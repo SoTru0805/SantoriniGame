@@ -18,7 +18,7 @@
 
 ## Notes
 * Ensure you have Java installed on your system.
-
+* The Java version for this program is 23.0.2.
 * This prototype demonstrates the basic setup and execution of a Java program.
 
 
