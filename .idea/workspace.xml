@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b00f7f2f-70a3-4240-bfa0-6011436602a5" name="Changes" comment="Added src root and deleted test.java file.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b00f7f2f-70a3-4240-bfa0-6011436602a5" name="Changes" comment="Pushed workspace.xml file">
+      <change afterPath="$PROJECT_DIR$/src/vietnguyensample/Guess.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -23,9 +30,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2vGEvkudwxfXoVebWbu5SwYrMOm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -36,7 +43,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "Viet-Nguyen-branch",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
@@ -98,6 +105,7 @@
     <MESSAGE value="Added new directory called docs for all the sprint files to be placed within." />
     <MESSAGE value="Added Contribution Log and Team GitLab Repository text files for the links." />
     <MESSAGE value="Added src root and deleted test.java file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added src root and deleted test.java file." />
+    <MESSAGE value="Pushed workspace.xml file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pushed workspace.xml file" />
   </component>
 </project>
