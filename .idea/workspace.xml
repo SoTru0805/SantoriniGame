@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b00f7f2f-70a3-4240-bfa0-6011436602a5" name="Changes" comment="Pushed workspace.xml file">
-      <change afterPath="$PROJECT_DIR$/src/vietnguyensample/Guess.java" afterDir="false" />
-    </list>
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,92 +18,48 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Viet-Nguyen-branch" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="2vGEvkudwxfXoVebWbu5SwYrMOm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Viet-Nguyen-branch",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Tom\IdeaProjects\FIT3077\docs" />
-      <recent name="C:\Users\Tom\IdeaProjects\FIT3077\docs\Sprint 1" />
-    </key>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+}</component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="b00f7f2f-70a3-4240-bfa0-6011436602a5" name="Changes" comment="Setting Up Sample Project:&#10;- Created a simple guessing game based on user input.&#10;- Modified .gitignore file for better clarification and files to ignore" />
-      <created>1743763243312</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1743763243312</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Added new directory called docs for all the sprint files to be placed within.">
+    <task id="LOCAL-00001" summary="Removed Viet Nguyen sammple Java Project">
       <option name="closed" value="true" />
-      <created>1743763408985</created>
+      <created>1743765444294</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1743763408985</updated>
+      <updated>1743765444294</updated>
     </task>
-    <task id="LOCAL-00002" summary="Added Contribution Log and Team GitLab Repository text files for the links.">
+    <task id="LOCAL-00002" summary="Delete the file">
       <option name="closed" value="true" />
-      <created>1743764009855</created>
+      <created>1743766039147</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1743764009855</updated>
+      <updated>1743766039147</updated>
     </task>
-    <task id="LOCAL-00003" summary="Added src root and deleted test.java file.">
+    <task id="LOCAL-00003" summary="Added a testing file">
       <option name="closed" value="true" />
-      <created>1743765105383</created>
+      <created>1743766086556</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1743765105383</updated>
+      <updated>1743766086556</updated>
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Setting Up Sample Project:&#10;- Created a simple guessing game based on user input.&#10;- Modified .gitignore file for better clarification and files to ignore" />
-    <MESSAGE value="Added new directory called docs for all the sprint files to be placed within." />
-    <MESSAGE value="Added Contribution Log and Team GitLab Repository text files for the links." />
-    <MESSAGE value="Added src root and deleted test.java file." />
-    <MESSAGE value="Pushed workspace.xml file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pushed workspace.xml file" />
+    <MESSAGE value="Merged main into Viet-Nguyen-branch" />
+    <MESSAGE value="Removed Viet Nguyen sammple Java Project" />
+    <MESSAGE value="Re-committed the sample project." />
+    <MESSAGE value="Delete the file" />
+    <MESSAGE value="Added a testing file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a testing file" />
   </component>
 </project>
