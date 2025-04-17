@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file" />
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Building.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/GodCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Worker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/engine/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/turn/Turn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/turn/TurnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,14 +30,53 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;vngu0096&quot;,
+      &quot;fullname&quot;: &quot;Nguyen Viet Phuc&quot;
+    }
   }
 }</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://git.infotech.monash.edu/FIT3077/fit3077-s1-2025/assignment-groups/CL_Tuesday04pm_Team063/project.git&quot;,
+    &quot;second&quot;: &quot;689acd6c-12be-40b8-820c-b74bd3e34dc2&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2vLuCCAZfRW1IW9TVJU9OBAQd0K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Guess.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "!2 on Viet-Nguyen-branch",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="Removed Viet Nguyen sammple Java Project">
       <option name="closed" value="true" />
@@ -51,6 +102,13 @@
       <option name="project" value="LOCAL" />
       <updated>1743766086556</updated>
     </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file" />
+      <created>1743936549643</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743936549643</updated>
+    </task>
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
@@ -60,6 +118,7 @@
     <MESSAGE value="Re-committed the sample project." />
     <MESSAGE value="Delete the file" />
     <MESSAGE value="Added a testing file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a testing file" />
+    <MESSAGE value="Pushed workspace.xml file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pushed workspace.xml file" />
   </component>
 </project>
