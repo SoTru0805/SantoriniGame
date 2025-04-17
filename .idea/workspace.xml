@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Building.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/GodCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Worker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/engine/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/turn/Turn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/turn/TurnManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/Test.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +62,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "!2 on Viet-Nguyen-branch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
@@ -111,6 +101,17 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merged main into Viet-Nguyen-branch" />
