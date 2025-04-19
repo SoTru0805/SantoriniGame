@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added a testing file">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +101,15 @@
       <option name="presentableId" value="Default" />
       <updated>1743936549643</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI.">
+      <option name="closed" value="true" />
+      <created>1745061538442</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745061538442</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,6 +130,7 @@
     <MESSAGE value="Delete the file" />
     <MESSAGE value="Added a testing file" />
     <MESSAGE value="Pushed workspace.xml file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pushed workspace.xml file" />
+    <MESSAGE value="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI." />
   </component>
 </project>
