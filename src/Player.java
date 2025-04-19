@@ -3,15 +3,13 @@ import java.util.List;
 
 /**
  * Represents a player in the Santorini game.
- * Each player has a name, owns a set of workers, and may have a God Card.
+ * Each player has a name, owns a set of workers, and have a God Card.
  */
 public class Player {
 
     private String name;
     private List<Worker> workers;
     private GodCard godCard; // Association with GodCard (0..1)
-
-    // Assuming Worker and GodCard classes exist
 
     /**
      * Constructs a new Player with a given name.
@@ -68,14 +66,8 @@ public class Player {
         this.godCard = godCard;
     }
 
-    // --- Methods related to game actions (based on UML) ---
-    // These methods would contain the logic for player actions,
-    // potentially interacting with the Board and TurnManager.
-    // The implementation details would depend on the rest of your game logic.
-
     /**
      * Selects a worker for the current turn.
-     * (Implementation needed)
      * @param worker The worker to select.
      */
     public void selectWorker(Worker worker) {
@@ -85,7 +77,6 @@ public class Player {
 
     /**
      * Attempts to move the selected worker to a target cell.
-     * (Implementation needed)
      * @param targetCell The cell to move to.
      * @return true if the move is valid and successful, false otherwise.
      */
@@ -97,7 +88,7 @@ public class Player {
 
     /**
      * Attempts to build a level on a target cell using the selected worker.
-     * (Implementation needed)
+     *
      * @param targetCell The cell to build on.
      * @return true if the build is valid and successful, false otherwise.
      */
@@ -110,7 +101,6 @@ public class Player {
     /**
      * Applies the move action. This might involve updating the worker's position
      * and checking for win conditions after the move.
-     * (Implementation needed)
      * @param worker The worker that moved.
      * @param cell The cell the worker moved to.
      */
@@ -122,7 +112,6 @@ public class Player {
     /**
      * Applies the build action. This might involve updating the cell's level
      * and checking for win conditions after the build (if applicable, e.g., winning by building a dome).
-     * (Implementation needed)
      * @param cell The cell where a level was built.
      */
     public void applyBuild(Cell cell) {
@@ -132,7 +121,6 @@ public class Player {
 
     /**
      * Undoes the current turn's actions.
-     * (Implementation needed - potentially part of a TurnManager or Memento pattern)
      */
     public void undoCurrentTurn() {
         // TODO: Implement undo logic
@@ -141,14 +129,12 @@ public class Player {
 
     /**
      * Confirms the current turn's actions, making them permanent.
-     * (Implementation needed - potentially part of a TurnManager)
      */
     public void confirmCurrentTurn() {
         // TODO: Implement turn confirmation logic
         System.out.println(name + " confirming current turn.");
     }
 
-    // You might also need methods like:
     // public List<Cell> getAvailableMoves(Worker worker) {}
     // public List<Cell> getAvailableBuilds(Worker worker) {}
     // public boolean canMove(Worker worker, Cell targetCell) {}
@@ -163,6 +149,3 @@ public class Player {
                '}';
     }
 }
-
-// Note: You will need to have corresponding Cell, Worker, and GodCard classes
-// with appropriate attributes and methods for this class to function correctly.
