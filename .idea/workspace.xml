@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Added Sprint_Two.iml to git">
-      <change afterPath="$PROJECT_DIR$/src/santorini/sandboxboard/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/sandboxboard/BoardGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/sandboxboard/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/sandboxboard/CellButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/sandboxboard/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose">
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/CellButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +134,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743936549643</updated>
-      <workItem from="1745060043031" duration="786000" />
+      <workItem from="1745060043031" duration="2248000" />
     </task>
     <task id="LOCAL-00004" summary="Added Sprint_Two.iml to git">
       <option name="closed" value="true" />
@@ -147,7 +144,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745058953897</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: add Board and Cell classes with grid logic and adjacency support">
+      <option name="closed" value="true" />
+      <created>1745061497284</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745061497284</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose">
+      <option name="closed" value="true" />
+      <created>1745061571457</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745061571457</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +212,8 @@
     <MESSAGE value="Added a testing file" />
     <MESSAGE value="Pushed workspace.xml file" />
     <MESSAGE value="Added Sprint_Two.iml to git" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Sprint_Two.iml to git" />
+    <MESSAGE value="feat: add Board and Cell classes with grid logic and adjacency support" />
+    <MESSAGE value="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose" />
   </component>
 </project>
