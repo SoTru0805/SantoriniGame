@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +68,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "MainGameLogic",
-    "kotlin-language-version-configured": "true"
+    "git-widget-placeholder": "Player",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="SharedIndexes">
