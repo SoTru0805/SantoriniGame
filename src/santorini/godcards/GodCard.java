@@ -1,4 +1,5 @@
-package santorini.elements;
+package santorini.godcards;
+import santorini.elements.Worker;
 import santorini.engine.Player;
 import santorini.board.Cell;
 
@@ -10,7 +11,7 @@ public abstract class GodCard {
     private String description;
     private Player player;
 
-    public GodCard(String name, String description, Player player)
+    public GodCard(String name, String description)
     {
         this.name = name;
         this.description = description;
@@ -30,6 +31,7 @@ public abstract class GodCard {
     //Develop for Sprint3
     /*public void applyEffect()
      {
+
      }*/
     public void onTurnStart()
     {

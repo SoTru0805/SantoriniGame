@@ -1,7 +1,7 @@
-package santorini.elements;
+package santorini.godcards;
 
 import santorini.board.Cell;
-import santorini.engine.Player;
+import santorini.elements.Worker;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ public class ArtemisGod extends GodCard {
     private Cell firstMoveCell;
     private boolean isSecondMove = false;
 
-    public ArtemisGod(Player player) {
-        super("Artemis", "Your Worker may move one additional time, but not back to the initial space.", player);
+    public ArtemisGod() {
+        super("Artemis", "Your Worker may move one additional time, but not back to the initial space.");
     }
     @Override
     public void onTurnStart() {
