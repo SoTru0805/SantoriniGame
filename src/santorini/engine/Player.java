@@ -2,7 +2,7 @@ package santorini.engine;
 
 import santorini.elements.Worker;
 import santorini.board.Cell;
-import santorini.elements.GodCard;
+import santorini.godcards.GodCard;
 import java.util.ArrayList;
 import java.util.List;
 
