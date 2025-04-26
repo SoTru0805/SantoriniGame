@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose">
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/CellButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +56,7 @@
 }</component>
   <component name="ProjectId" id="2vLuCCAZfRW1IW9TVJU9OBAQd0K" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -68,16 +69,36 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Player",
+    "git-widget-placeholder": "board__branch",
     "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="project" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -113,35 +134,71 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743936549643</updated>
+      <workItem from="1745060043031" duration="2248000" />
     </task>
-    <task id="LOCAL-00004" summary="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI.">
+    <task id="LOCAL-00004" summary="Added Sprint_Two.iml to git">
       <option name="closed" value="true" />
-      <created>1745061538442</created>
+      <created>1745058953896</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1745061538442</updated>
+      <updated>1745058953897</updated>
     </task>
-    <task id="LOCAL-00005" summary="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
+    <task id="LOCAL-00005" summary="feat: add Board and Cell classes with grid logic and adjacency support">
       <option name="closed" value="true" />
-      <created>1745063726155</created>
+      <created>1745061497284</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1745063726155</updated>
+      <updated>1745061497284</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose">
+      <option name="closed" value="true" />
+      <created>1745061571457</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745061571457</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/board_branch" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/board_branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -154,8 +211,9 @@
     <MESSAGE value="Delete the file" />
     <MESSAGE value="Added a testing file" />
     <MESSAGE value="Pushed workspace.xml file" />
-    <MESSAGE value="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI." />
-    <MESSAGE value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
+    <MESSAGE value="Added Sprint_Two.iml to git" />
+    <MESSAGE value="feat: add Board and Cell classes with grid logic and adjacency support" />
+    <MESSAGE value="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose" />
   </component>
 </project>
