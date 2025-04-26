@@ -1,53 +1,41 @@
 package santorini.board;
 
-
 public class Cell {
-    private final int x;
-    private final int y;
-    private boolean hasWorker;
-    private int buildingLevel;
-    private boolean hasDome;
+    private int level; // building level: 0 to 3
+    private boolean hasDome; // true if dome on top
+    private String worker; // null if no worker, or "P1", "P2"
 
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.hasWorker = false;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public boolean isOccupied() {
-        return hasWorker;
-    }
-
-    public void setOccupied(boolean hasWorker) {
-        this.hasWorker = hasWorker;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + x + "," + y + (hasWorker ? " W" : "") + "]";
+    public Cell() {
+        this.level = 0;
+        this.hasDome = false;
+        this.worker = null;
     }
 
     public int getLevel() {
-        return buildingLevel;
+        return level;
     }
 
-    public void setLevel(int level){
-        this.buildingLevel = level;
+    public void build() {
+        if (level < 3) {
+            level++;
+        } else {
+            hasDome = true;
+        }
     }
 
     public boolean hasDome() {
         return hasDome;
     }
 
-    public void setDome(boolean hasDome) {
-        this.hasDome = hasDome;
+    public String getWorker() {
+        return worker;
+    }
+
+    public void setWorker(String worker) {
+        this.worker = worker;
+    }
+
+    public void removeWorker() {
+        this.worker = null;
     }
 }
