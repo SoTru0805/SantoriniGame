@@ -20,3 +20,6 @@
 # Datasource configs
 .idea/dataSources/
 .idea/dataSources.local.xml
+
+# macOS system files
+.DS_Store
