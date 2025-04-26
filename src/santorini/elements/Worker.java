@@ -9,9 +9,6 @@ import santorini.board.Cell;
  */
 public class Worker {
 
-<<<<<<< Updated upstream
-}
-=======
     private int id;
     private Cell currentLocation;
     private Player player;
@@ -109,4 +106,3 @@ public class Worker {
         }
     }
 }
->>>>>>> Stashed changes

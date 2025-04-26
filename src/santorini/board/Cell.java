@@ -2,22 +2,6 @@ package santorini.board;
 import santorini.elements.Worker;
 import santorini.elements.Building;
 
-<<<<<<< Updated upstream
-
-public class Cell {
-    private final int x;
-    private final int y;
-    private boolean hasWorker;
-    private int buildingLevel;
-    private boolean hasDome;
-
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.hasWorker = false;
-    }
-
-=======
 /**
  * Represents a cell on the Santorini game board.
  * Each cell can have a building and/or a worker.
@@ -47,54 +31,19 @@ public class Cell {
      *
      * @return The x-coordinate.
      */
->>>>>>> Stashed changes
     public int getX() {
         return x;
     }
 
-<<<<<<< Updated upstream
-=======
     /**
      * Gets the y-coordinate of the cell.
      *
      * @return The y-coordinate.
      */
->>>>>>> Stashed changes
     public int getY() {
         return y;
     }
 
-<<<<<<< Updated upstream
-    public boolean isOccupied() {
-        return hasWorker;
-    }
-
-    public void setOccupied(boolean hasWorker) {
-        this.hasWorker = hasWorker;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + x + "," + y + (hasWorker ? " W" : "") + "]";
-    }
-
-    public int getLevel() {
-        return buildingLevel;
-    }
-
-    public void setLevel(int level){
-        this.buildingLevel = level;
-    }
-
-    public boolean hasDome() {
-        return hasDome;
-    }
-
-    public void setDome(boolean hasDome) {
-        this.hasDome = hasDome;
-    }
-}
-=======
     /**
      * Gets the building on this cell.
      *
@@ -181,4 +130,3 @@ public class Cell {
                 '}';
     }
 }
->>>>>>> Stashed changes
