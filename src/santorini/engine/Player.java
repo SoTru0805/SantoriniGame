@@ -1,6 +1,9 @@
 package santorini.engine;
 //import santorini.elements.GodCard;
 //import santorini.elements.Worker;
+import santorini.elements.Worker;
+import santorini.godcards.GodCard;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,8 @@ import java.util.List;
 public class Player {
 
     private String name;
-//    private List<Worker> workers;
-//    private GodCard godCard; // Association with GodCard (0..1)
+    private List<Worker> workers;
+    private GodCard godCard; // Association with GodCard (0..1)
 
     /**
      * Constructs a new Player with a given name.
@@ -57,17 +60,17 @@ public class Player {
      * Gets the God Card assigned to this player.
      * @return The GodCard object, or null if no God Card is assigned.
      */
-//    public GodCard getGodCard() {
-//        return godCard;
-//    }
+    public GodCard getGodCard() {
+        return godCard;
+    }
 
     /**
      * Assigns a God Card to this player.
      * @param godCard The GodCard object to assign.
      */
-//    public void setGodCard(GodCard godCard) {
-//        this.godCard = godCard;
-//    }
+    public void setGodCard(GodCard godCard) {
+        this.godCard = godCard;
+    }
 
     /**
      * Selects a worker for the current turn.

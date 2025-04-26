@@ -1,67 +1,64 @@
-package santorini; // Declare the package name (like a folder)
+package santorini;
 
-import javax.swing.*; // Import Java Swing components (GUI elements)
-import java.awt.*;    // Import AWT for layout and graphics
-import java.util.Arrays; // Import utility class for array operations
-import java.util.List;   // Import List interface
+import santorini.engine.Player;
+import santorini.godcards.GodCard;
+import santorini.godcards.ArtemisGod;
+import santorini.godcards.DemeterGod;
+import santorini.board.Board;
+import santorini.board.Cell;
+import santorini.board.CellButton;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
-    // CardLayout lets us switch between different screens (welcome, tutorial, game)
-    private static CardLayout cardLayout = new CardLayout();
-
-    // The main panel that will hold all the other panels (screens)
-    private static JPanel mainPanel = new JPanel(cardLayout);
-
-    // The main application window
     private static JFrame frame;
+    private static CardLayout cardLayout = new CardLayout();
+    private static JPanel mainPanel = new JPanel(cardLayout);
+    private static Board board; // Add this to store the board
 
     public static void main(String[] args) {
-        // Run all GUI creation on the Event Dispatch Thread (good Swing practice)
         SwingUtilities.invokeLater(() -> {
-            frame = new JFrame("Santorini"); // Create the main game window with a title
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit app when window is closed
-            frame.setSize(900, 600); // Set window dimensions
-            frame.setLocationRelativeTo(null); // Center the window on screen
+            frame = new JFrame("Santorini");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(900, 600);
+            frame.setLocationRelativeTo(null);
 
-            // Create both panels and assign them screen names
             JPanel welcomePanel = createWelcomePanel();
             JPanel tutorialPanel = createTutorialPanel();
 
-            // Add both panels to the mainPanel with identifiers for switching
             mainPanel.add(welcomePanel, "WELCOME");
             mainPanel.add(tutorialPanel, "TUTORIAL");
 
-            // Show the welcome screen first
             frame.setContentPane(mainPanel);
             frame.setVisible(true);
         });
     }
 
-    // Create the welcome screen panel
     private static JPanel createWelcomePanel() {
-        JPanel panel = new JPanel(); // Base panel
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Vertical layout
-        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100)); // Add padding
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
 
-        JLabel title = new JLabel("Welcome to Santorini"); // Title label
-        title.setFont(new Font("Arial", Font.BOLD, 26)); // Set font and size
-        title.setAlignmentX(Component.CENTER_ALIGNMENT); // Center horizontally
+        JLabel title = new JLabel("Welcome to Santorini");
+        title.setFont(new Font("Arial", Font.BOLD, 26));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Button to start the game
         JButton startButton = new JButton("Start game");
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Center button
-        startButton.setMaximumSize(new Dimension(200, 40)); // Set button size
-        startButton.addActionListener(e -> startGame()); // When clicked, start the game
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        startButton.setMaximumSize(new Dimension(200, 40));
+        startButton.addActionListener(e -> startGame());
 
-        // Button to open the tutorial
         JButton tutorialButton = new JButton("How to play");
         tutorialButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         tutorialButton.setMaximumSize(new Dimension(200, 40));
-        tutorialButton.addActionListener(e -> cardLayout.show(mainPanel, "TUTORIAL")); // Switch to tutorial
+        tutorialButton.addActionListener(e -> cardLayout.show(mainPanel, "TUTORIAL"));
 
-        // Add components to the panel with spacing
         panel.add(title);
-        panel.add(Box.createVerticalStrut(40)); // Add vertical space
+        panel.add(Box.createVerticalStrut(40));
         panel.add(startButton);
         panel.add(Box.createVerticalStrut(20));
         panel.add(tutorialButton);
@@ -69,152 +66,131 @@ public class Main {
         return panel;
     }
 
-    // Create the tutorial screen
     private static JPanel createTutorialPanel() {
-        JPanel panel = new JPanel(new BorderLayout()); // Use border layout for structure
+        JPanel panel = new JPanel(new BorderLayout());
 
-        JTextArea tutorialText = new JTextArea(); // Create a text area for tutorial
-        tutorialText.setEditable(false); // Make it read-only
-        tutorialText.setText(getHowToPlayText()); // Set the tutorial text
-        tutorialText.setLineWrap(true); // Wrap long lines
-        tutorialText.setWrapStyleWord(true); // Wrap at word boundaries
+        JTextArea tutorialText = new JTextArea();
+        tutorialText.setEditable(false);
+        tutorialText.setText("");
+        tutorialText.setLineWrap(true);
+        tutorialText.setWrapStyleWord(true);
 
-        JScrollPane scrollPane = new JScrollPane(tutorialText); // Add scroll
+        JScrollPane scrollPane = new JScrollPane(tutorialText);
         scrollPane.setPreferredSize(new Dimension(600, 400));
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JPanel bottomPanel = new JPanel(); // Bottom bar for buttons
-
-        // Back button to return to the welcome screen
+        JPanel bottomPanel = new JPanel();
         JButton backButton = new JButton("←");
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "WELCOME"));
 
-        // Button to show god card info
         JButton godCardButton = new JButton("God Cards Information →");
         godCardButton.addActionListener(e -> showGodCardInfo());
 
-        // Use border layout to place back button left, god card right
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.add(backButton, BorderLayout.WEST);
         bottomPanel.add(godCardButton, BorderLayout.EAST);
 
-        panel.add(scrollPane, BorderLayout.CENTER); // Tutorial text in center
-        panel.add(bottomPanel, BorderLayout.SOUTH); // Buttons at the bottom
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(bottomPanel, BorderLayout.SOUTH);
 
         return panel;
     }
 
-    //  New method to hold the "How to Play" text
-    private static String getHowToPlayText() {
-        return "How to Play Santorini\n\n" +
-                "Goal:\n" +
-                "Be the first player to move one of your Workers onto the third level.\n\n" +
-                "Setup:\n" +
-                "1. Assemble the board.\n" +
-                "2. Each player chooses a color and takes the two workers of that color.\n" +
-                "3. Players take turns placing their workers on unoccupied spaces on the first level.\n\n" +
-                "Gameplay:\n" +
-                "Each turn, a player must first move one of their Workers, and then build with the same Worker.\n" +
-                "Move: Move your Worker one space in any direction (horizontally, vertically, or diagonally) to an adjacent unoccupied space.\n" +
-                "You can move up a level, down any number of levels, or stay on the same level.\n" +
-                "You can move up a level, down any number of levels, or stay on the same level.\n" +
-                "Build: Build a level on an unoccupied space adjacent to the Worker that just moved.\n" +
-                "Build one level higher than the current level (up to the third level).\n\n" +
-                "Winning:\n" +
-                "You win if one of your Workers moves onto the third level.\n\n" +
-                "Losing:\n" +
-                "You lose if you cannot make a move or build on your turn.\n\n" +
-                "God Powers:\n" +
-                "Each player will choose a God Card, which grants a unique power that changes the standard rules of the game.";
-    }
-
-    // Show a popup with god card descriptions
     private static void showGodCardInfo() {
+        GodCard artemisCard = new ArtemisGod();
+        GodCard demeterCard = new DemeterGod();
+
+        String message = artemisCard.getName() + ":\n" + artemisCard.getDescription()
+                + "\n\n"
+                + demeterCard.getName() + ":\n" + demeterCard.getDescription();
+
         JOptionPane.showMessageDialog(frame,
-                "Artemis:\nYour Worker may move one additional time, but not back to its initial space.\n\n" +
-                        "Demeter:\nYour Worker may build one additional time, but not on the same space.",
+                message,
                 "God Cards Information",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // Run when the user clicks “Start game”
     private static void startGame() {
-        // Ask for player 1's name
-        String player1 = JOptionPane.showInputDialog(null, "Enter Player 1's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
-        if (player1 == null || player1.trim().isEmpty()) {
+        String name1 = JOptionPane.showInputDialog(null, "Enter Player 1's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
+        if (name1 == null || name1.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Player 1 name is required. Exiting.");
             System.exit(0);
         }
 
-        // Ask for player 2's name
-        String player2 = JOptionPane.showInputDialog(null, "Enter Player 2's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
-        if (player2 == null || player2.trim().isEmpty()) {
+        String name2 = JOptionPane.showInputDialog(null, "Enter Player 2's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
+        if (name2 == null || name2.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Player 2 name is required. Exiting.");
             System.exit(0);
         }
 
-        // List of available god cards
-        List<String> godCards = Arrays.asList("Artemis", "Demeter");
+        Player player1 = new Player(name1);
+        Player player2 = new Player(name2);
 
-        // Player 1 picks their god card
-        String p1GodCard = (String) JOptionPane.showInputDialog(
+        GodCard artemisCard = new ArtemisGod();
+        GodCard demeterCard = new DemeterGod();
+        List<GodCard> godChoices = Arrays.asList(artemisCard, demeterCard);
+
+        String[] options = godChoices.stream().map(GodCard::getName).toArray(String[]::new);
+
+        String p1Choice = (String) JOptionPane.showInputDialog(
                 null,
-                player1 + ", choose your God Card:",
+                name1 + ", choose your God Card:",
                 "God Card Selection",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
-                godCards.toArray(),
-                godCards.get(0)
+                options,
+                options[0]
         );
 
-        if (p1GodCard == null) System.exit(0); // Exit if cancel
 
-        // Automatically assign the other card to player 2
-        String p2CardDefault = godCards.get(0).equals(p1GodCard) ? godCards.get(1) : godCards.get(0);
+        if (p1Choice == null) System.exit(0);
 
-        String p2GodCard = (String) JOptionPane.showInputDialog(
-                null,
-                player2 + ", choose your God Card:",
-                "God Card Selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                new String[]{p2CardDefault},
-                p2CardDefault
-        );
+        GodCard godCard1 = createGodCard(p1Choice);
+        player1.setGodCard(godCard1);
 
-        if (p2GodCard == null) System.exit(0);
+        String p2Choice = godChoices.get(0).equals(p1Choice) ? godChoices.get(1) : godChoices.get(0);
+        GodCard godCard2 = createGodCard(p2Choice);
+        player2.setGodCard(godCard2);
 
-        // Create board area (placeholder)
-        JPanel boardPanel = new JPanel();
-        boardPanel.setPreferredSize(new Dimension(300, 300));
-        boardPanel.setBackground(Color.LIGHT_GRAY);
-        boardPanel.setBorder(BorderFactory.createTitledBorder(player1 + "’s Turn")); // Show turn title
+        // Create the real board
+        board = new Board();
 
-        // Game log area
+        // Create the board panel
+        JPanel boardPanel = new JPanel(new GridLayout(5, 5, 2, 2));
+        boardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        boardPanel.setBackground(Color.DARK_GRAY);
+
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
+                Cell cell = board.getCell(x, y);
+                CellButton button = new CellButton(cell);
+                boardPanel.add(button);
+            }
+        }
+
+        // Create game log
         JTextArea gameLog = new JTextArea("Game’s Log:\n• Turn 1: ...");
         gameLog.setEditable(false);
         JScrollPane gameLogScroll = new JScrollPane(gameLog);
         gameLogScroll.setPreferredSize(new Dimension(300, 100));
 
-        // Left side with board and log
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(boardPanel, BorderLayout.CENTER);
         leftPanel.add(gameLogScroll, BorderLayout.SOUTH);
 
-        // Right side for god card info and buttons
+        // Right side with God Card Info
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JLabel godCardTitle = new JLabel(player1 + "’s Card");
+        JLabel godCardTitle = new JLabel(player1.getName() + "’s Card");
         godCardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         godCardTitle.setFont(new Font("Arial", Font.BOLD, 16));
 
-        JLabel godCardName = new JLabel(p1GodCard);
+        JLabel godCardName = new JLabel(player1.getGodCard().getName());
         godCardName.setAlignmentX(Component.CENTER_ALIGNMENT);
         godCardName.setFont(new Font("Arial", Font.PLAIN, 14));
 
-        JTextArea godDescription = new JTextArea(getGodCardDescription(p1GodCard));
+        JTextArea godDescription = new JTextArea(player1.getGodCard().getDescription());
         godDescription.setLineWrap(true);
         godDescription.setWrapStyleWord(true);
         godDescription.setEditable(false);
@@ -226,7 +202,6 @@ public class Main {
         JButton endTurnButton = new JButton("End Turn");
         endTurnButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Add all items to right panel
         rightPanel.add(godCardTitle);
         rightPanel.add(Box.createVerticalStrut(10));
         rightPanel.add(godCardName);
@@ -237,7 +212,7 @@ public class Main {
         rightPanel.add(Box.createVerticalStrut(10));
         rightPanel.add(endTurnButton);
 
-        // Final layout: left = board & log, right = god info & buttons
+        // Replace the frame contents
         frame.getContentPane().removeAll();
         frame.setLayout(new BorderLayout());
         frame.add(leftPanel, BorderLayout.CENTER);
@@ -246,12 +221,11 @@ public class Main {
         frame.repaint();
     }
 
-    // Utility method to get god card descriptions
-    private static String getGodCardDescription(String card) {
-        return switch (card) {
-            case "Artemis" -> "Power: Your Worker may move one additional time, but not back to its initial space.";
-            case "Demeter" -> "Power: Your Worker may build one additional time, but not on the same space.";
-            default -> "";
+    private static GodCard createGodCard(String name) {
+        return switch (name) {
+            case "Artemis" -> new ArtemisGod();
+            case "Demeter" -> new DemeterGod();
+            default -> null;
         };
     }
 }
