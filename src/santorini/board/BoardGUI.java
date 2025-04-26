@@ -1,51 +1,62 @@
 package santorini.board;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class BoardGUI extends JFrame {
-    private final Board board;
-    private final CellButton[][] buttons;
+public class BoardGUI {
+    private JPanel boardPanel;
+    private CellButton[][] buttons;
+    private String currentPlayer = "P1";
+    private int p1WorkersPlaced = 0;
+    private int p2WorkersPlaced = 0;
+    private boolean setupPhase = true;
 
     public BoardGUI(Board board) {
-        this.board = board;
-        this.buttons = new CellButton[5][5];
+        boardPanel = new JPanel(new GridLayout(5, 5));
+        buttons = new CellButton[5][5];
 
-        setTitle("Santorini Board");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                CellButton button = new CellButton(i, j, board.getCell(i, j));
+                buttons[i][j] = button;
+                boardPanel.add(button);
 
-        //grid panel with pads and the background
-        JPanel boardPanel = new JPanel(new GridLayout(5, 5, 2, 2));
-        boardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        boardPanel.setBackground(Color.DARK_GRAY);
+                // Button click logic
+                button.addActionListener(e -> {
+                    CellButton clicked = (CellButton) e.getSource();
+                    Cell cell = clicked.getCell();
 
-        //create and add CellButtons that players can click on
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                Cell cell = board.getCell(x, y);
-                CellButton button = new CellButton(cell);
+                    if (cell.getWorker() != null) {
+                        return; // Cannot place on occupied cell
+                    }
 
-                int finalX = x;
-                int finalY = y;
+                    if (setupPhase) {
+                        // Place workers
+                        cell.setWorker(currentPlayer);
+                        clicked.updateDisplay();
 
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Clicked: (" + finalX + "," + finalY + ")");
-                        cell.setOccupied(!cell.isOccupied()); // Toggle
-                        button.updateDisplay();
+                        if (currentPlayer.equals("P1")) {
+                            p1WorkersPlaced++;
+                            if (p1WorkersPlaced >= 2) {
+                                currentPlayer = "P2";
+                            }
+                        } else if (currentPlayer.equals("P2")) {
+                            p2WorkersPlaced++;
+                            if (p2WorkersPlaced >= 2) {
+                                setupPhase = false; // setup done
+                                currentPlayer = "P1"; // start game with P1
+                            }
+                        }
+                    } else {
+                        // Later: move worker phase
+                        System.out.println(currentPlayer + " would move a worker now!");
                     }
                 });
-
-                buttons[x][y] = button;
-                boardPanel.add(button);
             }
         }
-        add(boardPanel, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(null); // center the window
-        setVisible(true);
+    }
+
+    public JPanel getBoardPanel() {
+        return boardPanel;
     }
 }
