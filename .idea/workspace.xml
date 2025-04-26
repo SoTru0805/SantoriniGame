@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Modified Main class:&#10;- Added a welcome page&#10;- Added comments for every functions and complex codes for other members to understand while coding since this will be merged to main branch.">
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/GodCard.java" beforeDir="false" />
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GodCardEntity" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,7 +54,9 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2vLuCCAZfRW1IW9TVJU9OBAQd0K" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -63,10 +68,19 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging main",
-    "kotlin-language-version-configured": "true"
+    "git-widget-placeholder": "Player",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="Removed Viet Nguyen sammple Java Project">
@@ -116,16 +130,11 @@
       <option name="project" value="LOCAL" />
       <updated>1745063726155</updated>
     </task>
-    <task id="LOCAL-00006" summary="Modified Main class:&#10;- Added a welcome page&#10;- Added comments for every functions and complex codes for other members to understand while coding since this will be merged to main branch.">
-      <option name="closed" value="true" />
-      <created>1745142732702</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1745142732702</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -147,7 +156,6 @@
     <MESSAGE value="Pushed workspace.xml file" />
     <MESSAGE value="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI." />
     <MESSAGE value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
-    <MESSAGE value="Modified Main class:&#10;- Added a welcome page&#10;- Added comments for every functions and complex codes for other members to understand while coding since this will be merged to main branch." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified Main class:&#10;- Added a welcome page&#10;- Added comments for every functions and complex codes for other members to understand while coding since this will be merged to main branch." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
   </component>
 </project>
