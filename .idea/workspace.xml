@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Merging board_branch into main">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/board/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/board/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/elements/GodCard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2025_7_44_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_04_2025_7_44_pm__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2025_7_50_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_26_04_2025_7_50_pm__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="board_branch" />
+        <entry key="$PROJECT_DIR$" value="building" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,23 +59,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Guess.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Guess.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
