@@ -1,24 +1,16 @@
 package santorini;
-
-import santorini.engine.Player;
-import santorini.godcards.GodCard;
-import santorini.godcards.ArtemisGod;
-import santorini.godcards.DemeterGod;
-import santorini.board.Board;
-import santorini.board.Cell;
-import santorini.board.CellButton;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import santorini.board.Board;
+import santorini.board.BoardGUI;
+
 
 public class Main {
-    private static JFrame frame;
     private static CardLayout cardLayout = new CardLayout();
     private static JPanel mainPanel = new JPanel(cardLayout);
-    private static Board board; // Add this to store the board
+    private static JFrame frame;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -79,13 +71,14 @@ public class Main {
         scrollPane.setPreferredSize(new Dimension(600, 400));
 
         JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BorderLayout());
+
         JButton backButton = new JButton("←");
         backButton.addActionListener(e -> cardLayout.show(mainPanel, "WELCOME"));
 
         JButton godCardButton = new JButton("God Cards Information →");
         godCardButton.addActionListener(e -> showGodCardInfo());
 
-        bottomPanel.setLayout(new BorderLayout());
         bottomPanel.add(backButton, BorderLayout.WEST);
         bottomPanel.add(godCardButton, BorderLayout.EAST);
 
@@ -96,78 +89,63 @@ public class Main {
     }
 
     private static void showGodCardInfo() {
-        GodCard artemisCard = new ArtemisGod();
-        GodCard demeterCard = new DemeterGod();
-
-        String message = artemisCard.getName() + ":\n" + artemisCard.getDescription()
-                + "\n\n"
-                + demeterCard.getName() + ":\n" + demeterCard.getDescription();
-
         JOptionPane.showMessageDialog(frame,
-                message,
+                "Artemis:\nYour Worker may move one additional time, but not back to its initial space.\n\n" +
+                        "Demeter:\nYour Worker may build one additional time, but not on the same space.",
                 "God Cards Information",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static void startGame() {
-        String name1 = JOptionPane.showInputDialog(null, "Enter Player 1's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
-        if (name1 == null || name1.trim().isEmpty()) {
+        String player1 = JOptionPane.showInputDialog(null, "Enter Player 1's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
+        if (player1 == null || player1.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Player 1 name is required. Exiting.");
             System.exit(0);
         }
 
-        String name2 = JOptionPane.showInputDialog(null, "Enter Player 2's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
-        if (name2 == null || name2.trim().isEmpty()) {
+        String player2 = JOptionPane.showInputDialog(null, "Enter Player 2's name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
+        if (player2 == null || player2.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Player 2 name is required. Exiting.");
             System.exit(0);
         }
 
-        Player player1 = new Player(name1);
-        Player player2 = new Player(name2);
+        List<String> godCards = Arrays.asList("Artemis", "Demeter");
 
-        GodCard artemisCard = new ArtemisGod();
-        GodCard demeterCard = new DemeterGod();
-        List<GodCard> godChoices = Arrays.asList(artemisCard, demeterCard);
-
-        String[] options = godChoices.stream().map(GodCard::getName).toArray(String[]::new);
-
-        String p1Choice = (String) JOptionPane.showInputDialog(
+        String p1GodCard = (String) JOptionPane.showInputDialog(
                 null,
-                name1 + ", choose your God Card:",
+                player1 + ", choose your God Card:",
                 "God Card Selection",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
-                options,
-                options[0]
+                godCards.toArray(),
+                godCards.get(0)
+        );
+
+        if (p1GodCard == null) System.exit(0);
+
+        String p2CardDefault = godCards.get(0).equals(p1GodCard) ? godCards.get(1) : godCards.get(0);
+
+        String p2GodCard = (String) JOptionPane.showInputDialog(
+                null,
+                player2 + ", choose your God Card:",
+                "God Card Selection",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new String[]{p2CardDefault},
+                p2CardDefault
         );
 
 
-        if (p1Choice == null) System.exit(0);
 
-        GodCard godCard1 = createGodCard(p1Choice);
-        player1.setGodCard(godCard1);
+        if (p2GodCard == null) System.exit(0);
 
-        String p2Choice = godChoices.get(0).equals(p1Choice) ? godChoices.get(1) : godChoices.get(0);
-        GodCard godCard2 = createGodCard(p2Choice);
-        player2.setGodCard(godCard2);
+        // Create the real Board and BoardGUI
+        Board board = new Board(); // <- your logic (must exist)
+        BoardGUI boardGUI = new BoardGUI(board); // <- your GUI wrapper
 
-        // Create the real board
-        board = new Board();
+        JPanel boardPanel = boardGUI.getBoardPanel(); // <- get the actual panel to add
 
-        // Create the board panel
-        JPanel boardPanel = new JPanel(new GridLayout(5, 5, 2, 2));
-        boardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        boardPanel.setBackground(Color.DARK_GRAY);
-
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                Cell cell = board.getCell(x, y);
-                CellButton button = new CellButton(cell);
-                boardPanel.add(button);
-            }
-        }
-
-        // Create game log
+        // Game log area
         JTextArea gameLog = new JTextArea("Game’s Log:\n• Turn 1: ...");
         gameLog.setEditable(false);
         JScrollPane gameLogScroll = new JScrollPane(gameLog);
@@ -177,20 +155,19 @@ public class Main {
         leftPanel.add(boardPanel, BorderLayout.CENTER);
         leftPanel.add(gameLogScroll, BorderLayout.SOUTH);
 
-        // Right side with God Card Info
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JLabel godCardTitle = new JLabel(player1.getName() + "’s Card");
+        JLabel godCardTitle = new JLabel(player1 + "’s Card");
         godCardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         godCardTitle.setFont(new Font("Arial", Font.BOLD, 16));
 
-        JLabel godCardName = new JLabel(player1.getGodCard().getName());
+        JLabel godCardName = new JLabel(p1GodCard);
         godCardName.setAlignmentX(Component.CENTER_ALIGNMENT);
         godCardName.setFont(new Font("Arial", Font.PLAIN, 14));
 
-        JTextArea godDescription = new JTextArea(player1.getGodCard().getDescription());
+        JTextArea godDescription = new JTextArea(getGodCardDescription(p1GodCard));
         godDescription.setLineWrap(true);
         godDescription.setWrapStyleWord(true);
         godDescription.setEditable(false);
@@ -212,7 +189,6 @@ public class Main {
         rightPanel.add(Box.createVerticalStrut(10));
         rightPanel.add(endTurnButton);
 
-        // Replace the frame contents
         frame.getContentPane().removeAll();
         frame.setLayout(new BorderLayout());
         frame.add(leftPanel, BorderLayout.CENTER);
@@ -221,11 +197,11 @@ public class Main {
         frame.repaint();
     }
 
-    private static GodCard createGodCard(String name) {
-        return switch (name) {
-            case "Artemis" -> new ArtemisGod();
-            case "Demeter" -> new DemeterGod();
-            default -> null;
+    private static String getGodCardDescription(String card) {
+        return switch (card) {
+            case "Artemis" -> "Power: Your Worker may move one additional time, but not back to its initial space.";
+            case "Demeter" -> "Power: Your Worker may build one additional time, but not on the same space.";
+            default -> "";
         };
     }
 }

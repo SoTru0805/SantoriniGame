@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Merging board_branch into main">
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/CellButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/board/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/board/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/elements/GodCard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="board_branch" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,22 +73,9 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="Removed Viet Nguyen sammple Java Project">
@@ -123,79 +108,32 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743936549643</updated>
-      <workItem from="1745060043031" duration="2248000" />
     </task>
-    <task id="LOCAL-00004" summary="Added Sprint_Two.iml to git">
+    <task id="LOCAL-00004" summary="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI.">
       <option name="closed" value="true" />
-      <created>1745058953896</created>
+      <created>1745061538442</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1745058953897</updated>
+      <updated>1745061538442</updated>
     </task>
-    <task id="LOCAL-00005" summary="feat: add Board and Cell classes with grid logic and adjacency support">
+    <task id="LOCAL-00005" summary="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page.">
       <option name="closed" value="true" />
-      <created>1745061497284</created>
+      <created>1745063726155</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1745061497284</updated>
+      <updated>1745063726155</updated>
     </task>
-    <task id="LOCAL-00006" summary="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose">
-      <option name="closed" value="true" />
-      <created>1745061571457</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1745061571457</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Merging board_branch into main">
-      <option name="closed" value="true" />
-      <created>1745661795627</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1745661795627</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/board_branch" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/board_branch" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -208,10 +146,8 @@
     <MESSAGE value="Delete the file" />
     <MESSAGE value="Added a testing file" />
     <MESSAGE value="Pushed workspace.xml file" />
-    <MESSAGE value="Added Sprint_Two.iml to git" />
-    <MESSAGE value="feat: add Board and Cell classes with grid logic and adjacency support" />
-    <MESSAGE value="Moved and deleted the Board and Cell.java in sandboxBoard which is for testing purpose" />
-    <MESSAGE value="Merging board_branch into main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merging board_branch into main" />
+    <MESSAGE value="Modified Main class:&#10;- Added 2 players prompts&#10;- Display the names input and the welcome windows.&#10;- Display the template UI." />
+    <MESSAGE value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
   </component>
 </project>

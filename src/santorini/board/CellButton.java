@@ -1,40 +1,39 @@
 package santorini.board;
 
 import javax.swing.*;
-import java.awt.*;
-
+import java.awt.Color;
 public class CellButton extends JButton {
-    private final Cell cell;
+    private int row;
+    private int col;
+    private Cell cell;
 
-    public CellButton(Cell cell) {
+    public CellButton(int row, int col, Cell cell) {
+        this.row = row;
+        this.col = col;
         this.cell = cell;
-        setPreferredSize(new Dimension(80, 80));
-        setFont(new Font("Arial", Font.BOLD, 24));
-        setFocusPainted(false);
-        setBackground(Color.WHITE);
-        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
         updateDisplay();
-    }
-
-    public void updateDisplay() {
-        String display = "";
-
-        // To tell workers the cells are occupied
-        if (cell.isOccupied()) {
-            display += "W";
-            setForeground(Color.BLUE); //this is for later move if the players swap
-        }
-
-        if (cell.hasDome()) {
-            display += " D";
-        } else if (cell.getLevel() > 0) {
-            display += " L" + cell.getLevel();
-        }
-
-        setText(display.trim());
     }
 
     public Cell getCell() {
         return cell;
     }
+
+    public void updateDisplay() {
+        if (cell.getWorker() != null) {
+            setText(cell.getWorker());
+            setBackground(Color.ORANGE); // Worker highlighted
+        } else if (cell.hasDome()) {
+            setText("");
+            setBackground(Color.DARK_GRAY); // Dome
+        } else {
+            setText("");
+            switch (cell.getLevel()) {
+                case 1 -> setBackground(Color.CYAN);
+                case 2 -> setBackground(Color.GREEN);
+                case 3 -> setBackground(Color.RED);
+                default -> setBackground(Color.LIGHT_GRAY);
+            }
+        }
+    }
+
 }
