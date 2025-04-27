@@ -1,22 +1,27 @@
-# IntelliJ IDEA
-.idea/*
+# IntelliJ IDEA project files
+.idea/
 !.idea/misc.xml
 !.idea/modules.xml
 !.idea/vcs.xml
 
-# Ignore user-specific settings
+# User-specific files
 .idea/workspace.xml
 .idea/tasks.xml
-.idea/dictionaries
-.idea/httpRequests
+.idea/dictionaries/
+.idea/httpRequests/
 .idea/shelf/
 
-# Ignore build output
-/out/
+# Build output
+out/
+build/
+target/
 
-# Project module file
+# IDE module files
 *.iml
 
 # Datasource configs
 .idea/dataSources/
 .idea/dataSources.local.xml
+
+# Mac system files
+.DS_Store
