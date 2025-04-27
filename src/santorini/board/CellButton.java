@@ -20,7 +20,7 @@ public class CellButton extends JButton {
 
     public void updateDisplay() {
         if (cell.getWorker() != null) {
-            setText(cell.getWorker());
+            setText(cell.getWorker().getName().substring(0, Math.min(2, cell.getWorker().getName().length())));
             setBackground(Color.ORANGE); // Worker highlighted
         } else if (cell.hasDome()) {
             setText("");

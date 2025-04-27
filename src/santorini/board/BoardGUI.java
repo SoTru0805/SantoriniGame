@@ -2,60 +2,71 @@ package santorini.board;
 
 import javax.swing.*;
 import java.awt.*;
+import santorini.engine.Game;
+import santorini.engine.Player;
 
 public class BoardGUI {
     private JPanel boardPanel;
     private CellButton[][] buttons;
-    private String currentPlayer = "P1";
-    private int p1WorkersPlaced = 0;
-    private int p2WorkersPlaced = 0;
-    private boolean setupPhase = false;
+    private boolean selectingWorker = true;
+    private int selectedRow = -1;
+    private int selectedCol = -1;
 
     public BoardGUI(Board board) {
-        boardPanel = new JPanel(new GridLayout(5, 5));
-        buttons = new CellButton[5][5];
+        boardPanel = new JPanel(new GridLayout(board.getRows(), board.getCols()));
+        buttons = new CellButton[board.getRows()][board.getCols()];
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < board.getRows(); i++) {
+            for (int j = 0; j < board.getCols(); j++) {
                 CellButton button = new CellButton(i, j, board.getCell(i, j));
                 buttons[i][j] = button;
                 boardPanel.add(button);
 
-                // Button click logic
                 button.addActionListener(e -> {
                     CellButton clicked = (CellButton) e.getSource();
-                    Cell cell = clicked.getCell();
                     int row = clicked.getRow();
                     int col = clicked.getCol();
+                    Cell cell = clicked.getCell();
 
-                    if (setupPhase) {
-                        // Place workers
-                        cell.setWorker(currentPlayer);
-                        clicked.updateDisplay();
+                    Player activePlayer = Game.getCurrentPlayer();
 
-                        if (currentPlayer.equals("P1")) {
-                            p1WorkersPlaced++;
-                            if (p1WorkersPlaced >= 2) {
-                                currentPlayer = "P2";
-                            }
-                        } else if (currentPlayer.equals("P2")) {
-                            p2WorkersPlaced++;
-                            if (p2WorkersPlaced >= 2) {
-                                setupPhase = false;
-                                currentPlayer = "P1";
-                                System.out.println("Setup done! Game starts!");
-                            }
+                    if (selectingWorker) {
+                        // Select the worker
+                        if (cell.getWorker() != null && cell.getWorker().equals(activePlayer)) {
+                            selectedRow = row;
+                            selectedCol = col;
+                            selectingWorker = false;
+                            System.out.println(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
+                        } else {
+                            System.out.println("Invalid selection. Select your own worker.");
                         }
                     } else {
-                        // Not setup phase anymore → playing the game
-                        santorini.engine.Game.playerClicked(row, col);
+                        // Move to new cell
+                        Cell selectedCell = Game.getBoard().getCell(selectedRow, selectedCol);
+
+                        if (cell.getWorker() == null && !cell.hasDome()) {
+                            cell.setWorker(activePlayer);
+                            selectedCell.removeWorker();
+                            buttons[row][col].updateDisplay();
+                            buttons[selectedRow][selectedCol].updateDisplay();
+
+                            System.out.println(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
+
+                            selectingWorker = true;
+                            selectedRow = -1;
+                            selectedCol = -1;
+
+                            // End turn
+                            Game.endTurn();
+                            System.out.println(Game.getCurrentPlayer().getName() + "'s turn now.");
+                        } else {
+                            System.out.println("Invalid move! Choose empty cell without dome.");
+                        }
                     }
                 });
-
             }
         }
     }
-
 
     public JPanel getBoardPanel() {
         return boardPanel;

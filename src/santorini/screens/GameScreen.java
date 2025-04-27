@@ -72,13 +72,13 @@ public class GameScreen implements Screen {
 // Place 2 P1 workers
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
-      board.getCell(p.x, p.y).setWorker("P1");
+      board.getCell(p.x, p.y).setWorker(player1);
     }
 
 // Place 2 P2 workers
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
-      board.getCell(p.x, p.y).setWorker("P2");
+      board.getCell(p.x, p.y).setWorker(player2);
     }
 // ===== DONE =====
 

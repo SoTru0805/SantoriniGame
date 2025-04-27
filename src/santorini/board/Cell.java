@@ -1,9 +1,11 @@
 package santorini.board;
 
+import santorini.engine.Player;
+
 public class Cell {
     private int level; // building level: 0 to 3
     private boolean hasDome; // true if dome on top
-    private String worker; // null if no worker, or "P1", "P2"
+    private Player worker; // <-- Change from String to Player
 
     public Cell() {
         this.level = 0;
@@ -27,11 +29,11 @@ public class Cell {
         return hasDome;
     }
 
-    public String getWorker() {
+    public Player getWorker() {
         return worker;
     }
 
-    public void setWorker(String worker) {
+    public void setWorker(Player worker) {
         this.worker = worker;
     }
 
