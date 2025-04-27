@@ -70,7 +70,7 @@ public class GameScreen implements Screen {
     BoardGUI boardGUI = new BoardGUI(board);
     JPanel boardPanel = boardGUI.getBoardPanel();
 
-    JTextArea gameLog = new JTextArea("Game’s Log:\n• " + player1.getGodCardName() + " starts the game...");
+    JTextArea gameLog = new JTextArea("Game’s Log:\n• " + player1.getName() + " starts the game...");
     gameLog.setEditable(false);
     JScrollPane logScroll = new JScrollPane(gameLog);
     logScroll.setPreferredSize(new Dimension(300, 100));
