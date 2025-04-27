@@ -4,6 +4,9 @@
 !.idea/modules.xml
 !.idea/vcs.xml
 
+# Ignore class files
+*.class
+
 # User-specific files
 .idea/workspace.xml
 .idea/tasks.xml
