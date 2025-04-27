@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Implement worker placement and improve board cell display&#10;&#10;- Added player turn management for P1 and P2 worker placements.&#10;- Limited worker placements to 2 workers per player during setup phase.&#10;- Prevented placing on occupied cells.&#10;- Cleaned up board appearance by removing '0' level display.&#10;- Improved cell display using emojis/color based on building level and dome.&#10;- Updated CellButton to handle dynamic worker and building visuals.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/elements/Building.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/elements/Worker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/engine/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/engine/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/turn/Turn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/turn/Turn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project/santorini/turn/TurnManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project/santorini/turn/TurnManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
-    </list>
+    <list default="true" id="8bae5496-7b87-4fa4-86b2-6b26cc4de4cb" name="Changes" comment="Implement worker placement and improve board cell display&#10;&#10;- Added player turn management for P1 and P2 worker placements.&#10;- Limited worker placements to 2 workers per player during setup phase.&#10;- Prevented placing on occupied cells.&#10;- Cleaned up board appearance by removing '0' level display.&#10;- Improved cell display using emojis/color based on building level and dome.&#10;- Updated CellButton to handle dynamic worker and building visuals." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,18 +56,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Guess.executor": "Run",
-    "Application.Main.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Player",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Guess.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="Removed Viet Nguyen sammple Java Project">
@@ -153,16 +142,5 @@
     <MESSAGE value="Updated Main class:&#10;- Made the Game GUI displays the first player's turn with their god card selected&#10;- Generated sample titles and descriptions to follow the domain model design main page." />
     <MESSAGE value="Implement worker placement and improve board cell display&#10;&#10;- Added player turn management for P1 and P2 worker placements.&#10;- Limited worker placements to 2 workers per player during setup phase.&#10;- Prevented placing on occupied cells.&#10;- Cleaned up board appearance by removing '0' level display.&#10;- Improved cell display using emojis/color based on building level and dome.&#10;- Updated CellButton to handle dynamic worker and building visuals." />
     <option name="LAST_COMMIT_MESSAGE" value="Implement worker placement and improve board cell display&#10;&#10;- Added player turn management for P1 and P2 worker placements.&#10;- Limited worker placements to 2 workers per player during setup phase.&#10;- Prevented placing on occupied cells.&#10;- Cleaned up board appearance by removing '0' level display.&#10;- Improved cell display using emojis/color based on building level and dome.&#10;- Updated CellButton to handle dynamic worker and building visuals." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/santorini/board/CellButton.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
