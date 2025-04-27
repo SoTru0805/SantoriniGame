@@ -1,6 +1,7 @@
 package santorini.engine;
 
 import santorini.board.Board;
+import santorini.screens.GameScreen;
 
 public class Game {
   private static Player player1;
@@ -38,4 +39,12 @@ public class Game {
       currentPlayer = player1;
     }
   }
+
+  public static void playerClicked(int row, int col) {
+    String message = currentPlayer.getName() + " clicked on (" + row + ", " + col + ")";
+
+    GameScreen.logMessage(message);
+    System.out.println(message);
+  }
+
 }

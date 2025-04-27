@@ -15,4 +15,13 @@ public class Board {
     public Cell getCell(int row, int col) {
         return cells[row][col];
     }
+
+    public int getRows() {
+        return 5;
+    }
+
+    public int getCols() {
+        return 5;
+    }
+
 }

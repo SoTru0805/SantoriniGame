@@ -9,7 +9,7 @@ public class BoardGUI {
     private String currentPlayer = "P1";
     private int p1WorkersPlaced = 0;
     private int p2WorkersPlaced = 0;
-    private boolean setupPhase = true;
+    private boolean setupPhase = false;
 
     public BoardGUI(Board board) {
         boardPanel = new JPanel(new GridLayout(5, 5));
@@ -25,10 +25,8 @@ public class BoardGUI {
                 button.addActionListener(e -> {
                     CellButton clicked = (CellButton) e.getSource();
                     Cell cell = clicked.getCell();
-
-                    if (cell.getWorker() != null) {
-                        return; // Cannot place on occupied cell
-                    }
+                    int row = clicked.getRow();
+                    int col = clicked.getCol();
 
                     if (setupPhase) {
                         // Place workers
@@ -43,18 +41,21 @@ public class BoardGUI {
                         } else if (currentPlayer.equals("P2")) {
                             p2WorkersPlaced++;
                             if (p2WorkersPlaced >= 2) {
-                                setupPhase = false; // setup done
-                                currentPlayer = "P1"; // start game with P1
+                                setupPhase = false;
+                                currentPlayer = "P1";
+                                System.out.println("Setup done! Game starts!");
                             }
                         }
                     } else {
-                        // Later: move worker phase
-                        System.out.println(currentPlayer + " would move a worker now!");
+                        // Not setup phase anymore → playing the game
+                        santorini.engine.Game.playerClicked(row, col);
                     }
                 });
+
             }
         }
     }
+
 
     public JPanel getBoardPanel() {
         return boardPanel;

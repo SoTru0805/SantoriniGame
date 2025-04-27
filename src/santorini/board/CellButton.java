@@ -36,4 +36,12 @@ public class CellButton extends JButton {
         }
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
 }

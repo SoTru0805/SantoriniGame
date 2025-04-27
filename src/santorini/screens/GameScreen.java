@@ -15,7 +15,7 @@ public class GameScreen implements Screen {
   private JPanel panel = new JPanel(new BorderLayout());
   private boolean setupDone = false;
   private GodCardDeck godCardDeck;
-
+  public static JTextArea gameLog;
   public GameScreen(GodCardDeck godCardDeck) {
     this.godCardDeck = godCardDeck;
   }
@@ -53,6 +53,35 @@ public class GameScreen implements Screen {
     // Setup board and logic
     Board board = new Board();
     Game.initializeGame(player1, player2, board);
+
+    // ===== RANDOMLY PLACE 2 workers for each player =====
+    java.util.List<Point> emptySpots = new java.util.ArrayList<>();
+
+// Collect all empty cells
+    for (int i = 0; i < board.getRows(); i++) {
+      for (int j = 0; j < board.getCols(); j++) {
+        if (board.getCell(i, j).getWorker() == null) {
+          emptySpots.add(new Point(i, j));
+        }
+      }
+    }
+
+// Shuffle to randomize
+    java.util.Collections.shuffle(emptySpots);
+
+// Place 2 P1 workers
+    for (int i = 0; i < 2; i++) {
+      Point p = emptySpots.remove(0);
+      board.getCell(p.x, p.y).setWorker("P1");
+    }
+
+// Place 2 P2 workers
+    for (int i = 0; i < 2; i++) {
+      Point p = emptySpots.remove(0);
+      board.getCell(p.x, p.y).setWorker("P2");
+    }
+// ===== DONE =====
+
 
     // Create GUI
     BoardGUI boardGUI = new BoardGUI(board);
@@ -147,4 +176,13 @@ public class GameScreen implements Screen {
     } while (name == null || name.trim().isEmpty());
     return name.trim();
   }
+
+  public static void logMessage(String message) {
+    if (gameLog != null) {
+      gameLog.append("\n• " + message);
+      gameLog.setCaretPosition(gameLog.getDocument().getLength()); // Always scroll to bottom
+    }
+  }
+
+
 }
