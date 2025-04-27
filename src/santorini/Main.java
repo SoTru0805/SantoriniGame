@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import santorini.board.Board;
 import santorini.board.BoardGUI;
+import java.util.Collections;
 
 
 public class Main {
@@ -109,35 +110,17 @@ public class Main {
             System.exit(0);
         }
 
+
         List<String> godCards = Arrays.asList("Artemis", "Demeter");
 
-        String p1GodCard = (String) JOptionPane.showInputDialog(
-                null,
-                player1 + ", choose your God Card:",
-                "God Card Selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                godCards.toArray(),
-                godCards.get(0)
-        );
+        Collections.shuffle(godCards); //This is to shuffle the card
 
-        if (p1GodCard == null) System.exit(0);
+        String p1GodCard = godCards.get(0); //These two for automatically assign
+        String p2GodCard = godCards.get(1);
 
-        String p2CardDefault = godCards.get(0).equals(p1GodCard) ? godCards.get(1) : godCards.get(0);
+        JOptionPane.showMessageDialog(null, player1 + ", you have received the God Card: " + p1GodCard, "God Card Assignment", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, player2 + ", you have received the God Card: " + p2GodCard, "God Card Assignment", JOptionPane.INFORMATION_MESSAGE);
 
-        String p2GodCard = (String) JOptionPane.showInputDialog(
-                null,
-                player2 + ", choose your God Card:",
-                "God Card Selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                new String[]{p2CardDefault},
-                p2CardDefault
-        );
-
-
-
-        if (p2GodCard == null) System.exit(0);
 
         // Create the real Board and BoardGUI
         Board board = new Board(); // <- your logic (must exist)
