@@ -10,11 +10,9 @@ import javax.swing.*;
 import santorini.screens.ScreenManager;
 
 public class Main {
-    private static JFrame frame;
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            frame = new JFrame("Santorini");
+            JFrame frame = new JFrame("Santorini");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(900, 600);
             frame.setLocationRelativeTo(null);
