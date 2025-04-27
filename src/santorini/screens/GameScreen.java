@@ -51,15 +51,21 @@ public class GameScreen implements Screen {
     player2.setGodCard(player2Card);
 
 // Show pop-up for each player
-    JOptionPane.showMessageDialog(null,
-            name1 + ", you have been assigned the God Card: " + player1Card.getName(),
+    JOptionPane.showMessageDialog(
+            null,
+            name1 + ", you have been assigned the God Card: " + player1Card.getName() + "\n\n" +
+                    "Power: " + player1Card.getDescription(),
             "God Card Assignment",
-            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.INFORMATION_MESSAGE
+    );
 
-    JOptionPane.showMessageDialog(null,
-            name2 + ", you have been assigned the God Card: " + player2Card.getName(),
+    JOptionPane.showMessageDialog(
+            null,
+            name2 + ", you have been assigned the God Card: " + player2Card.getName() + "\n\n" +
+                    "Power: " + player2Card.getDescription(),
             "God Card Assignment",
-            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.INFORMATION_MESSAGE
+    );
 
 
     // Setup board and logic
