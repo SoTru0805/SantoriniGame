@@ -25,15 +25,19 @@ public class Player {
     public Player(String name) {
         this.name = name;
 //        this.workers = new ArrayList<>(); // Initialize the list of workers
-//        this.godCard = null; // GodCard is initially null
+        this.godCard = null; // GodCard is initially null
     }
 
     /**
      * Gets the name of the player.
      * @return The player's name.
      */
+    public String getGodCardName() {
+        return this.godCard.getName();
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
