@@ -32,8 +32,4 @@ public class Main {
             ScreenManager.showScreen("WELCOME"); // Start with welcome screen
         });
     }
-
-    public static JFrame getFrame() {
-        return frame;
-    }
 }
