@@ -19,7 +19,6 @@ public class Main {
 
             GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod());
 
-            // Developer can see what screens exist:
             ScreenManager.registerScreen("WELCOME", new WelcomeScreen());
             ScreenManager.registerScreen("TUTORIAL", new TutorialScreen());
             ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck));
