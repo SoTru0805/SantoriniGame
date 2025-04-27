@@ -40,39 +40,27 @@ public class GameScreen implements Screen {
     Player player1 = new Player(name1);
     Player player2 = new Player(name2);
 
-// First player chooses
-    String p1Choice = (String) JOptionPane.showInputDialog(
-            null,
-            name1 + ", choose your God Card:",
-            "God Card Selection",
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            godCardDeck.getAvailableGodCardNames(), // <-- pull dynamic options from deck
-            godCardDeck.getAvailableGodCardNames()[0] // <-- set default option
-    );
+// Shuffle the God deck
+    godCardDeck.shuffle();
 
-// Assign the actual GodCard object
-    GodCard player1Card = godCardDeck.removeGodCard(p1Choice);
-
-// Second player chooses
-    String p2Choice = (String) JOptionPane.showInputDialog(
-            null,
-            name2 + ", choose your God Card:",
-            "God Card Selection",
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            godCardDeck.getAvailableGodCardNames(), // <-- again pull updated options (only 1 left!)
-            godCardDeck.getAvailableGodCardNames()[0]
-    );
-
-// Assign the second GodCard
-    GodCard player2Card = godCardDeck.removeGodCard(p2Choice);
+// Randomly assign
+    GodCard player1Card = godCardDeck.draw();
+    GodCard player2Card = godCardDeck.draw();
 
     player1.setGodCard(player1Card);
     player2.setGodCard(player2Card);
 
-    System.out.println(p1Choice);
-    System.out.println(p2Choice);
+// Show pop-up for each player
+    JOptionPane.showMessageDialog(null,
+            name1 + ", you have been assigned the God Card: " + player1Card.getName(),
+            "God Card Assignment",
+            JOptionPane.INFORMATION_MESSAGE);
+
+    JOptionPane.showMessageDialog(null,
+            name2 + ", you have been assigned the God Card: " + player2Card.getName(),
+            "God Card Assignment",
+            JOptionPane.INFORMATION_MESSAGE);
+
 
     // Setup board and logic
     Board board = new Board();
