@@ -2,15 +2,12 @@ package santorini.board;
 
 import javax.swing.*;
 import java.awt.*;
-import santorini.engine.Game;
-import santorini.engine.Player;
+import java.awt.event.ActionListener;
 
 public class BoardGUI {
     private JPanel boardPanel;
     private CellButton[][] buttons;
-    private boolean selectingWorker = true;
-    private int selectedRow = -1;
-    private int selectedCol = -1;
+    private ActionListener clickListener;
 
     public BoardGUI(Board board) {
         boardPanel = new JPanel(new GridLayout(board.getRows(), board.getCols()));
@@ -21,54 +18,36 @@ public class BoardGUI {
                 CellButton button = new CellButton(i, j, board.getCell(i, j));
                 buttons[i][j] = button;
                 boardPanel.add(button);
+            }
+        }
+    }
 
-                button.addActionListener(e -> {
-                    CellButton clicked = (CellButton) e.getSource();
-                    int row = clicked.getRow();
-                    int col = clicked.getCol();
-                    Cell cell = clicked.getCell();
-
-                    Player activePlayer = Game.getCurrentPlayer();
-
-                    if (selectingWorker) {
-                        // Select the worker
-                        if (cell.getWorker() != null && cell.getWorker().equals(activePlayer)) {
-                            selectedRow = row;
-                            selectedCol = col;
-                            selectingWorker = false;
-                            System.out.println(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
-                        } else {
-                            System.out.println("Invalid selection. Select your own worker.");
-                        }
-                    } else {
-                        // Move to new cell
-                        Cell selectedCell = Game.getBoard().getCell(selectedRow, selectedCol);
-
-                        if (cell.getWorker() == null && !cell.hasDome()) {
-                            cell.setWorker(activePlayer);
-                            selectedCell.removeWorker();
-                            buttons[row][col].updateDisplay();
-                            buttons[selectedRow][selectedCol].updateDisplay();
-
-                            System.out.println(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
-
-                            selectingWorker = true;
-                            selectedRow = -1;
-                            selectedCol = -1;
-
-                            // End turn
-                            Game.endTurn();
-                            System.out.println(Game.getCurrentPlayer().getName() + "'s turn now.");
-                        } else {
-                            System.out.println("Invalid move! Choose empty cell without dome.");
-                        }
-                    }
-                });
+    public void setCellClickListener(ActionListener listener) {
+        this.clickListener = listener;
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[i].length; j++) {
+                buttons[i][j].addActionListener(listener);
             }
         }
     }
 
     public JPanel getBoardPanel() {
         return boardPanel;
+    }
+
+    public CellButton getButton(int row, int col) {
+        return buttons[row][col];
+    }
+
+    public void refreshCell(int row, int col) {
+        buttons[row][col].updateDisplay();
+    }
+
+    public void refreshAll() {
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[i].length; j++) {
+                buttons[i][j].updateDisplay();
+            }
+        }
     }
 }

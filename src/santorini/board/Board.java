@@ -1,13 +1,15 @@
 package santorini.board;
 
 public class Board {
+    private final int ROWS = 5;
+    private final int COLUMNS = 5;
     private Cell[][] cells;
 
     public Board() {
-        cells = new Cell[5][5];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                cells[i][j] = new Cell();
+        cells = new Cell[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                cells[i][j] = new Cell(i, j);
             }
         }
     }
@@ -17,11 +19,11 @@ public class Board {
     }
 
     public int getRows() {
-        return 5;
+        return ROWS;
     }
 
     public int getCols() {
-        return 5;
+        return COLUMNS;
     }
 
 }

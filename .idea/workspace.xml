@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="" />
+    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Update .gitignore">
+      <change afterPath="$PROJECT_DIR$/src/santorini/actions/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/board/BoardEventHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Dome.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/FirstLevel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/SecondLevel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/elements/ThirdLevel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/turn/Turn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/turn/TurnManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/turn/Turn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/turn/TurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/TurnManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -13,9 +53,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2wMGxS7ktC03PXPypgru7eTBov2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -24,9 +64,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "GameLogic",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Tom/IdeaProjects/Santorini",
     "project.structure.last.edited": "Modules",
@@ -44,5 +85,9 @@
       <updated>1745844277284</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .gitignore" />
   </component>
 </project>

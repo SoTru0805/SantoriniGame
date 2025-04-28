@@ -16,6 +16,10 @@ public class Game {
     currentPlayer = player1; // Player 1 starts
   }
 
+  public static void setCurrentPlayer(Player p) {
+    currentPlayer = p;
+  }
+
   public static Player getPlayer1() {
     return player1;
   }

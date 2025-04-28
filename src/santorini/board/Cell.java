@@ -1,32 +1,25 @@
 package santorini.board;
 
+import santorini.elements.Building;
 import santorini.engine.Player;
 
-public class Cell {
-    private int level; // building level: 0 to 3
-    private boolean hasDome; // true if dome on top
-    private Player worker; // <-- Change from String to Player
+import java.awt.*;
 
-    public Cell() {
-        this.level = 0;
-        this.hasDome = false;
+public class Cell {
+    private int row;
+    private int col;
+    private Building building;
+    private Player worker;
+
+    public Cell(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.building = new Building();
         this.worker = null;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void build() {
-        if (level < 3) {
-            level++;
-        } else {
-            hasDome = true;
-        }
-    }
-
-    public boolean hasDome() {
-        return hasDome;
+    public Building getBuilding() {
+        return building;
     }
 
     public Player getWorker() {
@@ -39,5 +32,40 @@ public class Cell {
 
     public void removeWorker() {
         this.worker = null;
+    }
+
+    public boolean isOccupied() {
+        return worker != null;
+    }
+
+    public boolean hasDome() {
+        return building.hasDome();
+    }
+
+    public int getLevel() {
+        return building.getLevel();
+    }
+
+    public void build() {
+        building.build();
+    }
+
+    public void undoBuild() {
+        building.undoBuild();
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public String getDisplaySymbol() {
+        if (building != null) {
+            return building.getSymbol();
+        }
+        return "";
     }
 }

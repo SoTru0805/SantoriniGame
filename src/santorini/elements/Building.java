@@ -1,98 +1,59 @@
 package santorini.elements;
 
-/**
- * Represents a building on a cell in the Santorini game.
- * A building has a level and may have a dome.
- */
+import java.awt.*;
+
 public class Building {
+    protected int level;
+    protected String symbol;
+    protected boolean hasDome;
 
-    private int level; // Current level of the building
-    private int previousLevel; // Level before the last build
-    private boolean hasDome; // True if the building has a dome
-
-    /**
-     * Constructs a new Building with initial level 0 and no dome.
-     */
     public Building() {
-        this.level = 0; // Initial level is ground level
-        this.previousLevel = 0; // No previous level initially
-        this.hasDome = false; // No dome initially
+        this.level = 0;
+        this.hasDome = false;
+        this.symbol = null;
     }
 
-    /**
-     * Gets the current level of the building.
-     *
-     * @return The current level.
-     */
     public int getLevel() {
         return level;
     }
 
-    /**
-     * Sets the current level of the building.
-     *
-     * @param level The level to set.
-     */
-    public void setLevel(int level) {
-        this.level = level;
+    public String getSymbol() {
+        return symbol;
     }
 
-    /**
-     * Gets the previous level of the building.
-     *
-     * @return The previous level.
-     */
-    public int getPreviousLevel() {
-        return previousLevel;
-    }
-
-    /**
-     * Sets the previous level of the building.
-     *
-     * @param previousLevel The previous level to set.
-     */
-    public void setPreviousLevel(int previousLevel) {
-        this.previousLevel = previousLevel;
-    }
-
-    /**
-     * Checks if the building has a dome.
-     *
-     * @return True if the building has a dome, false otherwise.
-     */
     public boolean hasDome() {
         return hasDome;
     }
 
-    /**
-     * Sets whether the building has a dome.
-     *
-     * @param hasDome True to set a dome, false to remove it.
-     */
-    public void setHasDome(boolean hasDome) {
-        this.hasDome = hasDome;
-    }
+    // Build one level higher
+    public void build() {
+        if (hasDome) {
+            throw new IllegalStateException("Cannot build, dome already placed.");
+        }
 
-    /**
-     * Adds a level to the building.
-     * If the level is 3, a dome is placed.
-     */
-    public void addLevel() {
-        if (level < 3) {
-            previousLevel = level;
-            level++;
-        } else if (level == 3) {
-            previousLevel = level;
-            level++;
-            hasDome = true; // Dome is placed on level 3
+        level++;
+
+        if (level == 4) { // 4th level is a dome
+            hasDome = true;
         }
     }
 
-    /**
-     * Undoes the last build action, reverting to the previous level.
-     */
+    // Undo the last build action
     public void undoBuild() {
-        level = previousLevel; // Revert to previous level
-        hasDome = (level == 3); // Dome only if level is 3
+        if (level == 0) {
+            throw new IllegalStateException("No building to undo.");
+        }
+
+        if (hasDome) {
+            hasDome = false; // remove dome first
+        } else {
+            level--;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (hasDome) return "Dome";
+        return "Level " + level;
     }
 }
