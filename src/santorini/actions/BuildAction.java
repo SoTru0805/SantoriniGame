@@ -2,6 +2,8 @@ package santorini.actions;
 
 import santorini.board.BoardGUI;
 import santorini.board.Cell;
+import santorini.elements.Building;
+import santorini.elements.Ground;
 import santorini.engine.Player;
 
 public class BuildAction extends Action {
@@ -9,6 +11,8 @@ public class BuildAction extends Action {
   private final Cell selected;
   private final Cell target;
   private boolean status;
+  private Building previousLevel;
+  private Building builtLevel;
 
   public BuildAction(BoardGUI boardGUI, Player player, Cell selected, Cell target) {
     super(player);
@@ -25,14 +29,29 @@ public class BuildAction extends Action {
     }
 
     if (!target.isOccupied() && !target.hasDome()){
-      String previousLevel = target.getDisplaySymbol();
-      target.build();
+      previousLevel = target.getBuilding();
+      if (previousLevel == null) {
+        previousLevel = new Ground(target);
+      }
 
-//      boardGUI.getButton(target.getRow(),target.getCol()).buildDisplay(player);
+      builtLevel = previousLevel.next();
+      if (builtLevel == previousLevel) {
+        status = false;
+        return "Build failed: Already at maximum level.";
+      }
+
+      target.setBuilding(builtLevel);
+
+      boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
 
       status = true;
 
-      return player.getName() + " built on (" + target.getRow() + "," + target.getCol() + ") from " + previousLevel + " to " + target.getDisplaySymbol() + ".";
+      String sym = previousLevel.getSymbol();
+      if(sym == ""){
+        sym = "Ground";
+      }
+
+      return player.getName() + " built on (" + target.getRow() + "," + target.getCol() + ") from " + sym + " to " + target.getDisplaySymbol() + ".";
     } else if (target.isOccupied() && !target.hasDome()){
       return "Error: " + player.getName() + " cannot build on this position due to the existence of a worker.";
     } else {
@@ -50,8 +69,13 @@ public class BuildAction extends Action {
     String currentLevel = target.getDisplaySymbol();
     target.undoBuild();
 
-    status = false;
+    boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
 
-    return player.getName() + " undo the build from " + currentLevel + " back to " + target.getDisplaySymbol() + ".";
+    String sym = target.getDisplaySymbol();
+    if (sym == ""){
+      sym = "Ground";
+    }
+
+    return player.getName() + " undo the build from " + currentLevel + " back to " + sym + ".";
   }
 }

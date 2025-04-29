@@ -37,7 +37,7 @@ public class MoveAction extends Action {
 
       status = true;
 
-      return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + ")";
+      return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + "). Now, select a worker to build.";
     } else if (!target.isOccupied() && target.hasDome()){
       return "Error: " + player.getName() + " cannot move to a dome.";
     } else {
@@ -58,8 +58,6 @@ public class MoveAction extends Action {
 
     boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
     boardGUI.getButton(selected.getRow(),selected.getCol()).setUpDisplay();
-
-    status = false;
 
     return player.getName() + " undo move back to (" + selected.getRow() + "," + selected.getCol() + ")";
   }

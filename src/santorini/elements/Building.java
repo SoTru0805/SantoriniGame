@@ -1,59 +1,19 @@
 package santorini.elements;
 
-import java.awt.*;
+import santorini.board.Cell;
 
-public class Building {
-    protected int level;
-    protected String symbol;
-    protected boolean hasDome;
+public abstract class Building {
+    protected Cell cell;
 
-    public Building() {
-        this.level = 0;
-        this.hasDome = false;
-        this.symbol = null;
+    public Building(Cell cell) {
+        this.cell = cell;
     }
 
-    public int getLevel() {
-        return level;
-    }
+    public abstract int getLevel();
 
-    public String getSymbol() {
-        return symbol;
-    }
+    public abstract String getSymbol();
 
-    public boolean hasDome() {
-        return hasDome;
-    }
+    public abstract Building next();
 
-    // Build one level higher
-    public void build() {
-        if (hasDome) {
-            throw new IllegalStateException("Cannot build, dome already placed.");
-        }
-
-        level++;
-
-        if (level == 4) { // 4th level is a dome
-            hasDome = true;
-        }
-    }
-
-    // Undo the last build action
-    public void undoBuild() {
-        if (level == 0) {
-            throw new IllegalStateException("No building to undo.");
-        }
-
-        if (hasDome) {
-            hasDome = false; // remove dome first
-        } else {
-            level--;
-        }
-    }
-
-    @Override
-    public String toString() {
-        if (hasDome) return "Dome";
-        return "Level " + level;
-    }
+    public abstract Building previous();
 }

@@ -27,9 +27,8 @@ public class CellButton extends JButton {
                 setBackground(Color.BLUE);
             }
         } else {
-            // Display building symbol like G, L1, etc.
             if (cell.getBuilding() != null) {
-                setText(cell.getBuilding().getSymbol());
+                setText(cell.getDisplaySymbol());
             } else {
                 setText("");
             }

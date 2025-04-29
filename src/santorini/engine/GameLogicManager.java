@@ -22,6 +22,7 @@ public class GameLogicManager {
   private JLabel cardTitle, cardName, cardDescription;
 
   private boolean movingPhase = true;
+  private boolean buildCompleted = false;
   private boolean workerSelected = false;
   private Cell selectedWorkerCell;
   private Action lastAction = null;
@@ -68,6 +69,11 @@ public class GameLogicManager {
         }
       }
     } else {
+      if (buildCompleted) {
+        GameScreen.logMessage(currentPlayer.getName() + " has already built! Please end your turn.");
+        return;
+      }
+
       if (!workerSelected) {
         if (clickedCell.isOccupied()) {
           if (clickedCell.getWorker().getPlayer() == currentPlayer){
@@ -86,6 +92,8 @@ public class GameLogicManager {
         GameScreen.logMessage(log);
         if (buildAction.status()){
           lastAction = buildAction;
+          buildCompleted = true;
+          workerSelected = false;
 
           GameScreen.logMessage(currentPlayer.getName() + " must now end the turn.");
         }
@@ -99,7 +107,8 @@ public class GameLogicManager {
       GameScreen.logMessage(log);
       GameScreen.logMessage("Last action undone.");
       lastAction = null;
-      movingPhase = true;
+      movingPhase = !buildCompleted;
+      buildCompleted = false;
       workerSelected = false;
     } else {
       GameScreen.logMessage("Nothing to undo.");
@@ -107,7 +116,7 @@ public class GameLogicManager {
   }
 
   public void endTurn() {
-    if (movingPhase) {
+    if (movingPhase || !buildCompleted) {
       GameScreen.logMessage("You must move and build before ending turn!");
       return;
     }
@@ -127,6 +136,7 @@ public class GameLogicManager {
     // Reset phase
     movingPhase = true;
     workerSelected = false;
+    buildCompleted = false;
     lastAction = null;
   }
 }
