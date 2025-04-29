@@ -11,7 +11,7 @@ public class ArtemisGod extends GodCard {
     private boolean isSecondMove = false;
 
     public ArtemisGod() {
-        super("Artemis", "Your Worker may move one additional time, but not back to the initial space.", "images/GodCards/Artemis.jpg");
+        super("Artemis", "Your Worker may move one additional time, but not back to the initial space.", "images/GodCards_Avatar/Artemis.jpg");
     }
 
     @Override

@@ -208,7 +208,7 @@ public class GameScreen implements Screen {
 
     // Resize the image
     Image image = icon.getImage();
-    Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH);
+    Image newimg = image.getScaledInstance(120, 200,  java.awt.Image.SCALE_SMOOTH);
     icon = new ImageIcon(newimg);
 
     label.setIcon(icon);
