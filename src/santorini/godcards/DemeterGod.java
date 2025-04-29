@@ -10,7 +10,7 @@ public class DemeterGod extends GodCard {
     private boolean isFirstBuild = true;
 
     public DemeterGod() {
-        super("Demeter", "Your Worker may build one additional time, but not on the same space.");
+        super("Demeter", "Your Worker may build one additional time, but not on the same space.", "images/GodCards/Demeter.jpg");
     }
 
     @Override

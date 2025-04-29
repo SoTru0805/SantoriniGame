@@ -9,12 +9,14 @@ import java.util.List;
 public abstract class GodCard {
     private String name;
     private String description;
+    private String imagePath;
     private Player player;
 
-    public GodCard(String name, String description)
+    public GodCard(String name, String description, String imagePath)
     {
         this.name = name;
         this.description = description;
+        this.imagePath = imagePath;
         this.player = player;
     }
 
@@ -23,6 +25,9 @@ public abstract class GodCard {
     }
     public String getDescription() {
         return description;
+    }
+    public String getImagePath() {
+        return imagePath;
     }
     public Player getPlayer() {
         return player;
