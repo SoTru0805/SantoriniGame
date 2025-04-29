@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import santorini.engine.Game;
 import santorini.engine.Player;
+import santorini.screens.GameScreen; // To log messages into the Game Log
 
 public class BoardGUI {
     private JPanel boardPanel;
@@ -36,31 +37,34 @@ public class BoardGUI {
                             selectedRow = row;
                             selectedCol = col;
                             selectingWorker = false;
-                            System.out.println(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
+                            GameScreen.logMessage(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
                         } else {
-                            System.out.println("Invalid selection. Select your own worker.");
+                            GameScreen.logMessage("Invalid selection. Select your own worker.");
                         }
                     } else {
                         // Move to new cell
                         Cell selectedCell = Game.getBoard().getCell(selectedRow, selectedCol);
+                        int levelDiff = cell.getLevel() - selectedCell.getLevel();
+                        boolean isAdjacent = Math.abs(row - selectedRow) <= 1 && Math.abs(col - selectedCol) <= 1;
+                        boolean isDifferentCell = row != selectedRow || col != selectedCol;
 
-                        if (cell.getWorker() == null && !cell.hasDome()) {
+                        if (isAdjacent && isDifferentCell && levelDiff <= 1 && cell.getWorker() == null && !cell.hasDome()) {
+                            // Valid move
                             cell.setWorker(activePlayer);
                             selectedCell.removeWorker();
                             buttons[row][col].updateDisplay();
                             buttons[selectedRow][selectedCol].updateDisplay();
 
-                            System.out.println(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
+                            GameScreen.logMessage(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
 
                             selectingWorker = true;
                             selectedRow = -1;
                             selectedCol = -1;
 
-                            // End turn
                             Game.endTurn();
-                            System.out.println(Game.getCurrentPlayer().getName() + "'s turn now.");
+                            GameScreen.logMessage("Now " + Game.getCurrentPlayer().getName() + "'s turn (Turn " + Game.getTurnCount() + ")");
                         } else {
-                            System.out.println("Invalid move! Choose empty cell without dome.");
+                            GameScreen.logMessage("Invalid move! Must be adjacent, unoccupied, no dome, and at most 1 level up.");
                         }
                     }
                 });
