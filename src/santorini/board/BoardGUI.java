@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import santorini.engine.Game;
 import santorini.engine.Player;
-import santorini.screens.GameScreen; // To log messages into the Game Log
+import santorini.screens.GameScreen;
 
 public class BoardGUI {
     private JPanel boardPanel;
@@ -14,11 +14,14 @@ public class BoardGUI {
     private int selectedCol = -1;
 
     public BoardGUI(Board board) {
-        boardPanel = new JPanel(new GridLayout(board.getRows(), board.getCols()));
-        buttons = new CellButton[board.getRows()][board.getCols()];
+        int rows = board.getRows();
+        int cols = board.getCols();
 
-        for (int i = 0; i < board.getRows(); i++) {
-            for (int j = 0; j < board.getCols(); j++) {
+        boardPanel = new JPanel(new GridLayout(rows, cols));
+        buttons = new CellButton[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 CellButton button = new CellButton(i, j, board.getCell(i, j));
                 buttons[i][j] = button;
                 boardPanel.add(button);
@@ -32,7 +35,6 @@ public class BoardGUI {
                     Player activePlayer = Game.getCurrentPlayer();
 
                     if (selectingWorker) {
-                        // Select the worker
                         if (cell.getWorker() != null && cell.getWorker().equals(activePlayer)) {
                             selectedRow = row;
                             selectedCol = col;
@@ -42,14 +44,12 @@ public class BoardGUI {
                             GameScreen.logMessage("Invalid selection. Select your own worker.");
                         }
                     } else {
-                        // Move to new cell
                         Cell selectedCell = Game.getBoard().getCell(selectedRow, selectedCol);
                         int levelDiff = cell.getLevel() - selectedCell.getLevel();
                         boolean isAdjacent = Math.abs(row - selectedRow) <= 1 && Math.abs(col - selectedCol) <= 1;
                         boolean isDifferentCell = row != selectedRow || col != selectedCol;
 
                         if (isAdjacent && isDifferentCell && levelDiff <= 1 && cell.getWorker() == null && !cell.hasDome()) {
-                            // Valid move
                             cell.setWorker(activePlayer);
                             selectedCell.removeWorker();
                             buttons[row][col].updateDisplay();

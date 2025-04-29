@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
     showCardAssignment(player2);
 
     // Setup board and logic
-    Board board = new Board();
+    Board board = new Board(5,5);
     Game.initializeGame(player1, player2, board);
     java.util.List<Point> emptySpots = new java.util.ArrayList<>(); //Random placiong worker
 
