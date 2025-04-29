@@ -13,6 +13,11 @@ public class EndTurnAction extends Action {
   }
 
   @Override
+  public Boolean status(){
+    return true; // true as default
+  }
+
+  @Override
   public String undo() {
     return player.getName() + " cannot undo end turn.";
   }

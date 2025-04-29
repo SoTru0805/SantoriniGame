@@ -1,9 +1,11 @@
 package santorini.engine;
 //import santorini.elements.GodCard;
 //import santorini.elements.Worker;
+import santorini.board.Cell;
 import santorini.elements.Worker;
 import santorini.godcards.GodCard;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +18,18 @@ public class Player {
     private String name;
     private List<Worker> workers;
     private GodCard godCard; // Association with GodCard (0..1)
+    private Color color;
 
     /**
      * Constructs a new Player with a given name.
      * Workers and God Card will be assigned after creation.
      * @param name The name of the player.
      */
-    public Player(String name) {
+    public Player(String name, Color color) {
         this.name = name;
-//        this.workers = new ArrayList<>(); // Initialize the list of workers
+        this.workers = new ArrayList<>(); // Initialize the list of workers
         this.godCard = null; // GodCard is initially null
+        this.color = color;
     }
 
     /**
@@ -38,6 +42,9 @@ public class Player {
 
     public String getName() {
         return this.name;
+    }
+    public Color getColor(){
+        return color;
     }
 
     /**
@@ -76,6 +83,21 @@ public class Player {
         this.godCard = godCard;
     }
 
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+
+    // Create a new Worker and assign it to a Cell
+    public void addWorker(Worker worker) {
+        if (workers.size() >= 2) {
+            throw new IllegalStateException("A player can only have 2 workers.");
+        }
+        workers.add(worker);
+    }
+
+    public boolean contains(Worker worker) {
+        return workers.contains(worker);
+    }
     /**
      * Selects a worker for the current turn.
      * @param worker The worker to select.

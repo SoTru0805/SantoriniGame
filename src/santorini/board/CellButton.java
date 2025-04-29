@@ -1,47 +1,62 @@
 package santorini.board;
 
+import santorini.elements.Worker;
+import santorini.engine.Game;
+import santorini.engine.Player;
+
 import javax.swing.*;
 import java.awt.Color;
 public class CellButton extends JButton {
-    private int row;
-    private int col;
     private Cell cell;
 
-    public CellButton(int row, int col, Cell cell) {
-        this.row = row;
-        this.col = col;
+    public CellButton(Cell cell) {
         this.cell = cell;
-        updateDisplay();
+        setUpDisplay();
     }
 
     public Cell getCell() {
         return cell;
     }
 
-    public void updateDisplay() {
+    public void setUpDisplay(){
         if (cell.getWorker() != null) {
-            setText(cell.getWorker().getName().substring(0, Math.min(2, cell.getWorker().getName().length())));
-            setBackground(Color.ORANGE); // Worker highlighted
-        } else if (cell.hasDome()) {
-            setText("");
-            setBackground(Color.DARK_GRAY); // Dome
-        } else {
-            setText("");
-            switch (cell.getLevel()) {
-                case 1 -> setBackground(Color.CYAN);
-                case 2 -> setBackground(Color.GREEN);
-                case 3 -> setBackground(Color.RED);
-                default -> setBackground(Color.LIGHT_GRAY);
+            Player owner = cell.getWorker().getPlayer();
+            if (owner.getColor() == Color.RED) {
+                setBackground(Color.RED);
+            } else if (owner.getColor() == Color.BLUE) {
+                setBackground(Color.BLUE);
             }
+        } else {
+            // Display building symbol like G, L1, etc.
+            if (cell.getBuilding() != null) {
+                setText(cell.getBuilding().getSymbol());
+            } else {
+                setText("");
+            }
+            setBackground(Color.LIGHT_GRAY);
+        }
+    }
+
+    public void moveDisplay(Player player) {
+        if (cell.isOccupied()){
+            setBackground(Color.LIGHT_GRAY);
+        } else {
+            setBackground(player.getColor());
+        }
+    }
+
+    public void buildDisplay(Player player){
+        if (!cell.isOccupied()){
+            setText(cell.getDisplaySymbol());
         }
     }
 
     public int getRow() {
-        return row;
+        return cell.getRow();
     }
 
     public int getCol() {
-        return col;
+        return cell.getCol();
     }
 
 }

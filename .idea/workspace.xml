@@ -4,35 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Update .gitignore">
-      <change afterPath="$PROJECT_DIR$/src/santorini/actions/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/board/BoardEventHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Dome.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/FirstLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/SecondLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/ThirdLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
+    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Changes to major files:&#10;- Create child classes of Building abstract class&#10;- Create Action abstract and its action classes which are MoveAction, BuildAction and EndTurnAction.&#10;- Added BoardEventHandler for calling handleCellClick in logicManager.&#10;- Modified BoardGUI, Cell and Game classes&#10;- Added GameLogic and GameLogicManager classes for all the logic of the game.&#10;- Modified TurnManager to keep track of each turn.&#10;&#10;What will be improved:&#10;- Building action and moving action to be done while running.&#10;- Prevent god classes if needed.&#10;- Apply god cards ability into the game for both players.&#10;- Define winning requirement in the game logic.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/turn/Turn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/turn/TurnManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/actions/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/BoardGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/board/CellButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/CellButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/TurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/TurnManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/turn/Turn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/turn/TurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/TurnManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,10 +76,20 @@
       <option name="presentableId" value="Default" />
       <updated>1745844277284</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changes to major files:&#10;- Create child classes of Building abstract class&#10;- Create Action abstract and its action classes which are MoveAction, BuildAction and EndTurnAction.&#10;- Added BoardEventHandler for calling handleCellClick in logicManager.&#10;- Modified BoardGUI, Cell and Game classes&#10;- Added GameLogic and GameLogicManager classes for all the logic of the game.&#10;- Modified TurnManager to keep track of each turn.&#10;&#10;What will be improved:&#10;- Building action and moving action to be done while running.&#10;- Prevent god classes if needed.&#10;- Apply god cards ability into the game for both players.&#10;- Define winning requirement in the game logic.">
+      <option name="closed" value="true" />
+      <created>1745860659137</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745860659137</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update .gitignore" />
+    <MESSAGE value="Changes to major files:&#10;- Create child classes of Building abstract class&#10;- Create Action abstract and its action classes which are MoveAction, BuildAction and EndTurnAction.&#10;- Added BoardEventHandler for calling handleCellClick in logicManager.&#10;- Modified BoardGUI, Cell and Game classes&#10;- Added GameLogic and GameLogicManager classes for all the logic of the game.&#10;- Modified TurnManager to keep track of each turn.&#10;&#10;What will be improved:&#10;- Building action and moving action to be done while running.&#10;- Prevent god classes if needed.&#10;- Apply god cards ability into the game for both players.&#10;- Define winning requirement in the game logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to major files:&#10;- Create child classes of Building abstract class&#10;- Create Action abstract and its action classes which are MoveAction, BuildAction and EndTurnAction.&#10;- Added BoardEventHandler for calling handleCellClick in logicManager.&#10;- Modified BoardGUI, Cell and Game classes&#10;- Added GameLogic and GameLogicManager classes for all the logic of the game.&#10;- Modified TurnManager to keep track of each turn.&#10;&#10;What will be improved:&#10;- Building action and moving action to be done while running.&#10;- Prevent god classes if needed.&#10;- Apply god cards ability into the game for both players.&#10;- Define winning requirement in the game logic." />
   </component>
 </project>

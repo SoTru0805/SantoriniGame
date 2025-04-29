@@ -1,15 +1,15 @@
 package santorini.board;
 
 import santorini.elements.Building;
-import santorini.engine.Player;
+import santorini.elements.Worker;
 
-import java.awt.*;
+import javax.swing.*;
 
-public class Cell {
+public class Cell extends JButton {
     private int row;
     private int col;
     private Building building;
-    private Player worker;
+    private Worker worker;
 
     public Cell(int row, int col) {
         this.row = row;
@@ -22,11 +22,11 @@ public class Cell {
         return building;
     }
 
-    public Player getWorker() {
+    public Worker getWorker() {
         return worker;
     }
 
-    public void setWorker(Player worker) {
+    public void setWorker(Worker worker) {
         this.worker = worker;
     }
 
@@ -64,7 +64,7 @@ public class Cell {
 
     public String getDisplaySymbol() {
         if (building != null) {
-            return building.getSymbol();
+            return building.getSymbol(); // Example: "G", "L1", "L2", "L3", "D"
         }
         return "";
     }

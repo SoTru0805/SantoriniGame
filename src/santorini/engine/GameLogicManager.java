@@ -6,6 +6,7 @@ import santorini.board.BoardGUI;
 import santorini.actions.Action;
 import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
+import santorini.board.CellButton;
 import santorini.screens.GameScreen;
 
 import javax.swing.*;
@@ -44,36 +45,58 @@ public class GameLogicManager {
   public void handleCellClick(Cell clickedCell) {
     if (movingPhase) {
       if (!workerSelected) {
-        // Select worker
-        if (clickedCell.getWorker() == currentPlayer) {
-          selectedWorkerCell = clickedCell;
-          workerSelected = true;
-          GameScreen.logMessage(currentPlayer.getName() + " selected a worker.");
+        if (clickedCell.isOccupied()) {
+          if (clickedCell.getWorker().getPlayer() == currentPlayer){
+            selectedWorkerCell = clickedCell;
+            workerSelected = true;
+            GameScreen.logMessage(currentPlayer.getName() + " selected a worker to move.");
+          } else {
+            GameScreen.logMessage("Error: Invalid selection. Select your own worker.");
+          }
         } else {
-          GameScreen.logMessage("Invalid selection. Select your own worker.");
+          GameScreen.logMessage("Error: The cell does not have your worker.");
         }
       } else {
-        // Try to move
-        MoveAction moveAction = new MoveAction(currentPlayer, selectedWorkerCell, clickedCell);
+        MoveAction moveAction = new MoveAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
         String log = moveAction.execute();
-        lastAction = moveAction;
         GameScreen.logMessage(log);
-        movingPhase = false; // Now switch to building
-        workerSelected = false;
+        if (moveAction.status()){
+          lastAction = moveAction;
+
+          movingPhase = false;
+          workerSelected = false;
+        }
       }
     } else {
-      // Building phase
-      BuildAction buildAction = new BuildAction(currentPlayer, selectedWorkerCell, clickedCell);
-      String log = buildAction.execute();
-      lastAction = buildAction;
-      GameScreen.logMessage(log);
-      GameScreen.logMessage(currentPlayer.getName() + " must now end the turn.");
+      if (!workerSelected) {
+        if (clickedCell.isOccupied()) {
+          if (clickedCell.getWorker().getPlayer() == currentPlayer){
+            selectedWorkerCell = clickedCell;
+            workerSelected = true;
+            GameScreen.logMessage(currentPlayer.getName() + " selected a worker to build.");
+          } else {
+            GameScreen.logMessage("Error: Invalid selection. Select your own worker.");
+          }
+        } else {
+          GameScreen.logMessage("Error: The cell does not have your worker.");
+        }
+      } else {
+        BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
+        String log = buildAction.execute();
+        GameScreen.logMessage(log);
+        if (buildAction.status()){
+          lastAction = buildAction;
+
+          GameScreen.logMessage(currentPlayer.getName() + " must now end the turn.");
+        }
+      }
     }
   }
 
   public void undoLastAction() {
     if (lastAction != null) {
-      lastAction.undo();
+      String log = lastAction.undo();
+      GameScreen.logMessage(log);
       GameScreen.logMessage("Last action undone.");
       lastAction = null;
       movingPhase = true;

@@ -3,6 +3,7 @@ package santorini.screens;
 import santorini.board.Board;
 import santorini.board.BoardEventHandler;
 import santorini.board.BoardGUI;
+import santorini.elements.Worker;
 import santorini.engine.Game;
 import santorini.engine.GameLogicManager;
 import santorini.engine.Player;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
   private GodCardDeck godCardDeck;
   private Board board;
   private BoardGUI boardGUI;
+  private Worker worker1, worker2, worker3, worker4;
   private Player player1, player2;
   private GameLogicManager logicManager;
   public static JTextArea gameLog;
@@ -46,8 +48,11 @@ public class GameScreen implements Screen {
     String name1 = askName("Player 1");
     String name2 = askName("Player 2");
 
-    player1 = new Player(name1);
-    player2 = new Player(name2);
+    player1 = new Player(name1, Color.RED);
+    player2 = new Player(name2, Color.BLUE);
+
+    board = new Board();
+    randomizeWorkers();
 
     godCardDeck.shuffle();
     player1.setGodCard(godCardDeck.draw());
@@ -56,14 +61,10 @@ public class GameScreen implements Screen {
     showCardAssignment(player1);
     showCardAssignment(player2);
 
-    // FIX: Create the board FIRST!
-    board = new Board();
 
-    // Now randomize workers safely
-    randomizeWorkers();
 
     // GUI setup
-    gameLog = new JTextArea("Game’s Log:\n• " + player1.getName() + " starts the game...");
+    gameLog = new JTextArea("Game’s Log:\n• Turn #1 - " + player1.getName() + " starts the game...");
     gameLog.setEditable(false);
     JScrollPane logScroll = new JScrollPane(gameLog);
     logScroll.setPreferredSize(new Dimension(300, 120));
@@ -98,14 +99,24 @@ public class GameScreen implements Screen {
     }
     Collections.shuffle(emptySpots);
 
+
+
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
-      board.getCell(p.x, p.y).setWorker(player1);
+      Worker newWorker = new Worker(player1, player1.getWorkers().size());
+      board.getCell(p.x, p.y).setWorker(newWorker);
+      newWorker.setCurrentLocation(board.getCell(p.x, p.y));
+      player1.addWorker(newWorker);
     }
+    System.out.println(player1.getWorkers());
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
-      board.getCell(p.x, p.y).setWorker(player2);
+      Worker newWorker = new Worker(player2, player2.getWorkers().size());
+      board.getCell(p.x, p.y).setWorker(newWorker);
+      newWorker.setCurrentLocation(board.getCell(p.x, p.y));
+      player2.addWorker(newWorker);
     }
+    System.out.println(player2.getWorkers());
   }
 
   private JPanel createRightPanel() {

@@ -15,7 +15,7 @@ public class BoardGUI {
 
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getCols(); j++) {
-                CellButton button = new CellButton(i, j, board.getCell(i, j));
+                CellButton button = new CellButton(board.getCell(i, j));
                 buttons[i][j] = button;
                 boardPanel.add(button);
             }
@@ -37,17 +37,5 @@ public class BoardGUI {
 
     public CellButton getButton(int row, int col) {
         return buttons[row][col];
-    }
-
-    public void refreshCell(int row, int col) {
-        buttons[row][col].updateDisplay();
-    }
-
-    public void refreshAll() {
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons[i].length; j++) {
-                buttons[i][j].updateDisplay();
-            }
-        }
     }
 }
