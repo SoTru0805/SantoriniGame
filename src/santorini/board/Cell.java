@@ -1,43 +1,73 @@
 package santorini.board;
 
-import santorini.engine.Player;
+import santorini.elements.Building;
+import santorini.elements.Ground;
+import santorini.elements.Worker;
 
-public class Cell {
-    private int level; // building level: 0 to 3
-    private boolean hasDome; // true if dome on top
-    private Player worker; // <-- Change from String to Player
+import javax.swing.*;
 
-    public Cell() {
-        this.level = 0;
-        this.hasDome = false;
+public class Cell extends JButton {
+    private int row;
+    private int col;
+    private Building building;
+    private Worker worker;
+
+    public Cell(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.building = new Ground(this);
         this.worker = null;
     }
 
-    public int getLevel() {
-        return level;
+    public Building getBuilding() {
+        return building;
     }
 
-    public void build() {
-        if (level < 3) {
-            level++;
-        } else {
-            hasDome = true;
-        }
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public int getLevel() {
+        return building.getLevel();
     }
 
     public boolean hasDome() {
-        return hasDome;
+        return building.getSymbol().equals("D");
     }
 
-    public Player getWorker() {
+    public void build() {
+        this.building = building.next();
+    }
+
+    public void undoBuild() {
+        this.building = building.previous();
+    }
+
+    public Worker getWorker() {
         return worker;
     }
 
-    public void setWorker(Player worker) {
+    public void setWorker(Worker worker) {
         this.worker = worker;
     }
 
     public void removeWorker() {
         this.worker = null;
+    }
+
+    public boolean isOccupied() {
+        return worker != null;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public String getDisplaySymbol() {
+        return building.getSymbol(); // "", "L1", "L2", "L3", "D"
     }
 }

@@ -19,7 +19,7 @@ public class Worker {
      * @param id The unique identifier for this worker.
      * @param player The player who owns this worker.
      */
-    public Worker(int id, Player player) {
+    public Worker(Player player, int id) {
         this.id = id;
         this.player = player;
         this.currentLocation = null;
@@ -42,6 +42,9 @@ public class Worker {
         return currentLocation;
     }
 
+    public void setPlayer(Player player){
+        this.player = player;
+    }
     /**
      * Sets the current location of this worker.
      * @param currentLocation The Cell to set as the worker's current location.
@@ -56,6 +59,9 @@ public class Worker {
      */
     public Player getPlayer() {
         return player;
+    }
+    public String getPlayerName() {
+        return player.getName();
     }
 
     /**

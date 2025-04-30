@@ -2,23 +2,34 @@ package santorini.engine;
 
 import santorini.board.Board;
 import santorini.screens.GameScreen;
-import santorini.turn.TurnManager;
 
 public class Game {
   private static Player player1;
   private static Player player2;
+  private static Player currentPlayer;
   private static Board board;
-  private static TurnManager turnManager;
 
   public static void initializeGame(Player p1, Player p2, Board b) {
     player1 = p1;
     player2 = p2;
     board = b;
-    turnManager = new TurnManager(player1, player2);
+    currentPlayer = player1; // Player 1 starts
+  }
+
+  public static void setCurrentPlayer(Player p) {
+    currentPlayer = p;
+  }
+
+  public static Player getPlayer1() {
+    return player1;
+  }
+
+  public static Player getPlayer2() {
+    return player2;
   }
 
   public static Player getCurrentPlayer() {
-    return turnManager.getCurrentPlayer();
+    return currentPlayer;
   }
 
   public static Board getBoard() {
@@ -26,16 +37,18 @@ public class Game {
   }
 
   public static void endTurn() {
-    turnManager.endTurn();
-  }
-
-  public static int getTurnCount() {
-    return turnManager.getTurnCount();
+    if (currentPlayer == player1) {
+      currentPlayer = player2;
+    } else {
+      currentPlayer = player1;
+    }
   }
 
   public static void playerClicked(int row, int col) {
-    String message = getCurrentPlayer().getName() + " clicked on (" + row + ", " + col + ")";
+    String message = currentPlayer.getName() + " clicked on (" + row + ", " + col + ")";
+
     GameScreen.logMessage(message);
     System.out.println(message);
   }
+
 }
