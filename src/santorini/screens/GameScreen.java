@@ -54,6 +54,8 @@ public class GameScreen implements Screen {
     // Setup board and logic
     Board board = new Board(5,5);
     Game.initializeGame(player1, player2, board);
+    Game.getCurrentPlayer().getGodCard().onTurnStart();
+
     java.util.List<Point> emptySpots = new java.util.ArrayList<>(); //Random placiong worker
 
     for (int i = 0; i < board.getRows(); i++) {
@@ -134,8 +136,10 @@ public class GameScreen implements Screen {
 
     endTurnButton.addActionListener(e -> {
       Game.endTurn();
+
       Player current = Game.getCurrentPlayer();
-      GodCard currentCard = current.getGodCard();
+      current.getGodCard().onTurnEnd();
+
       cardTitle.setText(current.getName() + "’s Card");
       cardName.setText(current.getGodCard().getName());
       cardDescription.setText("<html><div style='text-align:center;'>" +
