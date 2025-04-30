@@ -8,17 +8,17 @@ import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
 import santorini.board.CellButton;
 import santorini.screens.GameScreen;
+import santorini.screens.ResultScreen;
+import santorini.screens.ScreenManager;
 import santorini.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameLogicManager {
-
-  private Board board;
   private BoardGUI boardGUI;
   private Player player1, player2;
-  private Player currentPlayer;
+  private Player currentPlayer, startingPlayer;
   private JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
   private JLabel godCardImage;
@@ -30,9 +30,8 @@ public class GameLogicManager {
   private Action lastAction = null;
   private int turnCount = 1;
 
-  public GameLogicManager(Board board, BoardGUI boardGUI, Player player1, Player player2,
+  public GameLogicManager(BoardGUI boardGUI, Player player1, Player player2, Player startingPlayer,
                           JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage) {
-    this.board = board;
     this.boardGUI = boardGUI;
     this.player1 = player1;
     this.player2 = player2;
@@ -40,10 +39,9 @@ public class GameLogicManager {
     this.cardTitle = cardTitle;
     this.cardName = cardName;
     this.cardDescription = cardDescription;
-    this.currentPlayer = player1;
+    this.startingPlayer = startingPlayer;
+    this.currentPlayer = startingPlayer;
     this.godCardImage = cardImage;
-
-    Game.setCurrentPlayer(currentPlayer);
   }
 
   public void handleCellClick(Cell clickedCell) {
@@ -53,27 +51,29 @@ public class GameLogicManager {
           if (clickedCell.getWorker().getPlayer() == currentPlayer){
             selectedWorkerCell = clickedCell;
             workerSelected = true;
-            GameScreen.logMessage(currentPlayer.getName() + " selected a worker to move.");
+            GameLog.logMessage(currentPlayer.getName() + " selected a worker to move.");
           } else {
-            GameScreen.logMessage("Error: Invalid selection. Select your own worker.");
+            GameLog.logMessage("Error: Invalid selection. Select your own worker.");
           }
         } else {
-          GameScreen.logMessage("Error: The cell does not have your worker.");
+          GameLog.logMessage("Error: The cell does not have your worker.");
         }
       } else {
         MoveAction moveAction = new MoveAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
         String log = moveAction.execute();
-        GameScreen.logMessage(log);
+        GameLog.logMessage(log);
         if (moveAction.status()){
           lastAction = moveAction;
 
           movingPhase = false;
           workerSelected = false;
+
+          checkWinner(clickedCell, currentPlayer);
         }
       }
     } else {
       if (buildCompleted) {
-        GameScreen.logMessage(currentPlayer.getName() + " has already built! Please end your turn.");
+        GameLog.logMessage(currentPlayer.getName() + " has already built! Please end your turn.");
         return;
       }
 
@@ -82,23 +82,23 @@ public class GameLogicManager {
           if (clickedCell.getWorker().getPlayer() == currentPlayer){
             selectedWorkerCell = clickedCell;
             workerSelected = true;
-            GameScreen.logMessage(currentPlayer.getName() + " selected a worker to build.");
+            GameLog.logMessage(currentPlayer.getName() + " selected a worker to build.");
           } else {
-            GameScreen.logMessage("Error: Invalid selection. Select your own worker.");
+            GameLog.logMessage("Error: Invalid selection. Select your own worker.");
           }
         } else {
-          GameScreen.logMessage("Error: The cell does not have your worker.");
+          GameLog.logMessage("Error: The cell does not have your worker.");
         }
       } else {
         BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
         String log = buildAction.execute();
-        GameScreen.logMessage(log);
+        GameLog.logMessage(log);
         if (buildAction.status()){
           lastAction = buildAction;
           buildCompleted = true;
           workerSelected = false;
 
-          GameScreen.logMessage(currentPlayer.getName() + " must now end the turn.");
+          GameLog.logMessage(currentPlayer.getName() + " must now end the turn.");
         }
       }
     }
@@ -107,20 +107,20 @@ public class GameLogicManager {
   public void undoLastAction() {
     if (lastAction != null) {
       String log = lastAction.undo();
-      GameScreen.logMessage(log);
-      GameScreen.logMessage("Last action undone.");
+      GameLog.logMessage(log);
+      GameLog.logMessage("Last action undone.");
       lastAction = null;
       movingPhase = !buildCompleted;
       buildCompleted = false;
       workerSelected = false;
     } else {
-      GameScreen.logMessage("Nothing to undo.");
+      GameLog.logMessage("Nothing to undo.");
     }
   }
 
   public void endTurn() {
     if (movingPhase || !buildCompleted) {
-      GameScreen.logMessage("You must move and build before ending turn!");
+      GameLog.logMessage("You must move and build before ending turn!");
       return;
     }
     // Switch player
@@ -132,15 +132,27 @@ public class GameLogicManager {
     cardName.setText(currentPlayer.getGodCard().getName());
     cardDescription.setText("<html><div style='text-align:center;'>" +
             currentPlayer.getGodCard().getDescription() + "</div></html>");
-    ImageUtils.setScaledGodCardIcon(currentPlayer.getGodCard(), godCardImage, 120, 120);
+    ImageUtils.setScaledGodCardIcon(currentPlayer.getGodCard(), godCardImage, 200, 300);
 
-    turnCount++;
-    GameScreen.logMessage("Turn #" + turnCount + " - " + currentPlayer.getName() + " starts!");
+    if (currentPlayer == startingPlayer){
+      turnCount++;
+      GameLog.turnMessage("Turn #" + turnCount);
+    }
+
+    GameLog.logMessage("It is now " + currentPlayer.getName() + " turn.");
+
 
     // Reset phase
     movingPhase = true;
     workerSelected = false;
     buildCompleted = false;
     lastAction = null;
+  }
+
+  public void checkWinner(Cell winnerCell, Player winner){
+    if (winnerCell.getBuilding().getLevel() == 3) {
+      ScreenManager.registerScreen("RESULT", new ResultScreen(winner, turnCount));
+      ScreenManager.showScreen("RESULT");
+    }
   }
 }

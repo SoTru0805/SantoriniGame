@@ -26,4 +26,13 @@ public class ImageUtils {
 
     return imageIcon;
   }
+
+  public static JLabel setUpGodCardLabel(){
+    JLabel godCardImage = new JLabel();
+    godCardImage.setHorizontalAlignment(SwingConstants.CENTER);
+    godCardImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+    godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+    return godCardImage;
+  }
 }

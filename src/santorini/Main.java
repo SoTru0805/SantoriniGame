@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import santorini.screens.ScreenManager;
 
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -17,6 +19,10 @@ public class Main {
             frame.setSize(900, 600);
             frame.setLocationRelativeTo(null);
 
+            // Assign color to player's workers
+            Color firstPlayerColor = Color.RED;
+            Color secondPlayerColor = Color.BLUE;
+
             GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod());
 
             String godCardPage = "GODCARDS";
@@ -24,12 +30,13 @@ public class Main {
             ScreenManager.registerScreen("WELCOME", new WelcomeScreen());
             ScreenManager.registerScreen(godCardPage, new GodCardInfoScreen(godCardDeck));
             ScreenManager.registerScreen("TUTORIAL", new TutorialScreen(godCardPage));
-            ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck));
+            ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck, firstPlayerColor, secondPlayerColor));
+
 
             frame.setContentPane(ScreenManager.getMainPanel());
             frame.setVisible(true);
 
-            ScreenManager.showScreen("WELCOME"); // Start with welcome screen
+            ScreenManager.showScreen("WELCOME"); // Start with the menu
         });
     }
 }

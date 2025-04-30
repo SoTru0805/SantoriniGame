@@ -26,23 +26,29 @@ public class MoveAction extends Action {
       return "Error: " + player.getName() + " cannot move too far away.";
     }
 
-    if (!target.isOccupied() && !target.hasDome()){
-      Worker selectedWorker = selected.getWorker();
-      target.setWorker(selectedWorker);
-      selectedWorker.setCurrentLocation(target);
-      selected.removeWorker();
-
-      boardGUI.getButton(selected.getRow(),selected.getCol()).setUpDisplay();
-      boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
-
-      status = true;
-
-      return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + "). Now, select a worker to build.";
-    } else if (!target.isOccupied() && target.hasDome()){
-      return "Error: " + player.getName() + " cannot move to a dome.";
-    } else {
-      return "Error: " + player.getName() + " cannot move to a position that already has a worker.";
+    if (target.isOccupied() || target.hasDome()) {
+      return "Error: " + player.getName() + " cannot move to a cell that has a worker or a dome.";
     }
+
+    int selectedLevel = selected.getBuilding().getLevel();
+    int targetLevel = target.getBuilding().getLevel();
+
+    if (targetLevel - selectedLevel > 1) {
+      return "Error: " + player.getName() + " cannot move up more than one level.";
+    }
+
+    Worker selectedWorker = selected.getWorker();
+    target.setWorker(selectedWorker);
+    selectedWorker.setCurrentLocation(target);
+    selected.removeWorker();
+
+    boardGUI.getButton(selected.getRow(),selected.getCol()).setUpDisplay();
+    boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
+
+    status = true;
+
+    return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + "). Now, select a worker to build.";
+
   }
   @Override
   public Boolean status(){

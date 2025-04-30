@@ -5,11 +5,13 @@ import santorini.board.BoardEventHandler;
 import santorini.board.BoardGUI;
 import santorini.elements.Worker;
 import santorini.engine.Game;
+import santorini.engine.GameLog;
 import santorini.engine.GameLogicManager;
 import santorini.engine.Player;
 import santorini.godcards.GodCard;
 import santorini.godcards.GodCardDeck;
 import santorini.utils.ImageUtils;
+import santorini.utils.PlayerUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,15 +26,17 @@ public class GameScreen implements Screen {
   private GodCardDeck godCardDeck;
   private Board board;
   private BoardGUI boardGUI;
-  private Worker worker1, worker2, worker3, worker4;
-  private Player player1, player2;
+  private Player player1, player2, randomPlayer;
   private GameLogicManager logicManager;
   public static JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
   private JLabel godCardImage;
+  private Color firstPlayerColor, secondPlayerColor;
 
-  public GameScreen(GodCardDeck godCardDeck) {
+  public GameScreen(GodCardDeck godCardDeck, Color firstPlayerColor, Color secondPlayerColor) {
     this.godCardDeck = godCardDeck;
+    this.firstPlayerColor = firstPlayerColor;
+    this.secondPlayerColor= secondPlayerColor;
   }
 
   @Override
@@ -55,11 +59,11 @@ public class GameScreen implements Screen {
     String name1 = askName("Player 1");
     String name2 = askName("Player 2");
 
-    player1 = new Player(name1, Color.RED);
-    player2 = new Player(name2, Color.BLUE);
+    player1 = new Player(name1, firstPlayerColor);
+    player2 = new Player(name2, secondPlayerColor);
 
     board = new Board();
-    randomizeWorkers();
+    PlayerUtils.randomizeWorkers(board, player1, player2);
 
     godCardDeck.shuffle();
     player1.setGodCard(godCardDeck.draw());
@@ -68,10 +72,10 @@ public class GameScreen implements Screen {
     showCardAssignment(player1);
     showCardAssignment(player2);
 
+    randomPlayer = PlayerUtils.getRandomPlayer(player1, player2);
 
     // GUI setup
-    gameLog = new JTextArea("Game’s Log:\n• Turn #1 - " + player1.getName() + " starts the game...");
-    gameLog.setEditable(false);
+    gameLog = GameLog.setUpGameLog(randomPlayer);
     JScrollPane logScroll = new JScrollPane(gameLog);
     logScroll.setPreferredSize(new Dimension(300, 120));
 
@@ -87,10 +91,10 @@ public class GameScreen implements Screen {
 
     // Setup Logic Manager AFTER BoardGUI created
     logicManager = new GameLogicManager(
-            board,
             boardGUI,
             player1,
             player2,
+            randomPlayer,
             gameLog,
             cardTitle,
             cardName,
@@ -104,35 +108,7 @@ public class GameScreen implements Screen {
   }
 
 
-  private void randomizeWorkers() {
-    List<Point> emptySpots = new ArrayList<>();
-    for (int i = 0; i < board.getRows(); i++) {
-      for (int j = 0; j < board.getCols(); j++) {
-        if (board.getCell(i, j).getWorker() == null) {
-          emptySpots.add(new Point(i, j));
-        }
-      }
-    }
-    Collections.shuffle(emptySpots);
 
-
-
-    for (int i = 0; i < 2; i++) {
-      Point p = emptySpots.remove(0);
-      Worker newWorker = new Worker(player1, player1.getWorkers().size());
-      board.getCell(p.x, p.y).setWorker(newWorker);
-      newWorker.setCurrentLocation(board.getCell(p.x, p.y));
-      player1.addWorker(newWorker);
-    }
-
-    for (int i = 0; i < 2; i++) {
-      Point p = emptySpots.remove(0);
-      Worker newWorker = new Worker(player2, player2.getWorkers().size());
-      board.getCell(p.x, p.y).setWorker(newWorker);
-      newWorker.setCurrentLocation(board.getCell(p.x, p.y));
-      player2.addWorker(newWorker);
-    }
-  }
 
   private JPanel createRightPanel() {
     JPanel rightPanel = new JPanel(new BorderLayout());
@@ -143,21 +119,21 @@ public class GameScreen implements Screen {
     godCardInfo.setLayout(new BoxLayout(godCardInfo, BoxLayout.Y_AXIS));
     godCardInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    cardTitle = new JLabel(player1.getName() + "’s Card");
+    cardTitle = new JLabel(randomPlayer.getName() + "’s Card");
     cardTitle.setFont(new Font("Arial", Font.BOLD, 16));
     cardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    cardName = new JLabel(player1.getGodCard().getName());
+    cardName = new JLabel(randomPlayer.getGodCard().getName());
     cardName.setFont(new Font("Arial", Font.PLAIN, 14));
     cardName.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     cardDescription = new JLabel("<html><div style='text-align:center;'>" +
-            player1.getGodCard().getDescription() + "</div></html>");
+            randomPlayer.getGodCard().getDescription() + "</div></html>");
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     // Load initial image for player1
-    ImageUtils.setScaledGodCardIcon(player1.getGodCard(), godCardImage, 200, 250);;
+    ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);;
 
     godCardInfo.add(cardTitle);
     godCardInfo.add(Box.createVerticalStrut(10));
@@ -193,13 +169,10 @@ public class GameScreen implements Screen {
   }
 
   private void showCardAssignment(Player player) {
-    godCardImage = new JLabel();
-    godCardImage.setHorizontalAlignment(SwingConstants.CENTER);
-    godCardImage.setAlignmentX(Component.CENTER_ALIGNMENT);
-    godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+    godCardImage = ImageUtils.setUpGodCardLabel();
 
     GodCard godCard = player.getGodCard();
-    ImageIcon scaledIcon = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 250);
+    ImageIcon scaledIcon = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 300);
 
     JLabel imageLabel = new JLabel(scaledIcon);
     imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -230,12 +203,5 @@ public class GameScreen implements Screen {
       name = JOptionPane.showInputDialog(null, "Enter " + prompt + " Name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
     } while (name == null || name.trim().isEmpty());
     return name.trim();
-  }
-
-  public static void logMessage(String message) {
-    if (gameLog != null) {
-      gameLog.append("\n• " + message);
-      gameLog.setCaretPosition(gameLog.getDocument().getLength());
-    }
   }
 }
