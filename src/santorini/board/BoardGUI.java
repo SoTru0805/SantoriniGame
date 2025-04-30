@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import santorini.engine.Game;
 import santorini.engine.Player;
+import santorini.screens.GameScreen;
 
 public class BoardGUI {
     private JPanel boardPanel;
@@ -11,18 +12,26 @@ public class BoardGUI {
     private boolean selectingWorker = true;
     private int selectedRow = -1;
     private int selectedCol = -1;
+    private boolean hasMoved = false; // Track if the player has moved
 
     public BoardGUI(Board board) {
-        boardPanel = new JPanel(new GridLayout(board.getRows(), board.getCols()));
-        buttons = new CellButton[board.getRows()][board.getCols()];
+        int rows = board.getRows();
+        int cols = board.getCols();
 
-        for (int i = 0; i < board.getRows(); i++) {
-            for (int j = 0; j < board.getCols(); j++) {
+        boardPanel = new JPanel(new GridLayout(rows, cols));
+        buttons = new CellButton[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 CellButton button = new CellButton(i, j, board.getCell(i, j));
                 buttons[i][j] = button;
                 boardPanel.add(button);
 
                 button.addActionListener(e -> {
+                    if (hasMoved) {
+                        GameScreen.logMessage("You have already moved. Please click End Turn.");
+                        return; // Do not allow further moves
+                    }
                     CellButton clicked = (CellButton) e.getSource();
                     int row = clicked.getRow();
                     int col = clicked.getCol();
@@ -31,41 +40,48 @@ public class BoardGUI {
                     Player activePlayer = Game.getCurrentPlayer();
 
                     if (selectingWorker) {
-                        // Select the worker
                         if (cell.getWorker() != null && cell.getWorker().equals(activePlayer)) {
                             selectedRow = row;
                             selectedCol = col;
                             selectingWorker = false;
-                            System.out.println(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
+                            GameScreen.logMessage(activePlayer.getName() + " selected worker at (" + row + ", " + col + ")");
                         } else {
-                            System.out.println("Invalid selection. Select your own worker.");
+                            GameScreen.logMessage("Invalid selection. Select your own worker.");
                         }
                     } else {
-                        // Move to new cell
                         Cell selectedCell = Game.getBoard().getCell(selectedRow, selectedCol);
+                        int levelDiff = cell.getLevel() - selectedCell.getLevel();
+                        boolean isAdjacent = Math.abs(row - selectedRow) <= 1 && Math.abs(col - selectedCol) <= 1;
+                        boolean isDifferentCell = row != selectedRow || col != selectedCol;
 
-                        if (cell.getWorker() == null && !cell.hasDome()) {
+                        if (isAdjacent && isDifferentCell && levelDiff <= 1 && cell.getWorker() == null && !cell.hasDome()) {
                             cell.setWorker(activePlayer);
                             selectedCell.removeWorker();
                             buttons[row][col].updateDisplay();
                             buttons[selectedRow][selectedCol].updateDisplay();
 
-                            System.out.println(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
-
+                            GameScreen.logMessage(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
+                            hasMoved = true; // Player has moved
                             selectingWorker = true;
                             selectedRow = -1;
                             selectedCol = -1;
 
-                            // End turn
-                            Game.endTurn();
-                            System.out.println(Game.getCurrentPlayer().getName() + "'s turn now.");
+                            //Game.endTurn();
+                            GameScreen.logMessage("Now " + Game.getCurrentPlayer().getName() + "'s turn (Turn " + Game.getTurnCount() + ")");
                         } else {
-                            System.out.println("Invalid move! Choose empty cell without dome.");
+                            GameScreen.logMessage("Invalid move! Must be adjacent, unoccupied, no dome, and at most 1 level up.");
                         }
                     }
                 });
             }
         }
+    }
+
+    public void resetTurnFlags() {
+        hasMoved = false;
+        selectingWorker = true;
+        selectedRow = -1;
+        selectedCol = -1;
     }
 
     public JPanel getBoardPanel() {

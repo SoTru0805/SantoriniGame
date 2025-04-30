@@ -16,6 +16,7 @@ public class GameScreen implements Screen {
   private boolean setupDone = false;
   private GodCardDeck godCardDeck;
   public static JTextArea gameLog;
+
   public GameScreen(GodCardDeck godCardDeck) {
     this.godCardDeck = godCardDeck;
   }
@@ -51,13 +52,12 @@ public class GameScreen implements Screen {
     showCardAssignment(player2);
 
     // Setup board and logic
-    Board board = new Board();
+    Board board = new Board(5,5);
     Game.initializeGame(player1, player2, board);
+    Game.getCurrentPlayer().getGodCard().onTurnStart();
 
-    // ===== RANDOMLY PLACE 2 workers for each player =====
-    java.util.List<Point> emptySpots = new java.util.ArrayList<>();
+    java.util.List<Point> emptySpots = new java.util.ArrayList<>(); //Random placiong worker
 
-// Collect all empty cells
     for (int i = 0; i < board.getRows(); i++) {
       for (int j = 0; j < board.getCols(); j++) {
         if (board.getCell(i, j).getWorker() == null) {
@@ -66,28 +66,22 @@ public class GameScreen implements Screen {
       }
     }
 
-// Shuffle to randomize
     java.util.Collections.shuffle(emptySpots);
 
-// Place 2 P1 workers
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
       board.getCell(p.x, p.y).setWorker(player1);
     }
 
-// Place 2 P2 workers
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
       board.getCell(p.x, p.y).setWorker(player2);
     }
-// ===== DONE =====
 
-
-    // Create GUI
     BoardGUI boardGUI = new BoardGUI(board);
     JPanel boardPanel = boardGUI.getBoardPanel();
 
-    JTextArea gameLog = new JTextArea("Game’s Log:\n• " + player1.getName() + " starts the game...");
+    gameLog = new JTextArea("Game’s Log:\n• " + player1.getName() + " starts the game...");
     gameLog.setEditable(false);
     JScrollPane logScroll = new JScrollPane(gameLog);
     logScroll.setPreferredSize(new Dimension(300, 120));
@@ -118,11 +112,17 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    // Load and display the GodCard image
+    JLabel cardImageLabel = new JLabel();
+    updateCardImage(cardImageLabel, player1.getGodCard());
+
     godCardInfo.add(cardTitle);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardName);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardDescription);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(cardImageLabel);
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -136,11 +136,15 @@ public class GameScreen implements Screen {
 
     endTurnButton.addActionListener(e -> {
       Game.endTurn();
+
       Player current = Game.getCurrentPlayer();
+      current.getGodCard().onTurnEnd();
+
       cardTitle.setText(current.getName() + "’s Card");
       cardName.setText(current.getGodCard().getName());
       cardDescription.setText("<html><div style='text-align:center;'>" +
               current.getGodCard().getDescription() + "</div></html>");
+      updateCardImage(cardImageLabel, currentCard);
       gameLog.append("\n• " + current.getGodCardName() + "'s Turn");
     });
 
@@ -153,17 +157,33 @@ public class GameScreen implements Screen {
     rightPanel.add(godCardInfo, BorderLayout.NORTH);
     rightPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-    // Final layout
     panel.add(leftPanel, BorderLayout.CENTER);
     panel.add(rightPanel, BorderLayout.EAST);
   }
 
   private void showCardAssignment(Player player) {
+    String cardName = player.getGodCard().getName();
+    String imagePath = "images/GodCards/" + cardName + ".jpg";
+    ImageIcon icon = new ImageIcon(imagePath);
+
+    // Resize the image
+    Image image = icon.getImage();
+    Image newimg = image.getScaledInstance(450, 300,  java.awt.Image.SCALE_SMOOTH);
+    ImageIcon resizedIcon = new ImageIcon(newimg);
+
+    JLabel imageLabel = new JLabel(resizedIcon);
+    imageLabel.setAlignmentX(SwingConstants.CENTER);
+    imageLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+    JPanel messagePanel = new JPanel();
+    messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+    messagePanel.add(new JLabel("<html>" + player.getName() + ", you have been assigned the God Card: <strong>" + cardName + "</strong><br></html>"));
+    messagePanel.add(new JLabel("<html><br>Power:<br><strong>" + player.getGodCard().getDescription() + "</strong></html>"));
+    messagePanel.add(imageLabel);
+
     JOptionPane.showMessageDialog(
             null,
-            player.getName() + ", you have been assigned the God Card: " +
-                    player.getGodCard().getName() + "\n\n" +
-                    "Power: " + player.getGodCard().getDescription(),
+            messagePanel,
             "God Card Assignment",
             JOptionPane.INFORMATION_MESSAGE
     );
@@ -177,12 +197,22 @@ public class GameScreen implements Screen {
     return name.trim();
   }
 
+  private void updateCardImage(JLabel label, GodCard card) {
+    String imagePath = card.getImagePath();
+    ImageIcon icon = new ImageIcon(imagePath);
+
+    // Resize the image
+    Image image = icon.getImage();
+    Image newimg = image.getScaledInstance(120, 200,  java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(newimg);
+
+    label.setIcon(icon);
+  }
+
   public static void logMessage(String message) {
     if (gameLog != null) {
       gameLog.append("\n• " + message);
-      gameLog.setCaretPosition(gameLog.getDocument().getLength()); // Always scroll to bottom
+      gameLog.setCaretPosition(gameLog.getDocument().getLength()); // auto-scroll
     }
   }
-
-
 }
