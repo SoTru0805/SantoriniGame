@@ -28,3 +28,10 @@ target/
 
 # Mac system files
 .DS_Store
+
+.idea/
+*.iml
+out/
+*.class
+workspace.xml
+
