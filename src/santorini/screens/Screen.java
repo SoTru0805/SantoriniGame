@@ -4,4 +4,5 @@ import javax.swing.*;
 
 public interface Screen {
   JPanel getPanel();
+  JScrollPane getScrollPanel();
 }

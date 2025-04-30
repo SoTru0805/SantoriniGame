@@ -19,8 +19,11 @@ public class Main {
 
             GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod());
 
+            String godCardPage = "GODCARDS";
+
             ScreenManager.registerScreen("WELCOME", new WelcomeScreen());
-            ScreenManager.registerScreen("TUTORIAL", new TutorialScreen());
+            ScreenManager.registerScreen(godCardPage, new GodCardInfoScreen(godCardDeck));
+            ScreenManager.registerScreen("TUTORIAL", new TutorialScreen(godCardPage));
             ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck));
 
             frame.setContentPane(ScreenManager.getMainPanel());

@@ -1,12 +1,20 @@
 package santorini.screens;
 
 import santorini.Main;
+import santorini.godcards.ArtemisGod;
+import santorini.godcards.DemeterGod;
+import santorini.godcards.GodCard;
+import santorini.godcards.GodCardDeck;
 import santorini.screens.ScreenManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TutorialScreen implements Screen {
+  private String page;
+  public TutorialScreen(String page){
+    this.page = page;
+  }
 
   private static String getHowToPlayText() {
     return "How to Play Santorini\n\n" +
@@ -87,41 +95,12 @@ public class TutorialScreen implements Screen {
     return panel;
   }
 
-  private static void showGodCardInfo() {
-    Object[] options = {"Artemis", "Demeter"};
-
-    String selectedCard = (String) JOptionPane.showInputDialog(
-            null,
-            "Choose a God Card to view:",
-            "God Cards",
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            options,
-            options[0]
-    );
-
-    if (selectedCard != null) {
-      ImageIcon cardImage = null;
-      String description = "";
-
-      if (selectedCard.equals("Artemis")) {
-        cardImage = new ImageIcon(GameScreen.class.getResource("/cards/artemis.png"));
-        description = "<html><h2>Artemis</h2>"
-                + "<p>Your Worker may move one additional time, but not back to its initial space.</p></html>";
-      } else if (selectedCard.equals("Demeter")) {
-        cardImage = new ImageIcon(GameScreen.class.getResource("/cards/demeter.png"));
-        description = "<html><h2>Demeter</h2>"
-                + "<p>Your Worker may build one additional time, but not on the same space.</p></html>";
-      }
-
-      JOptionPane.showMessageDialog(
-              null,
-              description,
-              "God Card - " + selectedCard,
-              JOptionPane.INFORMATION_MESSAGE,
-              cardImage
-      );
-    }
+  @Override
+  public JScrollPane getScrollPanel() {
+    return null;
   }
 
+  private void showGodCardInfo() {
+    ScreenManager.showScreen(page);
+  }
 }

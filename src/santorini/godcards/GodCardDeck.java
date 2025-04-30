@@ -56,4 +56,13 @@ public class GodCardDeck implements DeckInit {
     String randomKey = keys.get(0); // pick random key
     return removeGodCard(randomKey); // remove and return GodCard
   }
+
+  public GodCard peekGodCard(String name) {
+    try {
+      return map.get(name).newInstance(); // Or reuse existing constructor logic
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 }

@@ -17,7 +17,13 @@ public class ScreenManager {
 
   public static void registerScreen(String name, Screen screen) {
     screens.put(name, screen);
-    mainPanel.add(screen.getPanel(), name);
+    JPanel screenPanel = screen.getPanel();
+
+    JScrollPane scrollPane = new JScrollPane(screenPanel);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+    mainPanel.add(scrollPane, name);
   }
 
   public static Screen getScreen(String name) {

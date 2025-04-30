@@ -8,6 +8,7 @@ import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
 import santorini.board.CellButton;
 import santorini.screens.GameScreen;
+import santorini.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class GameLogicManager {
   private Player currentPlayer;
   private JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
+  private JLabel godCardImage;
 
   private boolean movingPhase = true;
   private boolean buildCompleted = false;
@@ -29,7 +31,7 @@ public class GameLogicManager {
   private int turnCount = 1;
 
   public GameLogicManager(Board board, BoardGUI boardGUI, Player player1, Player player2,
-                          JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription) {
+                          JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage) {
     this.board = board;
     this.boardGUI = boardGUI;
     this.player1 = player1;
@@ -39,6 +41,7 @@ public class GameLogicManager {
     this.cardName = cardName;
     this.cardDescription = cardDescription;
     this.currentPlayer = player1;
+    this.godCardImage = cardImage;
 
     Game.setCurrentPlayer(currentPlayer);
   }
@@ -129,6 +132,7 @@ public class GameLogicManager {
     cardName.setText(currentPlayer.getGodCard().getName());
     cardDescription.setText("<html><div style='text-align:center;'>" +
             currentPlayer.getGodCard().getDescription() + "</div></html>");
+    ImageUtils.setScaledGodCardIcon(currentPlayer.getGodCard(), godCardImage, 120, 120);
 
     turnCount++;
     GameScreen.logMessage("Turn #" + turnCount + " - " + currentPlayer.getName() + " starts!");

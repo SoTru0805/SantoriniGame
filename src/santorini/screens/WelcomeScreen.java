@@ -42,4 +42,9 @@ public class WelcomeScreen implements Screen {
 
     return panel;
   }
+
+  @Override
+  public JScrollPane getScrollPanel() {
+    return null;
+  }
 }

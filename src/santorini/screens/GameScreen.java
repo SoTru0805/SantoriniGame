@@ -9,6 +9,7 @@ import santorini.engine.GameLogicManager;
 import santorini.engine.Player;
 import santorini.godcards.GodCard;
 import santorini.godcards.GodCardDeck;
+import santorini.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
   private GameLogicManager logicManager;
   public static JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
+  private JLabel godCardImage;
 
   public GameScreen(GodCardDeck godCardDeck) {
     this.godCardDeck = godCardDeck;
@@ -36,6 +38,11 @@ public class GameScreen implements Screen {
   @Override
   public JPanel getPanel() {
     return panel;
+  }
+
+  @Override
+  public JScrollPane getScrollPanel() {
+    return null;
   }
 
   public void startGameSetup() {
@@ -62,7 +69,6 @@ public class GameScreen implements Screen {
     showCardAssignment(player2);
 
 
-
     // GUI setup
     gameLog = new JTextArea("Game’s Log:\n• Turn #1 - " + player1.getName() + " starts the game...");
     gameLog.setEditable(false);
@@ -80,7 +86,17 @@ public class GameScreen implements Screen {
     panel.add(rightPanel, BorderLayout.EAST);
 
     // Setup Logic Manager AFTER BoardGUI created
-    logicManager = new GameLogicManager(board, boardGUI, player1, player2, gameLog, cardTitle, cardName, cardDescription);
+    logicManager = new GameLogicManager(
+            board,
+            boardGUI,
+            player1,
+            player2,
+            gameLog,
+            cardTitle,
+            cardName,
+            cardDescription,
+            godCardImage
+    );
 
     // Setup Board Click Listener
     BoardEventHandler eventHandler = new BoardEventHandler(logicManager);
@@ -108,7 +124,7 @@ public class GameScreen implements Screen {
       newWorker.setCurrentLocation(board.getCell(p.x, p.y));
       player1.addWorker(newWorker);
     }
-    System.out.println(player1.getWorkers());
+
     for (int i = 0; i < 2; i++) {
       Point p = emptySpots.remove(0);
       Worker newWorker = new Worker(player2, player2.getWorkers().size());
@@ -116,7 +132,6 @@ public class GameScreen implements Screen {
       newWorker.setCurrentLocation(board.getCell(p.x, p.y));
       player2.addWorker(newWorker);
     }
-    System.out.println(player2.getWorkers());
   }
 
   private JPanel createRightPanel() {
@@ -141,17 +156,28 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    godCardImage = new JLabel();
+    godCardImage.setHorizontalAlignment(SwingConstants.CENTER);
+    godCardImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+    godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+    // Load initial image for player1
+    ImageUtils.setScaledGodCardIcon(player1.getGodCard(), godCardImage, 200, 250);;
+
     godCardInfo.add(cardTitle);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardName);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardDescription);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(godCardImage);
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
     JButton undoButton = new JButton("Undo");
     undoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+    undoButton.setPreferredSize(new Dimension(100, 40));
     undoButton.addActionListener(e -> logicManager.undoLastAction());
 
     JButton endTurnButton = new JButton("End Turn");
@@ -172,11 +198,28 @@ public class GameScreen implements Screen {
   }
 
   private void showCardAssignment(Player player) {
+    GodCard godCard = player.getGodCard();
+    Image scaledImage = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 300);
+    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+    JLabel imageLabel = new JLabel(scaledIcon);
+    imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    JLabel nameLabel = new JLabel("<html><div style='text-align: center;'><b>" +
+            player.getName() + "</b>, you have been assigned the God Card:<br><br>" +
+            "<b>" + godCard.getName() + "</b><br><br>" +
+            "<i>Power:</i><br>" + godCard.getDescription() + "</div></html>");
+    nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    panel.add(nameLabel);
+    panel.add(Box.createVerticalStrut(15)); // spacing
+    panel.add(imageLabel);
+
     JOptionPane.showMessageDialog(
             null,
-            player.getName() + ", you have been assigned the God Card: " +
-                    player.getGodCard().getName() + "\n\n" +
-                    "Power: " + player.getGodCard().getDescription(),
+            panel,
             "God Card Assignment",
             JOptionPane.INFORMATION_MESSAGE
     );

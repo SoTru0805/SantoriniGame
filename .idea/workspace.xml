@@ -5,28 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Major Changes #2:&#10;- Implemented the move action of workers.&#10;- The game log displays the status of the game and each action that the players make.&#10;- The game stores turns and players can undo the move action.&#10;- Still working in progress on the build action.&#10;- Commented the GameLogic and TurnManager classes. These classes will be in use as soon as possible for OOP design since the GameLogicManager handles most of the logic and is deemed to become a god class.">
-      <change afterPath="$PROJECT_DIR$/src/santorini/elements/Ground.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/screens/GodCardInfoScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/actions/BuildAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/actions/BuildAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/actions/MoveAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/actions/MoveAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Dome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Dome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/FirstLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/FirstLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/SecondLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/SecondLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/ThirdLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/ThirdLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/GameLogicManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/GameLogicManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/board/CellButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/board/CellButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/Dome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/Dome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/FirstLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/FirstLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/SecondLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/SecondLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/ThirdLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/elements/ThirdLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/GodCardFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Worker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/ArtemisGod.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/DeckInit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/DemeterGod.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/GodCard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/GodCardDeck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/Screen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/ScreenManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/TutorialScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/WelcomeScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/BoardGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Building.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/GodCardFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCardDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCardDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/Screen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/Screen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/ScreenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/ScreenManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/TutorialScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/TutorialScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/WelcomeScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/WelcomeScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/turn/Turn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/turn/TurnManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/elements/GodCardFrame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/GodCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/GodCardDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/ScreenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/TutorialScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/TutorialScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/WelcomeScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,16 +90,28 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.Run Santorini.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "GameLogic",
+    "git-widget-placeholder": "!6 on main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Tom/IdeaProjects/Santorini",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Run Santorini" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="santorini.Main" />
+      <module name="Sprint_Two1" />
+      <option name="VM_PARAMETERS" value="--enable-native-access=ALL-UNNAMED" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
