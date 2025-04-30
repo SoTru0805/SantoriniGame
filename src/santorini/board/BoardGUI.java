@@ -12,6 +12,7 @@ public class BoardGUI {
     private boolean selectingWorker = true;
     private int selectedRow = -1;
     private int selectedCol = -1;
+    private boolean hasMoved = false; // Track if the player has moved
 
     public BoardGUI(Board board) {
         int rows = board.getRows();
@@ -27,6 +28,10 @@ public class BoardGUI {
                 boardPanel.add(button);
 
                 button.addActionListener(e -> {
+                    if (hasMoved) {
+                        GameScreen.logMessage("You have already moved. Please click End Turn.");
+                        return; // Do not allow further moves
+                    }
                     CellButton clicked = (CellButton) e.getSource();
                     int row = clicked.getRow();
                     int col = clicked.getCol();
@@ -56,12 +61,12 @@ public class BoardGUI {
                             buttons[selectedRow][selectedCol].updateDisplay();
 
                             GameScreen.logMessage(activePlayer.getName() + " moved to (" + row + ", " + col + ")");
-
+                            hasMoved = true; // Player has moved
                             selectingWorker = true;
                             selectedRow = -1;
                             selectedCol = -1;
 
-                            Game.endTurn();
+                            //Game.endTurn();
                             GameScreen.logMessage("Now " + Game.getCurrentPlayer().getName() + "'s turn (Turn " + Game.getTurnCount() + ")");
                         } else {
                             GameScreen.logMessage("Invalid move! Must be adjacent, unoccupied, no dome, and at most 1 level up.");
@@ -70,6 +75,13 @@ public class BoardGUI {
                 });
             }
         }
+    }
+
+    public void resetTurnFlags() {
+        hasMoved = false;
+        selectingWorker = true;
+        selectedRow = -1;
+        selectedCol = -1;
     }
 
     public JPanel getBoardPanel() {
