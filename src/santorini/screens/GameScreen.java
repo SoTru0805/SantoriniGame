@@ -110,11 +110,17 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    // Load and display the GodCard image
+    JLabel cardImageLabel = new JLabel();
+    updateCardImage(cardImageLabel, player1.getGodCard());
+
     godCardInfo.add(cardTitle);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardName);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardDescription);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(cardImageLabel);
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -129,11 +135,13 @@ public class GameScreen implements Screen {
     endTurnButton.addActionListener(e -> {
       Game.endTurn();
       Player current = Game.getCurrentPlayer();
+      GodCard currentCard = current.getGodCard();
       cardTitle.setText(current.getName() + "’s Card");
       cardName.setText(current.getGodCard().getName());
       cardDescription.setText("<html><div style='text-align:center;'>" +
               current.getGodCard().getDescription() + "</div></html>");
-      logMessage("Turn " + Game.getTurnCount() + ": " + current.getName() + "'s Turn");
+      updateCardImage(cardImageLabel, currentCard);
+      gameLog.append("\n• " + current.getGodCardName() + "'s Turn");
     });
 
     buttonPanel.add(Box.createVerticalGlue());
@@ -150,11 +158,28 @@ public class GameScreen implements Screen {
   }
 
   private void showCardAssignment(Player player) {
+    String cardName = player.getGodCard().getName();
+    String imagePath = "images/GodCards/" + cardName + ".jpg";
+    ImageIcon icon = new ImageIcon(imagePath);
+
+    // Resize the image
+    Image image = icon.getImage();
+    Image newimg = image.getScaledInstance(450, 300,  java.awt.Image.SCALE_SMOOTH);
+    ImageIcon resizedIcon = new ImageIcon(newimg);
+
+    JLabel imageLabel = new JLabel(resizedIcon);
+    imageLabel.setAlignmentX(SwingConstants.CENTER);
+    imageLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+    JPanel messagePanel = new JPanel();
+    messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+    messagePanel.add(new JLabel("<html>" + player.getName() + ", you have been assigned the God Card: <strong>" + cardName + "</strong><br></html>"));
+    messagePanel.add(new JLabel("<html><br>Power:<br><strong>" + player.getGodCard().getDescription() + "</strong></html>"));
+    messagePanel.add(imageLabel);
+
     JOptionPane.showMessageDialog(
             null,
-            player.getName() + ", you have been assigned the God Card: " +
-                    player.getGodCard().getName() + "\n\n" +
-                    "Power: " + player.getGodCard().getDescription(),
+            messagePanel,
             "God Card Assignment",
             JOptionPane.INFORMATION_MESSAGE
     );
@@ -166,6 +191,18 @@ public class GameScreen implements Screen {
       name = JOptionPane.showInputDialog(null, "Enter " + prompt + " Name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
     } while (name == null || name.trim().isEmpty());
     return name.trim();
+  }
+
+  private void updateCardImage(JLabel label, GodCard card) {
+    String imagePath = card.getImagePath();
+    ImageIcon icon = new ImageIcon(imagePath);
+
+    // Resize the image
+    Image image = icon.getImage();
+    Image newimg = image.getScaledInstance(120, 200,  java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(newimg);
+
+    label.setIcon(icon);
   }
 
   public static void logMessage(String message) {
