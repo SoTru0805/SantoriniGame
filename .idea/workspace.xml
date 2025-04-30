@@ -4,60 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Major Changes #2:&#10;- Implemented the move action of workers.&#10;- The game log displays the status of the game and each action that the players make.&#10;- The game stores turns and players can undo the move action.&#10;- Still working in progress on the build action.&#10;- Commented the GameLogic and TurnManager classes. These classes will be in use as soon as possible for OOP design since the GameLogicManager handles most of the logic and is deemed to become a god class.">
-      <change afterPath="$PROJECT_DIR$/src/santorini/screens/GodCardInfoScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Board.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/BoardGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/board/CellButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Building.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/GodCardFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/elements/Worker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/engine/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/ArtemisGod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/DeckInit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/DemeterGod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/GodCard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/godcards/GodCardDeck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/GameScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/Screen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/ScreenManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/TutorialScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CodingWithGoblins_FIT3077/santorini/screens/WelcomeScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/BoardGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Building.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/GodCardFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCardDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCardDeck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/Screen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/Screen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/ScreenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/ScreenManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/TutorialScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/TutorialScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/WelcomeScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/WelcomeScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/turn/Turn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/turn/TurnManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/elements/GodCardFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/GodCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/GodCardDeck.java" afterDir="false" />
+    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Merged display-godcard-image, movement-update and MainLogic into main:&#10;- Resolved the conflicts during merging.&#10;- Fixed all the occurring errors for change adaption.">
       <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/screens/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/screens/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/ScreenManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/screens/TutorialScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/TutorialScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/screens/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/WelcomeScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/GodCardInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GodCardInfoScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,13 +87,22 @@
       <option name="project" value="LOCAL" />
       <updated>1745944045029</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Merged display-godcard-image, movement-update and MainLogic into main:&#10;- Resolved the conflicts during merging.&#10;- Fixed all the occurring errors for change adaption.">
+      <option name="closed" value="true" />
+      <created>1746023402169</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746023402169</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update .gitignore" />
     <MESSAGE value="Changes to major files:&#10;- Create child classes of Building abstract class&#10;- Create Action abstract and its action classes which are MoveAction, BuildAction and EndTurnAction.&#10;- Added BoardEventHandler for calling handleCellClick in logicManager.&#10;- Modified BoardGUI, Cell and Game classes&#10;- Added GameLogic and GameLogicManager classes for all the logic of the game.&#10;- Modified TurnManager to keep track of each turn.&#10;&#10;What will be improved:&#10;- Building action and moving action to be done while running.&#10;- Prevent god classes if needed.&#10;- Apply god cards ability into the game for both players.&#10;- Define winning requirement in the game logic." />
     <MESSAGE value="Major Changes #2:&#10;- Implemented the move action of workers.&#10;- The game log displays the status of the game and each action that the players make.&#10;- The game stores turns and players can undo the move action.&#10;- Still working in progress on the build action.&#10;- Commented the GameLogic and TurnManager classes. These classes will be in use as soon as possible for OOP design since the GameLogicManager handles most of the logic and is deemed to become a god class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Major Changes #2:&#10;- Implemented the move action of workers.&#10;- The game log displays the status of the game and each action that the players make.&#10;- The game stores turns and players can undo the move action.&#10;- Still working in progress on the build action.&#10;- Commented the GameLogic and TurnManager classes. These classes will be in use as soon as possible for OOP design since the GameLogicManager handles most of the logic and is deemed to become a god class." />
+    <MESSAGE value="Merged display-godcard-image, movement-update and MainLogic into main:&#10;- Resolved the conflicts during merging.&#10;- Fixed all the occurring errors for change adaption." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged display-godcard-image, movement-update and MainLogic into main:&#10;- Resolved the conflicts during merging.&#10;- Fixed all the occurring errors for change adaption." />
   </component>
 </project>

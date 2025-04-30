@@ -156,11 +156,6 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    godCardImage = new JLabel();
-    godCardImage.setHorizontalAlignment(SwingConstants.CENTER);
-    godCardImage.setAlignmentX(Component.CENTER_ALIGNMENT);
-    godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-
     // Load initial image for player1
     ImageUtils.setScaledGodCardIcon(player1.getGodCard(), godCardImage, 200, 250);;
 
@@ -198,9 +193,13 @@ public class GameScreen implements Screen {
   }
 
   private void showCardAssignment(Player player) {
+    godCardImage = new JLabel();
+    godCardImage.setHorizontalAlignment(SwingConstants.CENTER);
+    godCardImage.setAlignmentX(Component.CENTER_ALIGNMENT);
+    godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
     GodCard godCard = player.getGodCard();
-    Image scaledImage = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 300);
-    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+    ImageIcon scaledIcon = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 250);
 
     JLabel imageLabel = new JLabel(scaledIcon);
     imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

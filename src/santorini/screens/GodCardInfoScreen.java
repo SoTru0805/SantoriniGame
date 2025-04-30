@@ -46,8 +46,8 @@ public class GodCardInfoScreen implements Screen {
       godCardImage.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
       // Right side of page: Image
-      Image scaledImage = ImageUtils.setScaledGodCardIcon(card, godCardImage, 200, 300);
-      JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+      ImageIcon scaledImage = ImageUtils.setScaledGodCardIcon(card, godCardImage, 200, 300);
+      JLabel imageLabel = new JLabel(scaledImage);
       cardPanel.add(imageLabel, BorderLayout.EAST);
 
       panel.add(cardPanel);
