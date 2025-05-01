@@ -68,6 +68,8 @@ public class GameLogicManager {
           movingPhase = false;
           workerSelected = false;
 
+          selectedWorkerCell = clickedCell;
+
           checkWinner(clickedCell, currentPlayer);
         }
       }
@@ -79,10 +81,11 @@ public class GameLogicManager {
 
       if (!workerSelected) {
         if (clickedCell.isOccupied()) {
-          if (clickedCell.getWorker().getPlayer() == currentPlayer){
-            selectedWorkerCell = clickedCell;
+          if (clickedCell == selectedWorkerCell) {
             workerSelected = true;
-            GameLog.logMessage(currentPlayer.getName() + " selected a worker to build.");
+            GameLog.logMessage(currentPlayer.getName() + " selected the same worker to build.");
+          } else if (clickedCell.getWorker().getPlayer() == currentPlayer) {
+            GameLog.logMessage("Error: You must use the same worker that moved to build.");
           } else {
             GameLog.logMessage("Error: Invalid selection. Select your own worker.");
           }
