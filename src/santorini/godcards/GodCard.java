@@ -1,5 +1,6 @@
 package santorini.godcards;
 import santorini.elements.Worker;
+import santorini.engine.GameLogicManager;
 import santorini.engine.Player;
 import santorini.board.Cell;
 
@@ -17,6 +18,9 @@ public abstract class GodCard {
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;
+    }
+
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
@@ -33,11 +37,10 @@ public abstract class GodCard {
         return player;
     }
 
-    //Develop for Sprint3
-    /*public void applyEffect()
-     {
 
-     }*/
+    public boolean applyEffect(Worker worker, GameLogicManager logicManager) {
+        return false;
+    }
     public void onTurnStart()
     {
 

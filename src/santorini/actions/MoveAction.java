@@ -47,7 +47,7 @@ public class MoveAction extends Action {
 
     status = true;
 
-    return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + "). Now, select a worker to build.";
+    return player.getName() + " moved from (" + selected.getRow() + "," + selected.getCol() + ") to (" + target.getRow() + "," + target.getCol() + "). Now, select again the worker to build.";
 
   }
   @Override

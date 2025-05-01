@@ -81,6 +81,7 @@ public class Player {
      */
     public void setGodCard(GodCard godCard) {
         this.godCard = godCard;
+        godCard.setPlayer(this);
     }
 
     public List<Worker> getWorkers() {

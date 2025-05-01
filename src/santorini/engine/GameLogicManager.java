@@ -7,6 +7,9 @@ import santorini.actions.Action;
 import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
 import santorini.board.CellButton;
+import santorini.elements.Worker;
+import santorini.godcards.ArtemisGod;
+import santorini.godcards.DemeterGod;
 import santorini.screens.GameScreen;
 import santorini.screens.ResultScreen;
 import santorini.screens.ScreenManager;
@@ -106,6 +109,36 @@ public class GameLogicManager {
       }
     }
   }
+
+//  public void useSpecialAbility() {
+//    if (!workerSelected){
+//      GameLog.logMessage("You must select a worker to use the ability.");
+//    } else {
+//      Worker selected = selectedWorkerCell.getWorker();
+//      boolean activated = selected.getPlayer().getGodCard().applyEffect(selected, this);
+//      if (activated) {
+//        GameLog.logMessage(selected.getPlayer().getName() + " used their god power!");
+//      } else {
+//        workerSelected = false;
+//        GameLog.logMessage("Cannot use god power at this time.");
+//      }
+//    }
+//  }
+//
+//  public void allowExtraMove(Worker worker, Cell excludedCell) {
+//    // modify internal flags to re-enter move phase
+//    this.movingPhase = true;
+//    this.workerSelected = false;
+//    ((ArtemisGod) worker.getPlayer().getGodCard()).setFirstMoveCell(excludedCell);
+//  }
+//
+//  public void allowExtraBuild(Worker worker, Cell firstBuildCell) {
+//    this.movingPhase = false;
+//    this.workerSelected = false;
+//    this.buildCompleted = false;
+//    ((DemeterGod) worker.getPlayer().getGodCard()).setFirstBuildCell(firstBuildCell);
+//  }
+
 
   public void undoLastAction() {
     if (lastAction != null) {

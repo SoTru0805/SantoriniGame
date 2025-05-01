@@ -143,8 +143,24 @@ public class GameScreen implements Screen {
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(godCardImage);
 
-    JPanel buttonPanel = new JPanel();
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+
+    JButton usePowerButton = new JButton("Use Power");
+    usePowerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+    usePowerButton.setFont(new Font("Arial", Font.BOLD, 17));
+    usePowerButton.setForeground(Color.WHITE);
+    usePowerButton.setBackground(new Color(34, 139, 34)); // Forest Green
+    usePowerButton.setOpaque(true);
+    usePowerButton.setContentAreaFilled(true);
+    usePowerButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+    // Set preferred and maximum size
+    Dimension buttonSize = new Dimension(210, 50);
+    usePowerButton.setPreferredSize(buttonSize);
+    usePowerButton.setMaximumSize(buttonSize);
+
+//    usePowerButton.addActionListener(e -> logicManager.useSpecialAbility());
 
     JButton undoButton = new JButton("Undo");
     undoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -156,10 +172,16 @@ public class GameScreen implements Screen {
     endTurnButton.setPreferredSize(new Dimension(100, 40));
     endTurnButton.addActionListener(e -> logicManager.endTurn());
 
+    JPanel actionButtonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0)); // 10 px gap
+
+    actionButtonRow.add(undoButton);
+    actionButtonRow.add(endTurnButton);
+
     buttonPanel.add(Box.createVerticalGlue());
-    buttonPanel.add(undoButton);
-    buttonPanel.add(Box.createVerticalStrut(15));
-    buttonPanel.add(endTurnButton);
+    buttonPanel.add(usePowerButton);
+    buttonPanel.add(Box.createVerticalStrut(10));
+    buttonPanel.add(Box.createVerticalGlue());
+    buttonPanel.add(actionButtonRow);
     buttonPanel.add(Box.createVerticalGlue());
 
     rightPanel.add(godCardInfo, BorderLayout.NORTH);

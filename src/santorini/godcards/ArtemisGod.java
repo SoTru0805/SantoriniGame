@@ -2,6 +2,7 @@ package santorini.godcards;
 
 import santorini.board.Cell;
 import santorini.elements.Worker;
+import santorini.engine.GameLogicManager;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,6 +14,14 @@ public class ArtemisGod extends GodCard {
     public ArtemisGod() {
         super("Artemis", "Your Worker may move one additional time, but not back to the initial space.", "images/GodCards_Avatar/Artemis.jpg");
     }
+
+//    @Override
+//    public boolean applyEffect(Worker worker, GameLogicManager logicManager) {
+//        // Allow a second move if player has moved once
+//        if (!isSecondMove || firstMoveCell == null) return false;
+//        logicManager.allowExtraMove(worker, firstMoveCell); // custom method in logic
+//        return true;
+//    }
 
     @Override
     public void onTurnStart() {

@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Winning condition added:&#10;- Implemented the game with the winning requirement which is that the player having worker move to Level 3 building wins&#10;- Added the result screen to display the number of turns and winner information.&#10;- Re-implemented number of turns logic.&#10;- Place color objects in Main for player workers.&#10;- Added GameLog to display the game log messages.&#10;- Added PlayerUtils and ImageUtils to hold methods that are related to Players and Images.&#10;- Modified the main for more OOP design.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2025_10_02_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2025_10_02_pm__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_04_2025_10_20_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_04_2025_10_20_pm__Changes_.xml" afterDir="false" />
+    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Merged move-and-build-update into main:&#10;- Fixed the logic of only the same selected worker can do both actions in one turn, not alternatively with the other worker of such Player.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/ArtemisGod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/ArtemisGod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/DemeterGod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/DemeterGod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/GodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/GodCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GameLogic" />
+        <entry key="$PROJECT_DIR$" value="move-and-build-update" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,7 +61,7 @@
     "Application.Run Santorini.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "FixingPlayerErrors",
+    "git-widget-placeholder": "!6 on main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Tom/IdeaProjects/Santorini",
     "project.structure.last.edited": "Project",
@@ -116,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746034604626</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merged move-and-build-update into main:&#10;- Fixed the logic of only the same selected worker can do both actions in one turn, not alternatively with the other worker of such Player.">
+      <option name="closed" value="true" />
+      <created>1746069620668</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746069620668</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -126,6 +147,7 @@
     <MESSAGE value="Merged display-godcard-image, movement-update and MainLogic into main:&#10;- Resolved the conflicts during merging.&#10;- Fixed all the occurring errors for change adaption." />
     <MESSAGE value="Fixed error of image not displaying during card assignment to players." />
     <MESSAGE value="Winning condition added:&#10;- Implemented the game with the winning requirement which is that the player having worker move to Level 3 building wins&#10;- Added the result screen to display the number of turns and winner information.&#10;- Re-implemented number of turns logic.&#10;- Place color objects in Main for player workers.&#10;- Added GameLog to display the game log messages.&#10;- Added PlayerUtils and ImageUtils to hold methods that are related to Players and Images.&#10;- Modified the main for more OOP design." />
-    <option name="LAST_COMMIT_MESSAGE" value="Winning condition added:&#10;- Implemented the game with the winning requirement which is that the player having worker move to Level 3 building wins&#10;- Added the result screen to display the number of turns and winner information.&#10;- Re-implemented number of turns logic.&#10;- Place color objects in Main for player workers.&#10;- Added GameLog to display the game log messages.&#10;- Added PlayerUtils and ImageUtils to hold methods that are related to Players and Images.&#10;- Modified the main for more OOP design." />
+    <MESSAGE value="Merged move-and-build-update into main:&#10;- Fixed the logic of only the same selected worker can do both actions in one turn, not alternatively with the other worker of such Player." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged move-and-build-update into main:&#10;- Fixed the logic of only the same selected worker can do both actions in one turn, not alternatively with the other worker of such Player." />
   </component>
 </project>
