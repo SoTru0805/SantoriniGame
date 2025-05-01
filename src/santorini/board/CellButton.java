@@ -1,13 +1,12 @@
 package santorini.board;
 
-import java.awt.Color;
-import javax.swing.*;
 import santorini.elements.Worker;
 import santorini.engine.Game;
 import santorini.engine.Player;
 
+import javax.swing.*;
+import java.awt.Color;
 public class CellButton extends JButton {
-
     private Cell cell;
 
     public CellButton(Cell cell) {
@@ -21,7 +20,7 @@ public class CellButton extends JButton {
         return cell;
     }
 
-    public void setUpDisplay() {
+    public void setUpDisplay(){
         if (cell.getWorker() != null) {
             Player owner = cell.getWorker().getPlayer();
             if (owner.getColor() == Color.RED) {
@@ -40,15 +39,15 @@ public class CellButton extends JButton {
     }
 
     public void moveDisplay(Player player) {
-        if (cell.isOccupied()) {
+        if (cell.isOccupied()){
             setBackground(Color.LIGHT_GRAY);
         } else {
             setBackground(player.getColor());
         }
     }
 
-    public void buildDisplay(Player player) {
-        if (!cell.isOccupied()) {
+    public void buildDisplay(Player player){
+        if (!cell.isOccupied()){
             setText(cell.getDisplaySymbol());
         }
     }
@@ -60,4 +59,5 @@ public class CellButton extends JButton {
     public int getCol() {
         return cell.getCol();
     }
+
 }
