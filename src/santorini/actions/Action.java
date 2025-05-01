@@ -2,19 +2,29 @@
 package santorini.actions;
 
 import santorini.board.Cell;
+import santorini.elements.Worker;
 import santorini.engine.Player;
+
 
 public abstract class Action {
   protected Player player;
+  protected Worker worker;
+  protected Cell selected;
+  protected Cell target;
+
 
   public Action(Player player) {
     this.player = player;
+  }
+  public Worker getWorker() {
+    return selected.getWorker();
   }
 
   public abstract String execute();
   public abstract Boolean status();
 
   public abstract String undo();
+  public abstract Cell getTarget();
 
   public boolean isAdjacent(Cell a, Cell b) {
     int dr = Math.abs(a.getRow() - b.getRow());

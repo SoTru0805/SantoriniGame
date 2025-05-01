@@ -2,6 +2,7 @@ package santorini.godcards;
 
 import santorini.board.Cell;
 import santorini.elements.Worker;
+import santorini.engine.GameLog;
 import santorini.engine.GameLogicManager;
 
 import java.util.List;
@@ -14,18 +15,7 @@ public class DemeterGod extends GodCard {
         super("Demeter", "Your Worker may build one additional time, but not on the same space.", "images/GodCards_Avatar/Demeter.jpg");
     }
 
-    private Cell firstBuildCell = null;
 
-//    @Override
-//    public boolean applyEffect(Worker worker, GameLogicManager logicManager) {
-//        if (firstBuildCell == null) return false;
-//        logicManager.allowExtraBuild(worker, firstBuildCell); // custom method in logic
-//        return true;
-//    }
-
-    public void setFirstBuildCell(Cell cell) {
-        this.firstBuildCell = cell;
-    }
 
 
     @Override

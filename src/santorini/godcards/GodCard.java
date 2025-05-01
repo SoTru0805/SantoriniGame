@@ -12,6 +12,7 @@ public abstract class GodCard {
     private String description;
     private String imagePath;
     private Player player;
+    private Cell firstMoveCell;
 
     public GodCard(String name, String description, String imagePath)
     {
@@ -22,6 +23,9 @@ public abstract class GodCard {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+    public void setFirstMoveCell(Cell cell) {
+        this.firstMoveCell = cell;
     }
 
     public String getName() {
@@ -36,11 +40,10 @@ public abstract class GodCard {
     public Player getPlayer() {
         return player;
     }
-
-
-    public boolean applyEffect(Worker worker, GameLogicManager logicManager) {
-        return false;
+    public Cell getFirstMoveCell() {
+        return firstMoveCell;
     }
+
     public void onTurnStart()
     {
 

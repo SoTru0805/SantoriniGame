@@ -1,16 +1,13 @@
 package santorini.engine;
 
-import santorini.board.Board;
 import santorini.board.Cell;
 import santorini.board.BoardGUI;
 import santorini.actions.Action;
 import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
-import santorini.board.CellButton;
 import santorini.elements.Worker;
 import santorini.godcards.ArtemisGod;
 import santorini.godcards.DemeterGod;
-import santorini.screens.GameScreen;
 import santorini.screens.ResultScreen;
 import santorini.screens.ScreenManager;
 import santorini.utils.ImageUtils;
@@ -27,11 +24,13 @@ public class GameLogicManager {
   private JLabel godCardImage;
 
   private boolean movingPhase = true;
-  private boolean buildCompleted = false;
+  private boolean moveCompleted, buildCompleted = false;
   private boolean workerSelected = false;
   private Cell selectedWorkerCell;
   private Action lastAction = null;
   private int turnCount = 1;
+  private boolean abilityUsedThisTurn = false;
+  private Cell tempTarget, previousCell = null;
 
   public GameLogicManager(BoardGUI boardGUI, Player player1, Player player2, Player startingPlayer,
                           JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage) {
@@ -52,6 +51,7 @@ public class GameLogicManager {
       if (!workerSelected) {
         if (clickedCell.isOccupied()) {
           if (clickedCell.getWorker().getPlayer() == currentPlayer){
+            previousCell = clickedCell;
             selectedWorkerCell = clickedCell;
             workerSelected = true;
             GameLog.logMessage(currentPlayer.getName() + " selected a worker to move.");
@@ -62,18 +62,21 @@ public class GameLogicManager {
           GameLog.logMessage("Error: The cell does not have your worker.");
         }
       } else {
-        MoveAction moveAction = new MoveAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
+        MoveAction moveAction = new MoveAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell, tempTarget);
         String log = moveAction.execute();
         GameLog.logMessage(log);
         if (moveAction.status()){
+          tempTarget = null;
           lastAction = moveAction;
 
           movingPhase = false;
           workerSelected = false;
+          moveCompleted = true;
 
           selectedWorkerCell = clickedCell;
 
           checkWinner(clickedCell, currentPlayer);
+
         }
       }
     } else {
@@ -96,11 +99,14 @@ public class GameLogicManager {
           GameLog.logMessage("Error: The cell does not have your worker.");
         }
       } else {
-        BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
+        BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell, tempTarget);
         String log = buildAction.execute();
         GameLog.logMessage(log);
         if (buildAction.status()){
+          previousCell = clickedCell;
+          tempTarget = null;
           lastAction = buildAction;
+
           buildCompleted = true;
           workerSelected = false;
 
@@ -110,34 +116,35 @@ public class GameLogicManager {
     }
   }
 
-//  public void useSpecialAbility() {
-//    if (!workerSelected){
-//      GameLog.logMessage("You must select a worker to use the ability.");
-//    } else {
-//      Worker selected = selectedWorkerCell.getWorker();
-//      boolean activated = selected.getPlayer().getGodCard().applyEffect(selected, this);
-//      if (activated) {
-//        GameLog.logMessage(selected.getPlayer().getName() + " used their god power!");
-//      } else {
-//        workerSelected = false;
-//        GameLog.logMessage("Cannot use god power at this time.");
-//      }
-//    }
-//  }
-//
-//  public void allowExtraMove(Worker worker, Cell excludedCell) {
-//    // modify internal flags to re-enter move phase
-//    this.movingPhase = true;
-//    this.workerSelected = false;
-//    ((ArtemisGod) worker.getPlayer().getGodCard()).setFirstMoveCell(excludedCell);
-//  }
-//
-//  public void allowExtraBuild(Worker worker, Cell firstBuildCell) {
-//    this.movingPhase = false;
-//    this.workerSelected = false;
-//    this.buildCompleted = false;
-//    ((DemeterGod) worker.getPlayer().getGodCard()).setFirstBuildCell(firstBuildCell);
-//  }
+  public Action getLastAction(){
+    return lastAction;
+  }
+
+  public boolean triggerGodPower() {
+    if (abilityUsedThisTurn) return false;
+
+    if (moveCompleted && lastAction instanceof MoveAction && currentPlayer.getGodCard() instanceof ArtemisGod) {
+      abilityUsedThisTurn = true;
+      workerSelected = true;
+      movingPhase = true;
+      moveCompleted = false;
+      tempTarget = previousCell;
+      return true;
+
+    } else if (buildCompleted && lastAction instanceof BuildAction && currentPlayer.getGodCard() instanceof DemeterGod) {
+      abilityUsedThisTurn = true;
+      workerSelected = true;
+      movingPhase = false;
+      buildCompleted = false;
+      tempTarget = previousCell;
+      return true;
+    }
+
+    return false;
+  }
+
+
+
 
 
   public void undoLastAction() {
@@ -150,13 +157,13 @@ public class GameLogicManager {
       buildCompleted = false;
       workerSelected = false;
     } else {
-      GameLog.logMessage("Nothing to undo.");
+      GameLog.logMessage("Error: Nothing to undo.");
     }
   }
 
   public void endTurn() {
     if (movingPhase || !buildCompleted) {
-      GameLog.logMessage("You must move and build before ending turn!");
+      GameLog.logMessage("Error: You must move and build before ending turn!");
       return;
     }
     // Switch player
@@ -177,10 +184,12 @@ public class GameLogicManager {
 
     GameLog.logMessage("It is now " + currentPlayer.getName() + " turn.");
 
+    abilityUsedThisTurn = false;
 
     // Reset phase
     movingPhase = true;
     workerSelected = false;
+    moveCompleted = false;
     buildCompleted = false;
     lastAction = null;
   }

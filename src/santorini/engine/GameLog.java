@@ -12,6 +12,7 @@ public class GameLog {
   public static JTextArea setUpGameLog(Player startingPlayer) {
     gameLog = new JTextArea("Game’s Log:\n➢ Turn #1\n• " + startingPlayer.getName() + " starts the game!");
     gameLog.setEditable(false);
+    setGameLog(gameLog);
     return gameLog;
   }
 

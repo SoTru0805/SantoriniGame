@@ -8,8 +8,8 @@ import santorini.engine.Player;
 
 public class MoveAction extends Action {
   private final BoardGUI boardGUI;
-  private final Cell selected;
-  private final Cell target;
+  private final Cell selected, target;
+  private Cell excludedCell = null;
   private Boolean status;
 
   public MoveAction(BoardGUI boardGUI, Player player, Cell selected, Cell target) {
@@ -20,8 +20,21 @@ public class MoveAction extends Action {
     this.status = false;
   }
 
+  public MoveAction(BoardGUI boardGUI, Player player, Cell selected, Cell target, Cell excluded) {
+    super(player);
+    this.boardGUI = boardGUI;
+    this.selected = selected;
+    this.target = target;
+    this.excludedCell = excluded;
+    this.status = false;
+  }
+
   @Override
   public String execute() {
+    if (excludedCell != null && target == excludedCell) {
+      return "Error: You cannot move to the same cell again due to your god power.";
+    }
+
     if (!isAdjacent(selected, target)) {
       return "Error: " + player.getName() + " cannot move too far away.";
     }
@@ -53,6 +66,10 @@ public class MoveAction extends Action {
   @Override
   public Boolean status(){
     return status;
+  }
+  @Override
+  public Cell getTarget(){
+    return target;
   }
 
   @Override

@@ -1,9 +1,9 @@
 package santorini.screens;
 
+import santorini.actions.Action;
 import santorini.board.Board;
 import santorini.board.BoardEventHandler;
 import santorini.board.BoardGUI;
-import santorini.elements.Worker;
 import santorini.engine.Game;
 import santorini.engine.GameLog;
 import santorini.engine.GameLogicManager;
@@ -15,9 +15,6 @@ import santorini.utils.PlayerUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GameScreen implements Screen {
 
@@ -73,6 +70,7 @@ public class GameScreen implements Screen {
     showCardAssignment(player2);
 
     randomPlayer = PlayerUtils.getRandomPlayer(player1, player2);
+    Game.setCurrentPlayer(randomPlayer);
 
     // GUI setup
     gameLog = GameLog.setUpGameLog(randomPlayer);
@@ -160,7 +158,25 @@ public class GameScreen implements Screen {
     usePowerButton.setPreferredSize(buttonSize);
     usePowerButton.setMaximumSize(buttonSize);
 
-//    usePowerButton.addActionListener(e -> logicManager.useSpecialAbility());
+
+    usePowerButton.addActionListener(e -> {
+      if (logicManager.getLastAction() == null || !logicManager.getLastAction().status()) {
+        GameLog.logMessage("Error: You must make the action before using the effect.");
+        return;
+      }
+
+      Player currentPlayer = Game.getCurrentPlayer();
+
+      boolean success = logicManager.triggerGodPower();
+      if (success) {
+        GameLog.logMessage(currentPlayer.getName() + " used the god card " + currentPlayer.getGodCard().getName() + " effect.");
+        GameLog.logMessage("Select a cell to do the extra action.");
+      } else {
+        GameLog.logMessage("Error: Power cannot be used again or is not applicable now.");
+      }
+    });
+
+
 
     JButton undoButton = new JButton("Undo");
     undoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
