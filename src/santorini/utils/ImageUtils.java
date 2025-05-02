@@ -1,5 +1,6 @@
 package santorini.utils;
 
+import santorini.engine.Player;
 import santorini.godcards.GodCard;
 
 import javax.swing.*;

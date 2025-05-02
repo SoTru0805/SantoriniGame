@@ -24,7 +24,10 @@ public class EndTurnAction extends Action {
   }
 
   @Override
-  public Cell getTarget() {
+  public void setExcludedCell(Cell excludedCell) {}
+
+  @Override
+  public ActionType getActionType() {
     return null;
   }
 }

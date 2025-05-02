@@ -24,11 +24,13 @@ public abstract class Action {
   public abstract Boolean status();
 
   public abstract String undo();
-  public abstract Cell getTarget();
+  public abstract void setExcludedCell(Cell excludedCell);
 
   public boolean isAdjacent(Cell a, Cell b) {
     int dr = Math.abs(a.getRow() - b.getRow());
     int dc = Math.abs(a.getCol() - b.getCol());
     return (dr <= 1 && dc <= 1) && !(dr == 0 && dc == 0);
   }
+
+  public abstract ActionType getActionType();
 }

@@ -9,7 +9,7 @@ import santorini.engine.Player;
 public class MoveAction extends Action {
   private final BoardGUI boardGUI;
   private final Cell selected, target;
-  private Cell excludedCell = null;
+  private Cell excludedCell;
   private Boolean status;
 
   public MoveAction(BoardGUI boardGUI, Player player, Cell selected, Cell target) {
@@ -18,15 +18,7 @@ public class MoveAction extends Action {
     this.selected = selected;
     this.target = target;
     this.status = false;
-  }
-
-  public MoveAction(BoardGUI boardGUI, Player player, Cell selected, Cell target, Cell excluded) {
-    super(player);
-    this.boardGUI = boardGUI;
-    this.selected = selected;
-    this.target = target;
-    this.excludedCell = excluded;
-    this.status = false;
+    this.excludedCell = null;
   }
 
   @Override
@@ -68,9 +60,10 @@ public class MoveAction extends Action {
     return status;
   }
   @Override
-  public Cell getTarget(){
-    return target;
+  public void setExcludedCell(Cell excludedCell){
+    this.excludedCell = excludedCell;
   }
+
 
   @Override
   public String undo() {
@@ -83,5 +76,10 @@ public class MoveAction extends Action {
     boardGUI.getButton(selected.getRow(),selected.getCol()).setUpDisplay();
 
     return player.getName() + " undo move back to (" + selected.getRow() + "," + selected.getCol() + ")";
+  }
+
+  @Override
+  public ActionType getActionType() {
+    return ActionType.MOVE;
   }
 }

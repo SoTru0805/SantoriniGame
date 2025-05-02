@@ -10,7 +10,7 @@ import santorini.engine.Player;
 public class BuildAction extends Action {
   private final BoardGUI boardGUI;
   private final Cell selected, target;
-  private Cell excludedCell = null;
+  private Cell excludedCell;
   private boolean status;
   private Building previousLevel;
   private Building builtLevel;
@@ -21,15 +21,7 @@ public class BuildAction extends Action {
     this.selected = selected;
     this.target = target;
     this.status = false;
-  }
-
-  public BuildAction(BoardGUI boardGUI, Player player, Cell selected, Cell target, Cell excluded) {
-    super(player);
-    this.boardGUI = boardGUI;
-    this.selected = selected;
-    this.target = target;
-    this.excludedCell = excluded;
-    this.status = false;
+    this.excludedCell = null;
   }
 
   @Override
@@ -77,9 +69,10 @@ public class BuildAction extends Action {
   public Boolean status(){
     return status;
   }
+
   @Override
-  public Cell getTarget(){
-    return target;
+  public void setExcludedCell(Cell excludedCell){
+    this.excludedCell = excludedCell;
   }
 
   @Override
@@ -97,4 +90,8 @@ public class BuildAction extends Action {
     return player.getName() + " undo the build from " + currentLevel + " back to " + sym + ".";
   }
 
+  @Override
+  public ActionType getActionType() {
+    return ActionType.BUILD;
+  }
 }
