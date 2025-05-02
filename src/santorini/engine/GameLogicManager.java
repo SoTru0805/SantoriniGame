@@ -25,6 +25,7 @@ public class GameLogicManager {
   private JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
   private JLabel godCardImage;
+  private GameScreen gameScreen;
 
   private boolean movingPhase = true;
   private boolean buildCompleted = false;
@@ -32,9 +33,11 @@ public class GameLogicManager {
   private Cell selectedWorkerCell;
   private Action lastAction = null;
   private int turnCount = 1;
+  private JLabel currentPlayerNameLabel;
+  private JPanel currentPlayerColorIndicator;
 
   public GameLogicManager(BoardGUI boardGUI, Player player1, Player player2, Player startingPlayer,
-                          JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage) {
+                          JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage, GameScreen gameScreen) {
     this.boardGUI = boardGUI;
     this.player1 = player1;
     this.player2 = player2;
@@ -45,6 +48,7 @@ public class GameLogicManager {
     this.startingPlayer = startingPlayer;
     this.currentPlayer = startingPlayer;
     this.godCardImage = cardImage;
+    this.gameScreen = gameScreen;
   }
 
   public void handleCellClick(Cell clickedCell) {
@@ -170,13 +174,14 @@ public class GameLogicManager {
             currentPlayer.getGodCard().getDescription() + "</div></html>");
     ImageUtils.setScaledGodCardIcon(currentPlayer.getGodCard(), godCardImage, 200, 300);
 
+    gameScreen.updateCurrentPlayerDisplay(currentPlayer);
+
     if (currentPlayer == startingPlayer){
       turnCount++;
       GameLog.turnMessage("Turn #" + turnCount);
     }
 
     GameLog.logMessage("It is now " + currentPlayer.getName() + " turn.");
-
 
     // Reset phase
     movingPhase = true;

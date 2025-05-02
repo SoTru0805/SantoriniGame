@@ -32,6 +32,8 @@ public class GameScreen implements Screen {
   private JLabel cardTitle, cardName, cardDescription;
   private JLabel godCardImage;
   private Color firstPlayerColor, secondPlayerColor;
+  private JLabel currentPlayerNameLabel;
+  private JPanel currentPlayerColorIndicator;
 
   public GameScreen(GodCardDeck godCardDeck, Color firstPlayerColor, Color secondPlayerColor) {
     this.godCardDeck = godCardDeck;
@@ -99,7 +101,8 @@ public class GameScreen implements Screen {
             cardTitle,
             cardName,
             cardDescription,
-            godCardImage
+            godCardImage,
+            this
     );
 
     // Setup Board Click Listener
@@ -107,21 +110,28 @@ public class GameScreen implements Screen {
     boardGUI.setCellClickListener(eventHandler);
   }
 
-
-
-
   private JPanel createRightPanel() {
     JPanel rightPanel = new JPanel(new BorderLayout());
     rightPanel.setPreferredSize(new Dimension(250, 0));
     rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-    JPanel godCardInfo = new JPanel();
-    godCardInfo.setLayout(new BoxLayout(godCardInfo, BoxLayout.Y_AXIS));
-    godCardInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+    JPanel godCardInfoPanel = new JPanel();
+    godCardInfoPanel.setLayout(new BoxLayout(godCardInfoPanel, BoxLayout.Y_AXIS));
+    godCardInfoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    cardTitle = new JLabel(randomPlayer.getName() + "’s Card");
+    // Panel for current player info and "Player's Card" text
+    JPanel currentPlayerCardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    currentPlayerCardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    currentPlayerColorIndicator = new JPanel();
+    currentPlayerColorIndicator.setPreferredSize(new Dimension(20, 20));
+
+    cardTitle = new JLabel("Player’s Card");
     cardTitle.setFont(new Font("Arial", Font.BOLD, 16));
-    cardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    currentPlayerCardPanel.add(currentPlayerColorIndicator);
+    currentPlayerCardPanel.add(Box.createHorizontalStrut(5));
+    currentPlayerCardPanel.add(cardTitle);
 
     cardName = new JLabel(randomPlayer.getGodCard().getName());
     cardName.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -132,16 +142,16 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    // Load initial image for player1
-    ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);;
+    godCardImage = ImageUtils.setUpGodCardLabel();
+    ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);
 
-    godCardInfo.add(cardTitle);
-    godCardInfo.add(Box.createVerticalStrut(10));
-    godCardInfo.add(cardName);
-    godCardInfo.add(Box.createVerticalStrut(10));
-    godCardInfo.add(cardDescription);
-    godCardInfo.add(Box.createVerticalStrut(10));
-    godCardInfo.add(godCardImage);
+    godCardInfoPanel.add(currentPlayerCardPanel);
+    godCardInfoPanel.add(Box.createVerticalStrut(10));
+    godCardInfoPanel.add(cardName);
+    godCardInfoPanel.add(Box.createVerticalStrut(10));
+    godCardInfoPanel.add(cardDescription);
+    godCardInfoPanel.add(Box.createVerticalStrut(10));
+    godCardInfoPanel.add(godCardImage);
 
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -184,10 +194,18 @@ public class GameScreen implements Screen {
     buttonPanel.add(actionButtonRow);
     buttonPanel.add(Box.createVerticalGlue());
 
-    rightPanel.add(godCardInfo, BorderLayout.NORTH);
+    rightPanel.add(godCardInfoPanel, BorderLayout.NORTH);
     rightPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+    // Initialise the color for the starting player
+    updateCurrentPlayerDisplay(randomPlayer);
+
     return rightPanel;
+  }
+
+  public void updateCurrentPlayerDisplay(Player player) {
+    currentPlayerColorIndicator.setBackground(player.getColor());
+    cardTitle.setText(player.getName() + "’s Card"); // Update the card title
   }
 
   private void showCardAssignment(Player player) {

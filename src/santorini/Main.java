@@ -31,7 +31,8 @@ public class Main {
             ScreenManager.registerScreen(godCardPage, new GodCardInfoScreen(godCardDeck));
             ScreenManager.registerScreen("TUTORIAL", new TutorialScreen(godCardPage));
             ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck, firstPlayerColor, secondPlayerColor));
-
+            GameScreen gameScreen = new GameScreen(godCardDeck, firstPlayerColor, secondPlayerColor);
+            ScreenManager.registerScreen("GAME", gameScreen);
 
             frame.setContentPane(ScreenManager.getMainPanel());
             frame.setVisible(true);
