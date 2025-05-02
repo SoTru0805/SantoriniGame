@@ -4,12 +4,13 @@ import santorini.board.BoardGUI;
 import santorini.board.Cell;
 import santorini.elements.Building;
 import santorini.elements.Ground;
+import santorini.elements.Worker;
 import santorini.engine.Player;
 
 public class BuildAction extends Action {
   private final BoardGUI boardGUI;
-  private final Cell selected;
-  private final Cell target;
+  private final Cell selected, target;
+  private Cell excludedCell;
   private boolean status;
   private Building previousLevel;
   private Building builtLevel;
@@ -20,10 +21,15 @@ public class BuildAction extends Action {
     this.selected = selected;
     this.target = target;
     this.status = false;
+    this.excludedCell = null;
   }
 
   @Override
   public String execute() {
+    if (excludedCell != null && target == excludedCell) {
+      return "Error: You cannot build onto the same cell again due to your god power.";
+    }
+
     if (!isAdjacent(selected, target)) {
       return "Error: " + player.getName() + " cannot build too far.";
     }
@@ -65,6 +71,11 @@ public class BuildAction extends Action {
   }
 
   @Override
+  public void setExcludedCell(Cell excludedCell){
+    this.excludedCell = excludedCell;
+  }
+
+  @Override
   public String undo() {
     String currentLevel = target.getDisplaySymbol();
     target.undoBuild();
@@ -77,5 +88,10 @@ public class BuildAction extends Action {
     }
 
     return player.getName() + " undo the build from " + currentLevel + " back to " + sym + ".";
+  }
+
+  @Override
+  public ActionType getActionType() {
+    return ActionType.BUILD;
   }
 }

@@ -12,6 +12,7 @@ public abstract class GodCard {
     private String description;
     private String imagePath;
     private Player player;
+    private Cell firstMoveCell;
 
     public GodCard(String name, String description, String imagePath)
     {
@@ -22,6 +23,9 @@ public abstract class GodCard {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+    public void setFirstMoveCell(Cell cell) {
+        this.firstMoveCell = cell;
     }
 
     public String getName() {
@@ -36,36 +40,5 @@ public abstract class GodCard {
     public Player getPlayer() {
         return player;
     }
-
-
-    public boolean applyEffect(Worker worker, GameLogicManager logicManager) {
-        return false;
-    }
-    public void onTurnStart()
-    {
-
-    }
-
-    public void onTurnEnd()
-    {
-
-    }
-    /**
-     * Modify the available movement options for a worker.
-     * @param worker The worker trying to move.
-     * @param defaultOptions The default movement options.
-     * @return The modified list of movement options.
-     */
-    public List<Cell> modifyMoveOptions(Worker worker, List<Cell> defaultOptions) {
-        return defaultOptions;
-    }
-    /**
-     * Modify the available movement options for a worker.
-     * @param worker The worker trying to move.
-     * @param defaultOptions The default building options.
-     * @return The modified list of available build options.
-     */
-    public List<Cell> modifyBuildOptions(Worker worker, List<Cell> defaultOptions) {
-        return defaultOptions;
-    }
+    public abstract boolean useEffect(GameLogicManager logicManager);
 }

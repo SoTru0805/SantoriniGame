@@ -1,54 +1,40 @@
 package santorini.engine;
 
-import santorini.board.Board;
+import santorini.actions.ActionType;
 import santorini.board.Cell;
 import santorini.board.BoardGUI;
 import santorini.actions.Action;
 import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
-import santorini.board.CellButton;
-import santorini.elements.Worker;
-import santorini.godcards.ArtemisGod;
-import santorini.godcards.DemeterGod;
-import santorini.screens.GameScreen;
 import santorini.screens.ResultScreen;
 import santorini.screens.ScreenManager;
 import santorini.utils.ImageUtils;
+import santorini.utils.PlayerUtils;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.List;
 
 public class GameLogicManager {
   private BoardGUI boardGUI;
-  private Player player1, player2;
+  private List<Player> playerList;
   private Player currentPlayer, startingPlayer;
-  private JTextArea gameLog;
-  private JLabel cardTitle, cardName, cardDescription;
-  private JLabel godCardImage;
-  private GameScreen gameScreen;
 
   private boolean movingPhase = true;
-  private boolean buildCompleted = false;
+  private boolean moveCompleted, buildCompleted = false;
   private boolean workerSelected = false;
   private Cell selectedWorkerCell;
   private Action lastAction = null;
   private int turnCount = 1;
-  private JLabel currentPlayerNameLabel;
-  private JPanel currentPlayerColorIndicator;
+  private boolean abilityUsedThisTurn = false;
+  private Cell tempTarget, previousCell = null;
+  private CardDisplay cardDisplay;
 
-  public GameLogicManager(BoardGUI boardGUI, Player player1, Player player2, Player startingPlayer,
-                          JTextArea gameLog, JLabel cardTitle, JLabel cardName, JLabel cardDescription, JLabel cardImage, GameScreen gameScreen) {
+  public GameLogicManager(BoardGUI boardGUI, List<Player> playerList, Player startingPlayer, CardDisplay cardDisplay) {
     this.boardGUI = boardGUI;
-    this.player1 = player1;
-    this.player2 = player2;
-    this.gameLog = gameLog;
-    this.cardTitle = cardTitle;
-    this.cardName = cardName;
-    this.cardDescription = cardDescription;
+    this.playerList = playerList;
     this.startingPlayer = startingPlayer;
     this.currentPlayer = startingPlayer;
-    this.godCardImage = cardImage;
-    this.gameScreen = gameScreen;
+    this.cardDisplay = cardDisplay;
   }
 
   public void handleCellClick(Cell clickedCell) {
@@ -56,6 +42,7 @@ public class GameLogicManager {
       if (!workerSelected) {
         if (clickedCell.isOccupied()) {
           if (clickedCell.getWorker().getPlayer() == currentPlayer){
+            previousCell = clickedCell;
             selectedWorkerCell = clickedCell;
             workerSelected = true;
             GameLog.logMessage(currentPlayer.getName() + " selected a worker to move.");
@@ -67,17 +54,21 @@ public class GameLogicManager {
         }
       } else {
         MoveAction moveAction = new MoveAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
+        moveAction.setExcludedCell(tempTarget);
         String log = moveAction.execute();
         GameLog.logMessage(log);
         if (moveAction.status()){
           lastAction = moveAction;
+          tempTarget = null;
 
           movingPhase = false;
           workerSelected = false;
+          moveCompleted = true;
 
           selectedWorkerCell = clickedCell;
 
           checkWinner(clickedCell, currentPlayer);
+
         }
       }
     } else {
@@ -101,10 +92,14 @@ public class GameLogicManager {
         }
       } else {
         BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
+        buildAction.setExcludedCell(tempTarget);
         String log = buildAction.execute();
         GameLog.logMessage(log);
         if (buildAction.status()){
+          previousCell = clickedCell;
           lastAction = buildAction;
+          tempTarget = null;
+
           buildCompleted = true;
           workerSelected = false;
 
@@ -114,35 +109,46 @@ public class GameLogicManager {
     }
   }
 
-//  public void useSpecialAbility() {
-//    if (!workerSelected){
-//      GameLog.logMessage("You must select a worker to use the ability.");
-//    } else {
-//      Worker selected = selectedWorkerCell.getWorker();
-//      boolean activated = selected.getPlayer().getGodCard().applyEffect(selected, this);
-//      if (activated) {
-//        GameLog.logMessage(selected.getPlayer().getName() + " used their god power!");
-//      } else {
-//        workerSelected = false;
-//        GameLog.logMessage("Cannot use god power at this time.");
-//      }
-//    }
-//  }
-//
-//  public void allowExtraMove(Worker worker, Cell excludedCell) {
-//    // modify internal flags to re-enter move phase
-//    this.movingPhase = true;
-//    this.workerSelected = false;
-//    ((ArtemisGod) worker.getPlayer().getGodCard()).setFirstMoveCell(excludedCell);
-//  }
-//
-//  public void allowExtraBuild(Worker worker, Cell firstBuildCell) {
-//    this.movingPhase = false;
-//    this.workerSelected = false;
-//    this.buildCompleted = false;
-//    ((DemeterGod) worker.getPlayer().getGodCard()).setFirstBuildCell(firstBuildCell);
-//  }
+  public Action getLastAction(){
+    return lastAction;
+  }
 
+  public boolean activateAbility(){
+    boolean status = false;
+
+    if (abilityUsedThisTurn){
+      return status;
+    }
+
+    status = currentPlayer.getGodCard().useEffect(this);
+    if (status){
+      lastAction.setExcludedCell(tempTarget);
+
+      abilityUsedThisTurn = true;
+      workerSelected = true;
+      tempTarget = previousCell;
+    }
+    return status;
+  }
+
+
+  public boolean activateExtraMove(){
+    if (lastAction.getActionType() == ActionType.MOVE && moveCompleted){
+      movingPhase = true;
+      moveCompleted = false;
+      return true;
+    }
+    return false;
+  }
+
+  public boolean activateExtraBuild(){
+    if (lastAction.getActionType() == ActionType.BUILD && buildCompleted){
+      movingPhase = false;
+      buildCompleted = false;
+      return true;
+    }
+    return false;
+  }
 
   public void undoLastAction() {
     if (lastAction != null) {
@@ -154,28 +160,24 @@ public class GameLogicManager {
       buildCompleted = false;
       workerSelected = false;
     } else {
-      GameLog.logMessage("Nothing to undo.");
+      GameLog.logMessage("Error: Nothing to undo.");
     }
   }
 
   public void endTurn() {
     if (movingPhase || !buildCompleted) {
-      GameLog.logMessage("You must move and build before ending turn!");
+      GameLog.logMessage("Error: You must move and build before ending turn!");
       return;
     }
+
     // Switch player
-    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    currentPlayer = PlayerUtils.getNextPlayer(playerList, currentPlayer);
     Game.setCurrentPlayer(currentPlayer);
 
     // Update God card info panel
-    cardTitle.setText(currentPlayer.getName() + "’s Card");
-    cardName.setText(currentPlayer.getGodCard().getName());
-    cardDescription.setText("<html><div style='text-align:center;'>" +
-            currentPlayer.getGodCard().getDescription() + "</div></html>");
-    ImageUtils.setScaledGodCardIcon(currentPlayer.getGodCard(), godCardImage, 200, 300);
+    cardDisplay.updateCardPanel(currentPlayer);
 
-    gameScreen.updateCurrentPlayerDisplay(currentPlayer);
-
+    // Increment turn count
     if (currentPlayer == startingPlayer){
       turnCount++;
       GameLog.turnMessage("Turn #" + turnCount);
@@ -183,12 +185,17 @@ public class GameLogicManager {
 
     GameLog.logMessage("It is now " + currentPlayer.getName() + " turn.");
 
+    // Reset ability at every end turn
+    abilityUsedThisTurn = false;
+
     // Reset phase
     movingPhase = true;
     workerSelected = false;
+    moveCompleted = false;
     buildCompleted = false;
     lastAction = null;
   }
+
 
   public void checkWinner(Cell winnerCell, Player winner){
     if (winnerCell.getBuilding().getLevel() == 3) {

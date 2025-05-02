@@ -38,20 +38,6 @@ public class CellButton extends JButton {
         }
     }
 
-    public void moveDisplay(Player player) {
-        if (cell.isOccupied()){
-            setBackground(Color.LIGHT_GRAY);
-        } else {
-            setBackground(player.getColor());
-        }
-    }
-
-    public void buildDisplay(Player player){
-        if (!cell.isOccupied()){
-            setText(cell.getDisplaySymbol());
-        }
-    }
-
     public int getRow() {
         return cell.getRow();
     }

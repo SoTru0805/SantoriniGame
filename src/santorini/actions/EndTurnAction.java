@@ -1,5 +1,6 @@
 package santorini.actions;
 
+import santorini.board.Cell;
 import santorini.engine.Player;
 
 public class EndTurnAction extends Action {
@@ -20,5 +21,13 @@ public class EndTurnAction extends Action {
   @Override
   public String undo() {
     return player.getName() + " cannot undo end turn.";
+  }
+
+  @Override
+  public void setExcludedCell(Cell excludedCell) {}
+
+  @Override
+  public ActionType getActionType() {
+    return null;
   }
 }

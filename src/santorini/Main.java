@@ -1,5 +1,6 @@
 package santorini;
 
+import santorini.engine.Player;
 import santorini.godcards.ArtemisGod;
 import santorini.godcards.DemeterGod;
 import santorini.godcards.GodCardDeck;
@@ -8,8 +9,12 @@ import santorini.screens.*;
 import javax.swing.*;
 
 import santorini.screens.ScreenManager;
+import santorini.utils.PlayerUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,24 +25,28 @@ public class Main {
             frame.setLocationRelativeTo(null);
 
             // Assign color to player's workers
-            Color firstPlayerColor = Color.RED;
-            Color secondPlayerColor = Color.BLUE;
+            Player player1 = new Player(Color.RED);
+            Player player2 = new Player(Color.BLUE);
 
+            // Put all players into a list
+            List<Player> playerList = Arrays.asList(player1, player2);
+
+            // Create a deck for all god cards
             GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod());
 
+            // Create screens to ScreenManager
             String godCardPage = "GODCARDS";
 
             ScreenManager.registerScreen("WELCOME", new WelcomeScreen());
             ScreenManager.registerScreen(godCardPage, new GodCardInfoScreen(godCardDeck));
             ScreenManager.registerScreen("TUTORIAL", new TutorialScreen(godCardPage));
-            ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck, firstPlayerColor, secondPlayerColor));
-            GameScreen gameScreen = new GameScreen(godCardDeck, firstPlayerColor, secondPlayerColor);
-            ScreenManager.registerScreen("GAME", gameScreen);
+            ScreenManager.registerScreen("GAME", new GameScreen(godCardDeck, playerList));
 
             frame.setContentPane(ScreenManager.getMainPanel());
             frame.setVisible(true);
 
-            ScreenManager.showScreen("WELCOME"); // Start with the menu
+            // Start with the welcome menu
+            ScreenManager.showScreen("WELCOME");
         });
     }
 }

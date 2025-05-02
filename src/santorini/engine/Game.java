@@ -10,7 +10,9 @@ public class Game {
   public static void setCurrentPlayer(Player p) {
     currentPlayer = p;
   }
-
+  public static Player getCurrentPlayer(){
+    return currentPlayer;
+  }
   public static Board getBoard() {
     return board;
   }

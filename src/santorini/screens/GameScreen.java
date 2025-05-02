@@ -1,22 +1,19 @@
 package santorini.screens;
 
+import santorini.actions.Action;
 import santorini.board.Board;
 import santorini.board.BoardEventHandler;
 import santorini.board.BoardGUI;
-import santorini.elements.Worker;
-import santorini.engine.Game;
-import santorini.engine.GameLog;
-import santorini.engine.GameLogicManager;
-import santorini.engine.Player;
+import santorini.engine.*;
 import santorini.godcards.GodCard;
 import santorini.godcards.GodCardDeck;
+import santorini.utils.GodCardUtils;
 import santorini.utils.ImageUtils;
 import santorini.utils.PlayerUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class GameScreen implements Screen {
@@ -26,19 +23,16 @@ public class GameScreen implements Screen {
   private GodCardDeck godCardDeck;
   private Board board;
   private BoardGUI boardGUI;
-  private Player player1, player2, randomPlayer;
+  private Player randomPlayer;
   private GameLogicManager logicManager;
   public static JTextArea gameLog;
   private JLabel cardTitle, cardName, cardDescription;
   private JLabel godCardImage;
-  private Color firstPlayerColor, secondPlayerColor;
-  private JLabel currentPlayerNameLabel;
-  private JPanel currentPlayerColorIndicator;
+  private List<Player> players;
 
-  public GameScreen(GodCardDeck godCardDeck, Color firstPlayerColor, Color secondPlayerColor) {
+  public GameScreen(GodCardDeck godCardDeck, List<Player> players) {
     this.godCardDeck = godCardDeck;
-    this.firstPlayerColor = firstPlayerColor;
-    this.secondPlayerColor= secondPlayerColor;
+    this.players = players;
   }
 
   @Override
@@ -58,23 +52,18 @@ public class GameScreen implements Screen {
   }
 
   private void setupGame() {
-    String name1 = askName("Player 1");
-    String name2 = askName("Player 2");
-
-    player1 = new Player(name1, firstPlayerColor);
-    player2 = new Player(name2, secondPlayerColor);
-
     board = new Board();
-    PlayerUtils.randomizeWorkers(board, player1, player2);
+    PlayerUtils.askNamesForPlayers(players);
+    PlayerUtils.shufflePlayers(players);  // Shuffle players at the beginning
+    PlayerUtils.randomizeWorkers(board, players);  // Assign workers to such players
 
     godCardDeck.shuffle();
-    player1.setGodCard(godCardDeck.draw());
-    player2.setGodCard(godCardDeck.draw());
 
-    showCardAssignment(player1);
-    showCardAssignment(player2);
+    GodCardUtils.assignGodCardsToPlayers(players, godCardDeck);
 
-    randomPlayer = PlayerUtils.getRandomPlayer(player1, player2);
+    randomPlayer = PlayerUtils.getRandomPlayer(players);
+
+    Game.setCurrentPlayer(randomPlayer);
 
     // GUI setup
     gameLog = GameLog.setUpGameLog(randomPlayer);
@@ -91,18 +80,19 @@ public class GameScreen implements Screen {
     panel.add(leftPanel, BorderLayout.CENTER);
     panel.add(rightPanel, BorderLayout.EAST);
 
-    // Setup Logic Manager AFTER BoardGUI created
-    logicManager = new GameLogicManager(
-            boardGUI,
-            player1,
-            player2,
-            randomPlayer,
-            gameLog,
+    CardDisplay cardDisplay = new CardDisplay(
             cardTitle,
             cardName,
             cardDescription,
-            godCardImage,
-            this
+            godCardImage
+    );
+
+    // Setup Logic Manager after BoardGUI created
+    logicManager = new GameLogicManager(
+            boardGUI,
+            players,
+            randomPlayer,
+            cardDisplay
     );
 
     // Setup Board Click Listener
@@ -110,28 +100,21 @@ public class GameScreen implements Screen {
     boardGUI.setCellClickListener(eventHandler);
   }
 
+
+
+
   private JPanel createRightPanel() {
     JPanel rightPanel = new JPanel(new BorderLayout());
     rightPanel.setPreferredSize(new Dimension(250, 0));
     rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-    JPanel godCardInfoPanel = new JPanel();
-    godCardInfoPanel.setLayout(new BoxLayout(godCardInfoPanel, BoxLayout.Y_AXIS));
-    godCardInfoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    JPanel godCardInfo = new JPanel();
+    godCardInfo.setLayout(new BoxLayout(godCardInfo, BoxLayout.Y_AXIS));
+    godCardInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    // Panel for current player info and "Player's Card" text
-    JPanel currentPlayerCardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    currentPlayerCardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    currentPlayerColorIndicator = new JPanel();
-    currentPlayerColorIndicator.setPreferredSize(new Dimension(20, 20));
-
-    cardTitle = new JLabel("Player’s Card");
+    cardTitle = new JLabel(randomPlayer.getName() + "’s Card");
     cardTitle.setFont(new Font("Arial", Font.BOLD, 16));
-
-    currentPlayerCardPanel.add(currentPlayerColorIndicator);
-    currentPlayerCardPanel.add(Box.createHorizontalStrut(5));
-    currentPlayerCardPanel.add(cardTitle);
+    cardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     cardName = new JLabel(randomPlayer.getGodCard().getName());
     cardName.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -142,16 +125,17 @@ public class GameScreen implements Screen {
     cardDescription.setFont(new Font("Arial", Font.PLAIN, 12));
     cardDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    // Load initial image for the random player
     godCardImage = ImageUtils.setUpGodCardLabel();
-    ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);
+    ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);;
 
-    godCardInfoPanel.add(currentPlayerCardPanel);
-    godCardInfoPanel.add(Box.createVerticalStrut(10));
-    godCardInfoPanel.add(cardName);
-    godCardInfoPanel.add(Box.createVerticalStrut(10));
-    godCardInfoPanel.add(cardDescription);
-    godCardInfoPanel.add(Box.createVerticalStrut(10));
-    godCardInfoPanel.add(godCardImage);
+    godCardInfo.add(cardTitle);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(cardName);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(cardDescription);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(godCardImage);
 
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
     buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -170,7 +154,24 @@ public class GameScreen implements Screen {
     usePowerButton.setPreferredSize(buttonSize);
     usePowerButton.setMaximumSize(buttonSize);
 
-//    usePowerButton.addActionListener(e -> logicManager.useSpecialAbility());
+
+    usePowerButton.addActionListener(e -> {
+      if (logicManager.getLastAction() == null || !logicManager.getLastAction().status()) {
+        GameLog.logMessage("Error: You must make the action before using the effect.");
+        return;
+      }
+
+      Player currentPlayer = Game.getCurrentPlayer();
+
+      boolean success = logicManager.activateAbility();
+      if (success) {
+        GameLog.logMessage(currentPlayer.getName() + " used the god card " + currentPlayer.getGodCard().getName() + " effect.");
+        GameLog.logMessage("Select a cell to do the extra action.");
+      } else {
+        GameLog.logMessage("Error: Power cannot be used again or is not applicable now.");
+      }
+    });
+
 
     JButton undoButton = new JButton("Undo");
     undoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -194,54 +195,9 @@ public class GameScreen implements Screen {
     buttonPanel.add(actionButtonRow);
     buttonPanel.add(Box.createVerticalGlue());
 
-    rightPanel.add(godCardInfoPanel, BorderLayout.NORTH);
+    rightPanel.add(godCardInfo, BorderLayout.NORTH);
     rightPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-    // Initialise the color for the starting player
-    updateCurrentPlayerDisplay(randomPlayer);
-
     return rightPanel;
-  }
-
-  public void updateCurrentPlayerDisplay(Player player) {
-    currentPlayerColorIndicator.setBackground(player.getColor());
-    cardTitle.setText(player.getName() + "’s Card"); // Update the card title
-  }
-
-  private void showCardAssignment(Player player) {
-    godCardImage = ImageUtils.setUpGodCardLabel();
-
-    GodCard godCard = player.getGodCard();
-    ImageIcon scaledIcon = ImageUtils.setScaledGodCardIcon(godCard, godCardImage, 200, 300);
-
-    JLabel imageLabel = new JLabel(scaledIcon);
-    imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    JLabel nameLabel = new JLabel("<html><div style='text-align: center;'><b>" +
-            player.getName() + "</b>, you have been assigned the God Card:<br><br>" +
-            "<b>" + godCard.getName() + "</b><br><br>" +
-            "<i>Power:</i><br>" + godCard.getDescription() + "</div></html>");
-    nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    JPanel panel = new JPanel();
-    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-    panel.add(nameLabel);
-    panel.add(Box.createVerticalStrut(15)); // spacing
-    panel.add(imageLabel);
-
-    JOptionPane.showMessageDialog(
-            null,
-            panel,
-            "God Card Assignment",
-            JOptionPane.INFORMATION_MESSAGE
-    );
-  }
-
-  private String askName(String prompt) {
-    String name;
-    do {
-      name = JOptionPane.showInputDialog(null, "Enter " + prompt + " Name:", "Santorini", JOptionPane.PLAIN_MESSAGE);
-    } while (name == null || name.trim().isEmpty());
-    return name.trim();
   }
 }
