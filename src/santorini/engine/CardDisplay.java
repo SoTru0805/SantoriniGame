@@ -13,6 +13,10 @@ public class CardDisplay {
     this.godCardImage = cardImage;
   }
 
+  public JLabel getCardTitle(){
+    return cardTitle;
+  }
+
   public void updateCardPanel(Player player){
     cardTitle.setText(player.getName() + "’s Card");
     cardName.setText(player.getGodCard().getName());

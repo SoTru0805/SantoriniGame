@@ -36,4 +36,9 @@ public class ImageUtils {
 
     return godCardImage;
   }
+
+  public static void updateCurrentPlayerDisplay(Player player, JPanel currentPlayerColorIndicator, JLabel cardTitle) {
+    currentPlayerColorIndicator.setBackground(player.getColor());
+    cardTitle.setText(player.getName() + "’s Card");
+  }
 }

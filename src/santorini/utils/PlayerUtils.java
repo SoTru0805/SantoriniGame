@@ -49,6 +49,7 @@ public class PlayerUtils {
     int nextIndex = (currentIndex + 1) % players.size();
     return players.get(nextIndex);
   }
+
   public static void randomizeWorkers(Board board, List<Player> players) {
     if (players.size() < 2 || players.size() > 4) {
       throw new IllegalArgumentException("Player list must contain between 2 and 4 players.");

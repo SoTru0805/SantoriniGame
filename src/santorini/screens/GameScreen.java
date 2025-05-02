@@ -1,11 +1,9 @@
 package santorini.screens;
 
-import santorini.actions.Action;
 import santorini.board.Board;
 import santorini.board.BoardEventHandler;
 import santorini.board.BoardGUI;
 import santorini.engine.*;
-import santorini.godcards.GodCard;
 import santorini.godcards.GodCardDeck;
 import santorini.utils.GodCardUtils;
 import santorini.utils.ImageUtils;
@@ -13,7 +11,6 @@ import santorini.utils.PlayerUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameScreen implements Screen {
@@ -26,8 +23,11 @@ public class GameScreen implements Screen {
   private Player randomPlayer;
   private GameLogicManager logicManager;
   public static JTextArea gameLog;
-  private JLabel cardTitle, cardName, cardDescription;
-  private JLabel godCardImage;
+  private JLabel cardTitle, cardName, cardDescription, godCardImage;
+  private JLabel currentPlayerNameLabel;
+  private JPanel currentPlayerColorIndicator;
+
+
   private List<Player> players;
 
   public GameScreen(GodCardDeck godCardDeck, List<Player> players) {
@@ -54,12 +54,13 @@ public class GameScreen implements Screen {
   private void setupGame() {
     board = new Board();
     PlayerUtils.askNamesForPlayers(players);
-    PlayerUtils.shufflePlayers(players);  // Shuffle players at the beginning
-    PlayerUtils.randomizeWorkers(board, players);  // Assign workers to such players
 
     godCardDeck.shuffle();
 
     GodCardUtils.assignGodCardsToPlayers(players, godCardDeck);
+
+    PlayerUtils.shufflePlayers(players);  // Shuffle players at the beginning
+    PlayerUtils.randomizeWorkers(board, players);  // Assign workers to such players
 
     randomPlayer = PlayerUtils.getRandomPlayer(players);
 
@@ -92,7 +93,8 @@ public class GameScreen implements Screen {
             boardGUI,
             players,
             randomPlayer,
-            cardDisplay
+            cardDisplay,
+            currentPlayerColorIndicator
     );
 
     // Setup Board Click Listener
@@ -112,9 +114,22 @@ public class GameScreen implements Screen {
     godCardInfo.setLayout(new BoxLayout(godCardInfo, BoxLayout.Y_AXIS));
     godCardInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+    // Panel for current player info and "Player's Card" text
+    JPanel currentPlayerCardPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    currentPlayerCardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    currentPlayerColorIndicator = new JPanel();
+    currentPlayerColorIndicator.setPreferredSize(new Dimension(20, 20));
+
+
     cardTitle = new JLabel(randomPlayer.getName() + "’s Card");
     cardTitle.setFont(new Font("Arial", Font.BOLD, 16));
     cardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    currentPlayerCardPanel.add(currentPlayerColorIndicator);
+    currentPlayerCardPanel.add(Box.createHorizontalStrut(5));
+    currentPlayerCardPanel.add(cardTitle);
+
 
     cardName = new JLabel(randomPlayer.getGodCard().getName());
     cardName.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -129,7 +144,7 @@ public class GameScreen implements Screen {
     godCardImage = ImageUtils.setUpGodCardLabel();
     ImageUtils.setScaledGodCardIcon(randomPlayer.getGodCard(), godCardImage, 200, 300);;
 
-    godCardInfo.add(cardTitle);
+    godCardInfo.add(currentPlayerCardPanel);
     godCardInfo.add(Box.createVerticalStrut(10));
     godCardInfo.add(cardName);
     godCardInfo.add(Box.createVerticalStrut(10));
@@ -198,6 +213,11 @@ public class GameScreen implements Screen {
     rightPanel.add(godCardInfo, BorderLayout.NORTH);
     rightPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+    // Initialise the color for the starting player
+    ImageUtils.updateCurrentPlayerDisplay(randomPlayer, currentPlayerColorIndicator, cardTitle);
+
     return rightPanel;
   }
+
+
 }

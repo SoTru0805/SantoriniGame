@@ -28,13 +28,15 @@ public class GameLogicManager {
   private boolean abilityUsedThisTurn = false;
   private Cell tempTarget, previousCell = null;
   private CardDisplay cardDisplay;
+  private JPanel currentPlayerColorIndicator;
 
-  public GameLogicManager(BoardGUI boardGUI, List<Player> playerList, Player startingPlayer, CardDisplay cardDisplay) {
+  public GameLogicManager(BoardGUI boardGUI, List<Player> playerList, Player startingPlayer, CardDisplay cardDisplay, JPanel currentPlayerColorIndicator) {
     this.boardGUI = boardGUI;
     this.playerList = playerList;
     this.startingPlayer = startingPlayer;
     this.currentPlayer = startingPlayer;
     this.cardDisplay = cardDisplay;
+    this.currentPlayerColorIndicator = currentPlayerColorIndicator;
   }
 
   public void handleCellClick(Cell clickedCell) {
@@ -176,6 +178,8 @@ public class GameLogicManager {
 
     // Update God card info panel
     cardDisplay.updateCardPanel(currentPlayer);
+
+    ImageUtils.updateCurrentPlayerDisplay(currentPlayer, currentPlayerColorIndicator, cardDisplay.getCardTitle());
 
     // Increment turn count
     if (currentPlayer == startingPlayer){

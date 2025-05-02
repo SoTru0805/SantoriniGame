@@ -15,8 +15,6 @@ public class GodCardUtils {
       throw new IllegalArgumentException("Deck and player list must not be null or empty.");
     }
 
-    deck.shuffle();
-
     for (Player player : players) {
       GodCard card = deck.draw();
       player.setGodCard(card);

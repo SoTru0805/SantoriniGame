@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="God card ability in-use:&#10;- The game can now apply god card usage.&#10;- It is not OOP in this stage because god cards have not been used perfectly in the logic.">
-      <change afterPath="$PROJECT_DIR$/src/santorini/actions/ActionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/engine/CardDisplay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/santorini/utils/GodCardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_2_50_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_2_50_pm__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_3_58_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_3_58_am__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_2_50_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_2_50_pm__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_3_58_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_3_58_am__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/Action.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/Action.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/BuildAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/BuildAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/EndTurnAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/EndTurnAction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/CardDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/CardDisplay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" afterDir="false" />
@@ -21,18 +23,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/ImageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/ImageUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/PlayerUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/BuildAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/EndTurnAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/actions/MoveAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/engine/CardDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/CardDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/ArtemisGod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/ArtemisGod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/DemeterGod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/DemeterGod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/godcards/GodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/godcards/GodCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/santorini/utils/GodCardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/GodCardUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/santorini/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/PlayerUtils.java" afterDir="false" />
     </list>
@@ -76,7 +70,7 @@
     "Application.Run Santorini.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "!9 on GameLogic",
+    "git-widget-placeholder": "!6 on main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Tom/IdeaProjects/Santorini",
     "project.structure.last.edited": "Project",
