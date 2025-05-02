@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="God card ability in-use:&#10;- The game can now apply god card usage.&#10;- It is not OOP in this stage because god cards have not been used perfectly in the logic.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_2_50_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_2_50_pm__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_3_58_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_05_2025_3_58_am__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_2_50_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_2_50_pm__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_3_58_am__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_1_05_2025_3_58_am__Changes_.xml" afterDir="false" />
+    <list default="true" id="8a0881fb-7923-4384-b29a-306d18e6b59f" name="Changes" comment="Merged MainLogic and display-player-color into main and resolved the conflicts.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/BuildAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/BuildAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/actions/MoveAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/board/CellButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/elements/Worker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/CardDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/CardDisplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/GameLogicManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/engine/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/ArtemisGod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/DemeterGod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/godcards/GodCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/screens/GameScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/ImageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Sprint_Two1/santorini/utils/ImageUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/CardDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/CardDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/engine/GameLogicManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/screens/GameScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/utils/GodCardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/GodCardUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/ImageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/santorini/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/santorini/utils/PlayerUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746100845999</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Merged MainLogic and display-player-color into main and resolved the conflicts.">
+      <option name="closed" value="true" />
+      <created>1746188869138</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746188869138</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -175,6 +160,7 @@
     <MESSAGE value="Merged move-and-build-update into main:&#10;- Fixed the logic of only the same selected worker can do both actions in one turn, not alternatively with the other worker of such Player." />
     <MESSAGE value="GameScreen modification:&#10;- Added the use god card ability button called Use Effect" />
     <MESSAGE value="God card ability in-use:&#10;- The game can now apply god card usage.&#10;- It is not OOP in this stage because god cards have not been used perfectly in the logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="God card ability in-use:&#10;- The game can now apply god card usage.&#10;- It is not OOP in this stage because god cards have not been used perfectly in the logic." />
+    <MESSAGE value="Merged MainLogic and display-player-color into main and resolved the conflicts." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged MainLogic and display-player-color into main and resolved the conflicts." />
   </component>
 </project>
