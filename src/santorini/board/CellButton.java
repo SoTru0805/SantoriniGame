@@ -5,7 +5,8 @@ import santorini.engine.Game;
 import santorini.engine.Player;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
+
 public class CellButton extends JButton {
     private Cell cell;
 
@@ -21,8 +22,11 @@ public class CellButton extends JButton {
     }
 
     public void setUpDisplay(){
+        setText(cell.getDisplaySymbol());
+
         if (cell.getWorker() != null) {
             Player owner = cell.getWorker().getPlayer();
+            setFont(getFont().deriveFont(Font.BOLD));
             if (owner.getColor() == Color.RED) {
                 setBackground(Color.RED);
             } else if (owner.getColor() == Color.BLUE) {

@@ -8,7 +8,7 @@ import santorini.engine.GameLogicManager;
 public class ZeusGod extends GodCard {
 
     public ZeusGod() {
-        super("Zeus", "Your Worker may build a block under itself.", "zeus.png");
+        super("Zeus", "Your Worker may build a block under itself.", "images/GodCards_Avatar/Zeus.jpg");
     }
 
     @Override

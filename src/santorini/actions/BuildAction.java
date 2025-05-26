@@ -30,11 +30,12 @@ public class BuildAction extends Action {
       return "Error: You cannot build onto the same cell again due to your god power.";
     }
 
-    if (!isAdjacent(selected, target)) {
-      return "Error: " + player.getName() + " cannot build too far.";
-    }
+    // Zeus power logic, player can build underneath them
+    boolean isZeus = player.getGodCard() != null && player.getGodCard().getName().equals("Zeus");
+    boolean isSelfCell = selected.getRow() == target.getRow() && selected.getCol() == target.getCol();
+    boolean canBuildUnderSelf = isZeus && isSelfCell && !target.hasDome() && target.getLevel() < 3;
 
-    if (!target.isOccupied() && !target.hasDome()){
+    if (canBuildUnderSelf) {
       previousLevel = target.getBuilding();
       if (previousLevel == null) {
         previousLevel = new Ground(target);
@@ -47,23 +48,54 @@ public class BuildAction extends Action {
       }
 
       target.setBuilding(builtLevel);
-
-      boardGUI.getButton(target.getRow(),target.getCol()).setUpDisplay();
-
+      boardGUI.getButton(target.getRow(), target.getCol()).setUpDisplay();
       status = true;
 
       String sym = previousLevel.getSymbol();
-      if(sym == ""){
+      if (sym == "") {
         sym = "Ground";
       }
 
-      return player.getName() + " built on (" + target.getRow() + "," + target.getCol() + ") from " + sym + " to " + target.getDisplaySymbol() + ".";
-    } else if (target.isOccupied() && !target.hasDome()){
+      return player.getName() + " used Zeus power and built under their own worker on (" +
+              target.getRow() + "," + target.getCol() + ") from " + sym + " to " + target.getDisplaySymbol() + ".";
+    }
+
+    // Standard adjacency check for all other cases
+    if (!isAdjacent(selected, target)) {
+      return "Error: " + player.getName() + " cannot build too far.";
+    }
+
+    // Standard Santorini build rule (must be unoccupied and not a dome)
+    if (!target.isOccupied() && !target.hasDome()) {
+      previousLevel = target.getBuilding();
+      if (previousLevel == null) {
+        previousLevel = new Ground(target);
+      }
+
+      builtLevel = previousLevel.next();
+      if (builtLevel == previousLevel) {
+        status = false;
+        return "Build failed: Already at maximum level.";
+      }
+
+      target.setBuilding(builtLevel);
+      boardGUI.getButton(target.getRow(), target.getCol()).setUpDisplay();
+      status = true;
+
+      String sym = previousLevel.getSymbol();
+      if (sym == "") {
+        sym = "Ground";
+      }
+
+      return player.getName() + " built on (" +
+              target.getRow() + "," + target.getCol() + ") from " + sym + " to " + target.getDisplaySymbol() + ".";
+    } else if (target.isOccupied() && !target.hasDome()) {
       return "Error: " + player.getName() + " cannot build on this position due to the existence of a worker.";
     } else {
       return "Error: " + player.getName() + " cannot build on top of a dome.";
     }
   }
+
 
   @Override
   public Boolean status(){

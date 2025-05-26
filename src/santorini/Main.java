@@ -4,6 +4,7 @@ import santorini.engine.Player;
 import santorini.godcards.ArtemisGod;
 import santorini.godcards.DemeterGod;
 import santorini.godcards.GodCardDeck;
+import santorini.godcards.ZeusGod;
 import santorini.screens.*;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class Main {
             List<Player> playerList = Arrays.asList(player1, player2);
 
             // Create a deck for all god cards
-            GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod());
+            GodCardDeck godCardDeck = new GodCardDeck(new ArtemisGod(), new DemeterGod(), new ZeusGod());
 
             // Create screens to ScreenManager
             String godCardPage = "GODCARDS";
