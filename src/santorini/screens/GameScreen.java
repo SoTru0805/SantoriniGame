@@ -27,6 +27,10 @@ public class GameScreen implements Screen {
   private JLabel currentPlayerNameLabel;
   private JPanel currentPlayerColorIndicator;
 
+  private JLabel player1TimerLable;
+  private JLabel player2TimerLable;
+  private ChessClock chessClock;
+
 
   private List<Player> players;
 
@@ -88,18 +92,41 @@ public class GameScreen implements Screen {
             godCardImage
     );
 
+
     // Setup Logic Manager after BoardGUI created
     logicManager = new GameLogicManager(
             boardGUI,
             players,
             randomPlayer,
             cardDisplay,
-            currentPlayerColorIndicator
+            currentPlayerColorIndicator,
+            chessClock
     );
 
     // Setup Board Click Listener
     BoardEventHandler eventHandler = new BoardEventHandler(logicManager);
     boardGUI.setCellClickListener(eventHandler);
+
+    // New panels for timer
+    JPanel timerPanel = new JPanel();
+    timerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    timerPanel.add(player1TimerLable);
+    timerPanel.add(Box.createHorizontalStrut(20)); // spacing between timers
+    timerPanel.add(player2TimerLable);
+
+    // Add timer panel above the board
+    panel.add(timerPanel, BorderLayout.NORTH);
+
+
+    // Check who is player 1
+    Runnable onTimeOut = () -> JOptionPane.showMessageDialog(null, "Time's up!");
+    chessClock = new ChessClock(player1TimerLable, player2TimerLable, 10, onTimeOut); // 10 minutes each player
+
+
+
+    // Start the timer for the starting player
+    chessClock.start();
+
   }
 
 
@@ -215,6 +242,20 @@ public class GameScreen implements Screen {
 
     // Initialise the color for the starting player
     ImageUtils.updateCurrentPlayerDisplay(randomPlayer, currentPlayerColorIndicator, cardTitle);
+
+    player1TimerLable = new JLabel("Player 1: 10:00");
+    player1TimerLable.setFont(new Font("Arial", Font.BOLD, 14));
+    player1TimerLable.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    player2TimerLable = new JLabel("Player 2: 10:00");
+    player2TimerLable.setFont(new Font("Arial", Font.BOLD, 14));
+    player2TimerLable.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    godCardInfo.add(Box.createVerticalStrut(20));
+    godCardInfo.add(player1TimerLable);
+    godCardInfo.add(Box.createVerticalStrut(10));
+    godCardInfo.add(player2TimerLable);
+
 
     return rightPanel;
   }
