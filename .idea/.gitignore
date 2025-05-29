@@ -1,0 +1,54 @@
+# IntelliJ IDEA project files
+.idea/
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+
+# Ignore class files
+*.class
+
+# User-specific files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/httpRequests/
+.idea/shelf/
+
+# Build output
+out/
+build/
+target/
+
+# IDE module files
+*.iml
+
+# Datasource configs
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# Mac system files
+.DS_Store
+
+.idea/
+*.iml
+out/
+*.class
+workspace.xml
+
+# Java build output
+/out/
+/*.class
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.xml
+
+# Shelved changes
+.idea/shelf/
+shelved.patch
+Uncommitted_changes_*
+
+# Misc
+*.log
+.DS_Store
