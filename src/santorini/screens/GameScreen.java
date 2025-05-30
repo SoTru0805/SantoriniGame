@@ -8,6 +8,8 @@ import santorini.godcards.GodCardDeck;
 import santorini.utils.GodCardUtils;
 import santorini.utils.ImageUtils;
 import santorini.utils.PlayerUtils;
+import javax.swing.JOptionPane;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,6 +104,9 @@ public class GameScreen implements Screen {
             currentPlayerColorIndicator,
             chessClock
     );
+
+    logicManager.setPostTurnCallback(() -> showDiceRollPopup(Game.getCurrentPlayer()));
+
 
     // Setup Board Click Listener
     BoardEventHandler eventHandler = new BoardEventHandler(logicManager);
@@ -258,6 +263,24 @@ public class GameScreen implements Screen {
 
 
     return rightPanel;
+  }
+
+  public void showDiceRollPopup(Player player) {
+    int diceRoll = (int)(Math.random() * 6) + 1;
+    String[] rewards = {
+            "Lucky you! Next turn, you get one extra move.",
+            "Double builder! You can build twice next time.",
+            "Sneaky! Block your opponent’s move for one turn.",
+            "Oh no! You lose your next turn. Better luck next time!",
+            "Switcheroo! You can swap the positions of your two workers.",
+            "Super move! Jump up two levels on your next move."
+    };
+    String rewardMessage = rewards[diceRoll - 1];
+
+    JOptionPane.showMessageDialog(null,
+            player.getName() + " rolled a " + diceRoll + "!\n" + rewardMessage,
+            "Dice Roll",
+            JOptionPane.INFORMATION_MESSAGE);
   }
 
 

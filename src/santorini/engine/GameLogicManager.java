@@ -64,6 +64,15 @@ public class GameLogicManager {
   /** The chess clock object managing player timers. */
   private ChessClock chessClock;
 
+  /** Add a post-turn call back to End Turn*/
+  private Runnable postTurnCallBack;
+
+  /**Setter for PostTurnCallBack*/
+  public void setPostTurnCallback(Runnable callback) {
+    this.postTurnCallBack = callback;
+  }
+
+
   /**
    * Constructs the GameLogicManager.
    *
@@ -285,6 +294,10 @@ public class GameLogicManager {
     moveCompleted = false;
     buildCompleted = false;
     lastAction = null;
+
+    if (postTurnCallBack != null) {
+      this.postTurnCallBack.run();
+    }
   }
 
   /**
