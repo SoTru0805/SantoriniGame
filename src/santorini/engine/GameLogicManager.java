@@ -6,6 +6,7 @@ import santorini.board.BoardGUI;
 import santorini.actions.Action;
 import santorini.actions.MoveAction;
 import santorini.actions.BuildAction;
+import santorini.elements.Worker;
 import santorini.screens.ChessClock;
 import santorini.screens.ResultScreen;
 import santorini.screens.ScreenManager;
@@ -133,6 +134,16 @@ public class GameLogicManager {
 
           checkWinner(clickedCell, currentPlayer);
 
+          // Handle extra move rewards from the dice
+          if (currentPlayer.hasExtraMove()) {
+            GameLog.logMessage(currentPlayer.getName() + "uses extra move from last dice roll");
+            currentPlayer.setHasExtraMove(false);
+            movingPhase = true;
+            moveCompleted = false;
+            workerSelected = false;
+            selectedWorkerCell = null;
+            return;
+          }
         }
       }
     } else {
@@ -168,6 +179,15 @@ public class GameLogicManager {
           workerSelected = false;
 
           GameLog.logMessage(currentPlayer.getName() + " must now end the turn.");
+
+          // Handle Double Build reward
+          if (currentPlayer.hasExtraMove()) {
+            GameLog.logMessage(currentPlayer.getName() + "uses extra move from last dice roll");
+            currentPlayer.setHasExtraMove(false);
+            buildCompleted = false; //allow another build
+            workerSelected = false;
+            return; //allow another build before ending turn
+          }
         }
       }
     }
@@ -268,22 +288,72 @@ public class GameLogicManager {
       chessClock.start();
     }
 
-    // Switch player
+    // Switch to next player
     currentPlayer = PlayerUtils.getNextPlayer(playerList, currentPlayer);
     Game.setCurrentPlayer(currentPlayer);
 
+    // Skip turn if blocked or lose turn ---
+    boolean skippedTurn = false;
+
+    // Check for Lose Turn
+    if (currentPlayer.shouldLoseTurn()) {
+      GameLog.logMessage(currentPlayer.getName() + " loses their turn due to last dice roll!");
+      currentPlayer.setShouldLoseTurn(false);
+      currentPlayer = PlayerUtils.getNextPlayer(playerList, currentPlayer);
+      Game.setCurrentPlayer(currentPlayer);
+      skippedTurn = true;
+    }
+
+    // Check for Blocked
+    if (currentPlayer.isBlocked()) {
+      GameLog.logMessage(currentPlayer.getName() + " is blocked this turn due to last dice roll!");
+      currentPlayer.setBlocked(false);
+      currentPlayer = PlayerUtils.getNextPlayer(playerList, currentPlayer);
+      Game.setCurrentPlayer(currentPlayer);
+      skippedTurn = true;
+    }
+
     // Update God card info panel
     cardDisplay.updateCardPanel(currentPlayer);
-
     ImageUtils.updateCurrentPlayerDisplay(currentPlayer, currentPlayerColorIndicator, cardDisplay.getCardTitle());
 
     // Increment turn count if we're back to the starting player
-    if (currentPlayer == startingPlayer){
+    if (currentPlayer == startingPlayer) {
       turnCount++;
       GameLog.turnMessage("Turn #" + turnCount);
     }
 
-    GameLog.logMessage("It is now " + currentPlayer.getName() + " turn.");
+    GameLog.logMessage("It is now " + currentPlayer.getName() + "'s turn.");
+
+    // Announce any available dice rewards
+    if (currentPlayer.hasExtraMove())
+      GameLog.logMessage(currentPlayer.getName() + " has an extra move this turn from last dice roll!");
+    if (currentPlayer.hasDoubleBuild())
+      GameLog.logMessage(currentPlayer.getName() + " has double build this turn from last dice roll!");
+    if (currentPlayer.canSwapWorkers())
+      GameLog.logMessage(currentPlayer.getName() + " can swap workers this turn from last dice roll!");
+    if (currentPlayer.canJumpTwoLevels())
+      GameLog.logMessage(currentPlayer.getName() + " can jump two levels this turn from last dice roll!");
+
+    // Handle swap workers
+    if (currentPlayer.canSwapWorkers() && currentPlayer.getWorkers().size() == 2) {
+      int swap = JOptionPane.showConfirmDialog(
+              null,
+              currentPlayer.getName() + ", do you want to swap your workers due to last dice roll?",
+              "Swap Workers",
+              JOptionPane.YES_NO_OPTION
+      );
+      if (swap == JOptionPane.YES_OPTION) {
+        Worker w1 = currentPlayer.getWorkers().get(0);
+        Worker w2 = currentPlayer.getWorkers().get(1);
+        Cell c1 = w1.getCurrentLocation();
+        Cell c2 = w2.getCurrentLocation();
+        w1.setCurrentLocation(c2);
+        w2.setCurrentLocation(c1);
+        GameLog.logMessage(currentPlayer.getName() + " swapped their workers!");
+      }
+      currentPlayer.setCanSwapWorkers(false);
+    }
 
     // Reset ability at every end turn
     abilityUsedThisTurn = false;
@@ -295,10 +365,12 @@ public class GameLogicManager {
     buildCompleted = false;
     lastAction = null;
 
+    // Show dice roll popup if needed (handled by postTurnCallback)
     if (postTurnCallBack != null) {
       this.postTurnCallBack.run();
     }
   }
+
 
   /**
    * Checks if the current player is a winner by reaching a level 3 building.
