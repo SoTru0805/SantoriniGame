@@ -10,6 +10,9 @@ import santorini.utils.ImageUtils;
 import santorini.utils.PlayerUtils;
 import javax.swing.JOptionPane;
 
+import santorini.dice.DiceReward;
+import santorini.dice.DiceRewardFactory;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -94,6 +97,17 @@ public class GameScreen implements Screen {
             godCardImage
     );
 
+    // New panels for timer
+    JPanel timerPanel = new JPanel();
+    timerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    timerPanel.add(player1TimerLable);
+    timerPanel.add(Box.createHorizontalStrut(20));
+    timerPanel.add(player2TimerLable);
+    panel.add(timerPanel, BorderLayout.NORTH);
+
+    Runnable onTimeOut = () -> JOptionPane.showMessageDialog(null, "Time's up!");
+    chessClock = new ChessClock(player1TimerLable, player2TimerLable, 10, onTimeOut); // Create BEFORE logicManager!
+
 
     // Setup Logic Manager after BoardGUI created
     logicManager = new GameLogicManager(
@@ -105,29 +119,31 @@ public class GameScreen implements Screen {
             chessClock
     );
 
-    logicManager.setPostTurnCallback(() -> showDiceRollPopup(Game.getCurrentPlayer()));
+    logicManager.setPostTurnCallback(() -> {
+      Player player = Game.getCurrentPlayer();
+      int choice = JOptionPane.showConfirmDialog(
+              null,
+              player.getName() + ", do you want to roll the dice for a random event?",
+              "Roll Dice?",
+              JOptionPane.YES_NO_OPTION
+      );
+
+      if (choice == JOptionPane.YES_OPTION) {
+        showDiceRollPopup(player);
+      } else {
+        JOptionPane.showMessageDialog(
+                null,
+                "You chose not to roll the dice this turn.",
+                "No Dice Roll",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+      }
+    });
 
 
     // Setup Board Click Listener
     BoardEventHandler eventHandler = new BoardEventHandler(logicManager);
     boardGUI.setCellClickListener(eventHandler);
-
-    // New panels for timer
-    JPanel timerPanel = new JPanel();
-    timerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-    timerPanel.add(player1TimerLable);
-    timerPanel.add(Box.createHorizontalStrut(20)); // spacing between timers
-    timerPanel.add(player2TimerLable);
-
-    // Add timer panel above the board
-    panel.add(timerPanel, BorderLayout.NORTH);
-
-
-    // Check who is player 1
-    Runnable onTimeOut = () -> JOptionPane.showMessageDialog(null, "Time's up!");
-    chessClock = new ChessClock(player1TimerLable, player2TimerLable, 10, onTimeOut); // 10 minutes each player
-
-
 
     // Start the timer for the starting player
     chessClock.start();
@@ -267,21 +283,27 @@ public class GameScreen implements Screen {
 
   public void showDiceRollPopup(Player player) {
     int diceRoll = (int)(Math.random() * 6) + 1;
-    String[] rewards = {
-            "Lucky you! Next turn, you get one extra move.",
-            "Double builder! You can build twice next time.",
-            "Sneaky! Block your opponent’s move for one turn.",
-            "Oh no! You lose your next turn. Better luck next time!",
-            "Switcheroo! You can swap the positions of your two workers.",
-            "Super move! Jump up two levels on your next move."
-    };
-    String rewardMessage = rewards[diceRoll - 1];
+    DiceReward reward = DiceRewardFactory.getReward(diceRoll);
 
-    JOptionPane.showMessageDialog(null,
-            player.getName() + " rolled a " + diceRoll + "!\n" + rewardMessage,
+    // Reset all reward flags
+    player.setHasExtraMove(false);
+    player.setHasDoubleBuild(false);
+    player.setCanDemolish(false);
+    player.setCanJumpTwoLevels(false);
+    player.setShouldLoseTurn(false);
+    player.setBlocked(false);
+
+    // Apply the reward
+    reward.apply(player, logicManager);
+
+    JOptionPane.showMessageDialog(
+            null,
+            player.getName() + " rolled a " + diceRoll + "!\n" + reward.getDescription(),
             "Dice Roll",
-            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.INFORMATION_MESSAGE
+    );
   }
+
 
 
 }

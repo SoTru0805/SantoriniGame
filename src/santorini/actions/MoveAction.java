@@ -38,9 +38,19 @@ public class MoveAction extends Action {
     int selectedLevel = selected.getBuilding().getLevel();
     int targetLevel = target.getBuilding().getLevel();
 
-    if (targetLevel - selectedLevel > 1) {
-      return "Error: " + player.getName() + " cannot move up more than one level.";
+    // Allow jump two levels if player has the flag set
+    if (player.canJumpTwoLevels()) {
+      if (targetLevel - selectedLevel > 2) {
+        return "Error: " + player.getName() + " cannot move up more than two levels (dice reward effect).";
+      }
+      // Use up the reward after this move
+      player.setCanJumpTwoLevels(false);
+    } else {
+      if (targetLevel - selectedLevel > 1) {
+        return "Error: " + player.getName() + " cannot move up more than one level.";
+      }
     }
+
 
     Worker selectedWorker = selected.getWorker();
     target.setWorker(selectedWorker);

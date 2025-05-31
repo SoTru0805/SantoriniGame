@@ -16,4 +16,6 @@ public abstract class Building {
     public abstract Building next();
 
     public abstract Building previous();
+
+
 }

@@ -20,14 +20,19 @@ import java.util.List;
  * Manages the main game logic for the Santorini board game, including turn management,
  * action handling (move, build, undo), phase control, ability activation, and player switching.
  * Also integrates with a ChessClock for timing each player's moves.
+ * Supports special dice rewards, including demolishing a building.
  */
 public class GameLogicManager {
 
   /** The GUI for the game board. */
   private BoardGUI boardGUI;
 
+  private boolean doubleBuildInProgress = false;
+
+  private Cell firstBuildCell = null;
+
   /** The list of all players in the game. */
-  private List<Player> playerList;
+  public List<Player> playerList;
 
   /** The player whose turn it is currently. */
   private Player currentPlayer, startingPlayer;
@@ -65,14 +70,16 @@ public class GameLogicManager {
   /** The chess clock object managing player timers. */
   private ChessClock chessClock;
 
-  /** Add a post-turn call back to End Turn*/
+  /** Add a post-turn call back to End Turn */
   private Runnable postTurnCallBack;
 
-  /**Setter for PostTurnCallBack*/
+  /**
+   * Setter for PostTurnCallBack, called after endTurn().
+   * @param callback Runnable to run after turn ends
+   */
   public void setPostTurnCallback(Runnable callback) {
     this.postTurnCallBack = callback;
   }
-
 
   /**
    * Constructs the GameLogicManager.
@@ -95,7 +102,6 @@ public class GameLogicManager {
     this.chessClock = chessClock;
   }
 
-
   /**
    * Handles a cell click event, managing move/build phases, worker selection,
    * and action execution.
@@ -106,7 +112,7 @@ public class GameLogicManager {
     if (movingPhase) {
       if (!workerSelected) {
         if (clickedCell.isOccupied()) {
-          if (clickedCell.getWorker().getPlayer() == currentPlayer){
+          if (clickedCell.getWorker().getPlayer() == currentPlayer) {
             previousCell = clickedCell;
             selectedWorkerCell = clickedCell;
             workerSelected = true;
@@ -122,7 +128,7 @@ public class GameLogicManager {
         moveAction.setExcludedCell(tempTarget);
         String log = moveAction.execute();
         GameLog.logMessage(log);
-        if (moveAction.status()){
+        if (moveAction.status()) {
           lastAction = moveAction;
           tempTarget = null;
 
@@ -136,7 +142,7 @@ public class GameLogicManager {
 
           // Handle extra move rewards from the dice
           if (currentPlayer.hasExtraMove()) {
-            GameLog.logMessage(currentPlayer.getName() + "uses extra move from last dice roll");
+            GameLog.logMessage(currentPlayer.getName() + " uses extra move from last dice roll");
             currentPlayer.setHasExtraMove(false);
             movingPhase = true;
             moveCompleted = false;
@@ -147,7 +153,7 @@ public class GameLogicManager {
         }
       }
     } else {
-      if (buildCompleted) {
+      if (buildCompleted && !doubleBuildInProgress) {
         GameLog.logMessage(currentPlayer.getName() + " has already built! Please end your turn.");
         return;
       }
@@ -166,39 +172,59 @@ public class GameLogicManager {
           GameLog.logMessage("Error: The cell does not have your worker.");
         }
       } else {
+        boolean canDoubleBuild = currentPlayer.hasDoubleBuild();
+
+        // For second build, prevent building on the same cell as first build
+        if (doubleBuildInProgress && clickedCell == firstBuildCell) {
+          GameLog.logMessage("You cannot build twice on the same cell!");
+          return;
+        }
+
         BuildAction buildAction = new BuildAction(boardGUI, currentPlayer, selectedWorkerCell, clickedCell);
         buildAction.setExcludedCell(tempTarget);
         String log = buildAction.execute();
         GameLog.logMessage(log);
-        if (buildAction.status()){
+
+        if (buildAction.status()) {
           previousCell = clickedCell;
           lastAction = buildAction;
           tempTarget = null;
 
-          buildCompleted = true;
-          workerSelected = false;
-
-          GameLog.logMessage(currentPlayer.getName() + " must now end the turn.");
-
-          // Handle Double Build reward
-          if (currentPlayer.hasExtraMove()) {
-            GameLog.logMessage(currentPlayer.getName() + "uses extra move from last dice roll");
-            currentPlayer.setHasExtraMove(false);
-            buildCompleted = false; //allow another build
+          if (canDoubleBuild && !doubleBuildInProgress) {
+            // First build of double build
+            doubleBuildInProgress = true;
+            firstBuildCell = clickedCell;
+            buildCompleted = false; // allow another build
             workerSelected = false;
-            return; //allow another build before ending turn
+            GameLog.logMessage(currentPlayer.getName() + " may now build again on a different cell (Double Build reward).");
+            return;
+          } else if (canDoubleBuild && doubleBuildInProgress) {
+            // Second build finished!
+            doubleBuildInProgress = false;
+            currentPlayer.setHasDoubleBuild(false);
+            firstBuildCell = null;
+            buildCompleted = true;
+            workerSelected = false;
+            GameLog.logMessage(currentPlayer.getName() + " has finished double build. Please end your turn.");
+            return;
+          } else {
+            // Standard single build
+            buildCompleted = true;
+            workerSelected = false;
+            GameLog.logMessage(currentPlayer.getName() + " must now end the turn.");
           }
         }
       }
     }
   }
 
+
   /**
    * Returns the last action performed (move or build).
    *
    * @return The last Action, or null if none exists.
    */
-  public Action getLastAction(){
+  public Action getLastAction() {
     return lastAction;
   }
 
@@ -207,15 +233,15 @@ public class GameLogicManager {
    *
    * @return True if the ability was successfully activated, false otherwise.
    */
-  public boolean activateAbility(){
+  public boolean activateAbility() {
     boolean status = false;
 
-    if (abilityUsedThisTurn){
+    if (abilityUsedThisTurn) {
       return status;
     }
 
     status = currentPlayer.getGodCard().useEffect(this);
-    if (status){
+    if (status) {
       lastAction.setExcludedCell(tempTarget);
 
       abilityUsedThisTurn = true;
@@ -230,8 +256,8 @@ public class GameLogicManager {
    *
    * @return True if extra move was activated, false otherwise.
    */
-  public boolean activateExtraMove(){
-    if (lastAction.getActionType() == ActionType.MOVE && moveCompleted){
+  public boolean activateExtraMove() {
+    if (lastAction.getActionType() == ActionType.MOVE && moveCompleted) {
       movingPhase = true;
       moveCompleted = false;
       return true;
@@ -244,8 +270,8 @@ public class GameLogicManager {
    *
    * @return True if extra build was activated, false otherwise.
    */
-  public boolean activateExtraBuild(){
-    if (lastAction.getActionType() == ActionType.BUILD && buildCompleted){
+  public boolean activateExtraBuild() {
+    if (lastAction.getActionType() == ActionType.BUILD && buildCompleted) {
       movingPhase = false;
       buildCompleted = false;
       return true;
@@ -273,7 +299,7 @@ public class GameLogicManager {
   /**
    * Ends the current player's turn, resets phases, increments the turn counter as needed,
    * updates UI, and switches to the next player. Also updates the ChessClock to switch
-   * timers between players.
+   * timers between players. Handles dice rewards, including the Demolish reward.
    */
   public void endTurn() {
     if (movingPhase || !buildCompleted) {
@@ -288,11 +314,16 @@ public class GameLogicManager {
       chessClock.start();
     }
 
+    // Show dice roll popup if needed (handled by postTurnCallback)
+    if (postTurnCallBack != null) {
+      this.postTurnCallBack.run();
+    }
+
     // Switch to next player
     currentPlayer = PlayerUtils.getNextPlayer(playerList, currentPlayer);
     Game.setCurrentPlayer(currentPlayer);
 
-    // Skip turn if blocked or lose turn ---
+    // Skip turn if blocked or lose turn
     boolean skippedTurn = false;
 
     // Check for Lose Turn
@@ -330,44 +361,62 @@ public class GameLogicManager {
       GameLog.logMessage(currentPlayer.getName() + " has an extra move this turn from last dice roll!");
     if (currentPlayer.hasDoubleBuild())
       GameLog.logMessage(currentPlayer.getName() + " has double build this turn from last dice roll!");
-    if (currentPlayer.canSwapWorkers())
-      GameLog.logMessage(currentPlayer.getName() + " can swap workers this turn from last dice roll!");
     if (currentPlayer.canJumpTwoLevels())
       GameLog.logMessage(currentPlayer.getName() + " can jump two levels this turn from last dice roll!");
+    if (currentPlayer.canDemolish())
+      GameLog.logMessage(currentPlayer.getName() + " can demolish a building at the start of this turn!");
 
-    // Handle swap workers
-    if (currentPlayer.canSwapWorkers() && currentPlayer.getWorkers().size() == 2) {
-      int swap = JOptionPane.showConfirmDialog(
-              null,
-              currentPlayer.getName() + ", do you want to swap your workers due to last dice roll?",
-              "Swap Workers",
-              JOptionPane.YES_NO_OPTION
-      );
-      if (swap == JOptionPane.YES_OPTION) {
-        Worker w1 = currentPlayer.getWorkers().get(0);
-        Worker w2 = currentPlayer.getWorkers().get(1);
-        Cell c1 = w1.getCurrentLocation();
-        Cell c2 = w2.getCurrentLocation();
-        w1.setCurrentLocation(c2);
-        w2.setCurrentLocation(c1);
-        GameLog.logMessage(currentPlayer.getName() + " swapped their workers!");
-      }
-      currentPlayer.setCanSwapWorkers(false);
+    // Handle Demolish Reward
+    if (currentPlayer.canDemolish()) {
+      handleDemolishReward();
+      currentPlayer.setCanDemolish(false);
     }
 
     // Reset ability at every end turn
     abilityUsedThisTurn = false;
 
-    // Reset phase
+    // Reset phase and double build state
     movingPhase = true;
     workerSelected = false;
     moveCompleted = false;
     buildCompleted = false;
     lastAction = null;
 
-    // Show dice roll popup if needed (handled by postTurnCallback)
-    if (postTurnCallBack != null) {
-      this.postTurnCallBack.run();
+    doubleBuildInProgress = false;
+    firstBuildCell = null;
+    currentPlayer.setHasDoubleBuild(false);
+  }
+
+
+  /**
+   * Allows the current player to demolish (remove the top level from) any building on the board.
+   * Pops up a dialog to enter cell coordinates and updates the board accordingly.
+   */
+  private void handleDemolishReward() {
+    GameLog.logMessage(currentPlayer.getName() + " can select a building to demolish (remove top level).");
+    JOptionPane.showMessageDialog(null, currentPlayer.getName() +
+            ": Select a cell on the board to demolish (remove the top level of a building).", "Demolish Reward", JOptionPane.INFORMATION_MESSAGE);
+
+    String input = JOptionPane.showInputDialog(null, "Enter cell coordinates to demolish (row,col):", "e.g., 2,3");
+    if (input != null && input.contains(",")) {
+      String[] parts = input.split(",");
+      try {
+        int row = Integer.parseInt(parts[0].trim());
+        int col = Integer.parseInt(parts[1].trim());
+        Cell cell = boardGUI.getBoard().getCell(row, col);
+
+        int currentLevel = cell.getBuilding().getLevel();
+        if (currentLevel > 0) {
+          // Downgrade the building to the previous level
+          cell.setBuilding(cell.getBuilding().previous());
+          GameLog.logMessage("Demolished cell at (" + row + "," + col + "). New level: " + cell.getBuilding().getLevel());
+          boardGUI.getButton(row, col).setUpDisplay();
+        } else {
+          GameLog.logMessage("Cell at (" + row + "," + col + ") has no building to demolish.");
+        }
+      } catch (Exception e) {
+        GameLog.logMessage("Invalid input for demolish cell.");
+      }
     }
   }
 
@@ -379,7 +428,7 @@ public class GameLogicManager {
    * @param winnerCell The cell the worker moved to.
    * @param winner The player who may have won.
    */
-  public void checkWinner(Cell winnerCell, Player winner){
+  public void checkWinner(Cell winnerCell, Player winner) {
     if (winnerCell.getBuilding().getLevel() == 3) {
       ScreenManager.registerScreen("RESULT", new ResultScreen(winner, turnCount));
       ScreenManager.showScreen("RESULT");

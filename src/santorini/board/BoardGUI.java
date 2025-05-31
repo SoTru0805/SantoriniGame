@@ -8,6 +8,7 @@ public class BoardGUI {
     private JPanel boardPanel;
     private CellButton[][] buttons;
     private ActionListener clickListener;
+    private Board board;
 
     public BoardGUI(Board board) {
         boardPanel = new JPanel(new GridLayout(board.getRows(), board.getCols()));
@@ -37,5 +38,9 @@ public class BoardGUI {
 
     public CellButton getButton(int row, int col) {
         return buttons[row][col];
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
